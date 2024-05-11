@@ -1,5 +1,10 @@
 /* eslint-disable node/prefer-global/process */
 
+import { fileURLToPath } from 'node:url'
+import Debug from 'debug'
+
+const debug = Debug('importx')
+
 type ArgumentTypes<T> = T extends (...args: infer U) => any ? U : never
 
 export type SupportedLoader = 'tsx' | 'jiti' | 'bundle-require' | 'native'
@@ -24,7 +29,7 @@ export interface ImportTsOptions {
     /**
      * Options for `jiti` loader.
      *
-     * @default { esmResolve: true, interopDefault: true }
+     * @default { esmResolve: true }
      * @see https://github.com/unjs/jiti#options
      */
     jiti?: import('jiti').JITIOptions
@@ -161,11 +166,13 @@ export async function importTs<T = any>(path: string, options: string | ImportTs
     }
   }
 
+  debug(`[${loader}]`, 'Importing', path, 'from', parentURL)
+
   switch (loader) {
     case 'native': {
       return import(
         path[0] === '.'
-          ? new URL(path, parentURL).href
+          ? fileURLToPath(new URL(path, parentURL))
           : path,
         otherOptions
       )
@@ -177,16 +184,15 @@ export async function importTs<T = any>(path: string, options: string | ImportTs
           path,
           {
             ...loaderOptions.tsx,
-            parentURL,
+            parentURL: fileURLToPath(parentURL),
           },
         ))
     }
 
     case 'jiti': {
       return import('jiti')
-        .then(r => r.default(path, {
+        .then(r => r.default(fileURLToPath(parentURL), {
           esmResolve: true,
-          interopDefault: true,
           ...loaderOptions.jiti,
         })(path))
     }
@@ -196,7 +202,7 @@ export async function importTs<T = any>(path: string, options: string | ImportTs
         .then(r => r.bundleRequire({
           ...loaderOptions.bundleRequire,
           filepath: path,
-          cwd: parentURL,
+          cwd: fileURLToPath(parentURL),
         }))
         .then(r => r.mod)
     }
