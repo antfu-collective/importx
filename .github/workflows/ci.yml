@@ -88,4 +88,4 @@ jobs:
         run: nr build
 
       - name: Matrix
-        run: node ./test/run-matrix.js
+        run: node ./test/run-matrix.mjs
