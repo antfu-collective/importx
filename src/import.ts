@@ -82,12 +82,6 @@ export async function importx<T = any>(_specifier: string | URL, _options: strin
       }
 
       case 'tsx': {
-        if (cache === true && !ignoreImportxWarning)
-          throw new Error('`cache: true` is not compatible with `tsx` loader')
-
-        const dependencies: string[] = []
-        info.dependencies = dependencies
-
         return import('./loaders/tsx')
           .then(r => r.loader(info, options))
       }
