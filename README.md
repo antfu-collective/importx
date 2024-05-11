@@ -8,7 +8,18 @@
 
 Unified tool for importing TypeScript modules at runtime.
 
-Multi-strategies based on the environment:
+- [`tsx`](#tsx)
+- [`jiti`](#jiti)
+- [`bundle-require`](#bundle-require)
+- [`native`](#native)
+
+## Motivation
+
+It's a common need for tools to support importing TypeScript modules at runtime. For example, to support configure files written in TypeScript.
+
+There are so many ways to do that, each with its own trade-offs and limitations. This library aims to provide a simple, unified API for importing TypeScript modules and swap loaders as ease.
+
+By default, it also provides a smart "auto" mode that decides the best loader based on the environment:
 
 - Use native `import()` for runtimes that support directly importing TypeScript modules (Deno, Bun, or `ts-node`, `tsx` CLI).
 - Use `tsx` for modern module environments.
@@ -33,9 +44,11 @@ Automatically choose the best loader based on the environment.
 
 ```mermaid
 graph TD
-  A[auto] --> B{{"Is Cache Disabled?"}}
+  A[Auto] --> B{{"Is Cache disabled?"}}
   B --> |Yes| C[bundle-require]
-  B --> |No| D{{"Support Native TypeScript?"}}
+  B --> |No| IsTS{{"Is importing TypeScript file?"}}
+  IsTS --> |No| Z[native import]
+  IsTS --> |Yes| D{{"Supports native TypeScript?"}}
   D --> |Yes| E[native import]
   D --> |No| F{{"Node versions support tsx?"}}
   F --> |Yes| G[tsx]
@@ -50,17 +63,28 @@ Use the native `import()` to import the module.
 
 Use [`tsx`](https://github.com/privatenumber/tsx)'s [`tsImport` API](https://tsx.is/node#tsimport) to import the module. Under the hood, it registers [Node.js loader API](https://nodejs.org/api/module.html#moduleregisterspecifier-parenturl-options) and uses [esbuild](https://esbuild.github.io/) to transpile TypeScript to JavaScript.
 
+#### Limitations
+
+- Use the native Node.js module loader, the module cache can't be invalidated.
+- Requires Node.js `^18.18.0` or `^20.6.0`
+
 ### `jiti`
 
 Use [`jiti`](https://github.com/unjs/jiti) to import the module. It uses a bundled Babel parser to transpile modules. It runs in CJS mode and has its own cache and module runner.
 
-> It does not support top-level await yet, and might have some potential misalignments with Node.js native module resolutions.
+#### Limitations
+
+- [Does not support top-level await yet](https://github.com/unjs/jiti/issues/72)
+- Runs in CJS mode (transpiles all TS/ESM to CJS)
 
 ### `bundle-require`
 
 Use [`bundle-require`](https://github.com/egoist/bundle-require) to import the module. It uses `esbuild` to bundle the entry module, saves it to a temporary file, and then imports it.
 
-> It creates a temporary bundle file on importing (will external `node_modules`). Can be inefficient for there is a lot of TypeScript source files to be bundled.
+#### Limitations
+
+- It creates a temporary bundle file on importing (will external `node_modules`).
+- Can be inefficient where there are many TypeScript modules in the import tree.
 
 ## Sponsors
 
