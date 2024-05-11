@@ -31,18 +31,37 @@ export async function detectLoader(
   listDependencies: boolean,
   isTsFile: boolean,
 ): Promise<SupportedLoader> {
-  if (cache === false || listDependencies) {
-    return listDependencies
-      ? tsxOrBundleRequire ()
-      : tsxOrJiti()
+  return detectLoaderLogic(
+    cache,
+    listDependencies,
+    isTsFile,
+    await isNativeTsImportSupported(),
+    isRuntimeSupportsTsx(),
+  )
+}
+
+export function detectLoaderLogic(
+  cache: boolean | null,
+  listDependencies: boolean,
+  isTsFile: boolean,
+  isNativeTsImportSupported: boolean,
+  isTsxSupported: boolean,
+): SupportedLoader {
+  function getLoader() {
+    if (isTsxSupported)
+      return 'tsx'
+    if (listDependencies)
+      return 'bundle-require'
+    return 'jiti'
   }
 
-  if (!isTsFile || await isNativeTsImportSupported())
+  if (cache === false || listDependencies)
+    return getLoader()
+
+  if (!isTsFile || isNativeTsImportSupported)
     return 'native'
 
-  return listDependencies
-    ? tsxOrBundleRequire()
-    : tsxOrJiti()
+  return getLoader()
 }
 
 /**
@@ -60,18 +79,6 @@ function isRuntimeSupportsTsx() {
   )
     return false
   return true
-}
-
-async function tsxOrJiti() {
-  if (isRuntimeSupportsTsx())
-    return 'tsx'
-  return 'jiti'
-}
-
-async function tsxOrBundleRequire() {
-  if (isRuntimeSupportsTsx())
-    return 'tsx'
-  return 'bundle-require'
 }
 
 const reIsTypeScriptFile = /\.[mc]?tsx?$/

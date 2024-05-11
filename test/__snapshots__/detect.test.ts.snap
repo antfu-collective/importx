@@ -1,0 +1,97 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`cache=? | deps=F | isTS=F | nativeTS=F | tsx=F 1`] = `"native"`;
+
+exports[`cache=? | deps=F | isTS=F | nativeTS=F | tsx=T 1`] = `"native"`;
+
+exports[`cache=? | deps=F | isTS=F | nativeTS=T | tsx=F 1`] = `"native"`;
+
+exports[`cache=? | deps=F | isTS=F | nativeTS=T | tsx=T 1`] = `"native"`;
+
+exports[`cache=? | deps=F | isTS=T | nativeTS=F | tsx=F 1`] = `"jiti"`;
+
+exports[`cache=? | deps=F | isTS=T | nativeTS=F | tsx=T 1`] = `"tsx"`;
+
+exports[`cache=? | deps=F | isTS=T | nativeTS=T | tsx=F 1`] = `"native"`;
+
+exports[`cache=? | deps=F | isTS=T | nativeTS=T | tsx=T 1`] = `"native"`;
+
+exports[`cache=? | deps=T | isTS=F | nativeTS=F | tsx=F 1`] = `"bundle-require"`;
+
+exports[`cache=? | deps=T | isTS=F | nativeTS=F | tsx=T 1`] = `"tsx"`;
+
+exports[`cache=? | deps=T | isTS=F | nativeTS=T | tsx=F 1`] = `"bundle-require"`;
+
+exports[`cache=? | deps=T | isTS=F | nativeTS=T | tsx=T 1`] = `"tsx"`;
+
+exports[`cache=? | deps=T | isTS=T | nativeTS=F | tsx=F 1`] = `"bundle-require"`;
+
+exports[`cache=? | deps=T | isTS=T | nativeTS=F | tsx=T 1`] = `"tsx"`;
+
+exports[`cache=? | deps=T | isTS=T | nativeTS=T | tsx=F 1`] = `"bundle-require"`;
+
+exports[`cache=? | deps=T | isTS=T | nativeTS=T | tsx=T 1`] = `"tsx"`;
+
+exports[`cache=F | deps=F | isTS=F | nativeTS=F | tsx=F 1`] = `"jiti"`;
+
+exports[`cache=F | deps=F | isTS=F | nativeTS=F | tsx=T 1`] = `"tsx"`;
+
+exports[`cache=F | deps=F | isTS=F | nativeTS=T | tsx=F 1`] = `"jiti"`;
+
+exports[`cache=F | deps=F | isTS=F | nativeTS=T | tsx=T 1`] = `"tsx"`;
+
+exports[`cache=F | deps=F | isTS=T | nativeTS=F | tsx=F 1`] = `"jiti"`;
+
+exports[`cache=F | deps=F | isTS=T | nativeTS=F | tsx=T 1`] = `"tsx"`;
+
+exports[`cache=F | deps=F | isTS=T | nativeTS=T | tsx=F 1`] = `"jiti"`;
+
+exports[`cache=F | deps=F | isTS=T | nativeTS=T | tsx=T 1`] = `"tsx"`;
+
+exports[`cache=F | deps=T | isTS=F | nativeTS=F | tsx=F 1`] = `"bundle-require"`;
+
+exports[`cache=F | deps=T | isTS=F | nativeTS=F | tsx=T 1`] = `"tsx"`;
+
+exports[`cache=F | deps=T | isTS=F | nativeTS=T | tsx=F 1`] = `"bundle-require"`;
+
+exports[`cache=F | deps=T | isTS=F | nativeTS=T | tsx=T 1`] = `"tsx"`;
+
+exports[`cache=F | deps=T | isTS=T | nativeTS=F | tsx=F 1`] = `"bundle-require"`;
+
+exports[`cache=F | deps=T | isTS=T | nativeTS=F | tsx=T 1`] = `"tsx"`;
+
+exports[`cache=F | deps=T | isTS=T | nativeTS=T | tsx=F 1`] = `"bundle-require"`;
+
+exports[`cache=F | deps=T | isTS=T | nativeTS=T | tsx=T 1`] = `"tsx"`;
+
+exports[`cache=T | deps=F | isTS=F | nativeTS=F | tsx=F 1`] = `"native"`;
+
+exports[`cache=T | deps=F | isTS=F | nativeTS=F | tsx=T 1`] = `"native"`;
+
+exports[`cache=T | deps=F | isTS=F | nativeTS=T | tsx=F 1`] = `"native"`;
+
+exports[`cache=T | deps=F | isTS=F | nativeTS=T | tsx=T 1`] = `"native"`;
+
+exports[`cache=T | deps=F | isTS=T | nativeTS=F | tsx=F 1`] = `"jiti"`;
+
+exports[`cache=T | deps=F | isTS=T | nativeTS=F | tsx=T 1`] = `"tsx"`;
+
+exports[`cache=T | deps=F | isTS=T | nativeTS=T | tsx=F 1`] = `"native"`;
+
+exports[`cache=T | deps=F | isTS=T | nativeTS=T | tsx=T 1`] = `"native"`;
+
+exports[`cache=T | deps=T | isTS=F | nativeTS=F | tsx=F 1`] = `"bundle-require"`;
+
+exports[`cache=T | deps=T | isTS=F | nativeTS=F | tsx=T 1`] = `"tsx"`;
+
+exports[`cache=T | deps=T | isTS=F | nativeTS=T | tsx=F 1`] = `"bundle-require"`;
+
+exports[`cache=T | deps=T | isTS=F | nativeTS=T | tsx=T 1`] = `"tsx"`;
+
+exports[`cache=T | deps=T | isTS=T | nativeTS=F | tsx=F 1`] = `"bundle-require"`;
+
+exports[`cache=T | deps=T | isTS=T | nativeTS=F | tsx=T 1`] = `"tsx"`;
+
+exports[`cache=T | deps=T | isTS=T | nativeTS=T | tsx=F 1`] = `"bundle-require"`;
+
+exports[`cache=T | deps=T | isTS=T | nativeTS=T | tsx=T 1`] = `"tsx"`;

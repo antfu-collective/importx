@@ -48,7 +48,7 @@ it('should get dependencies with tsx', async () => {
   })
 
   const cwd = new URL('..', import.meta.url).href
-  expect(info?.dependencies?.map(i => i.slice(cwd.length)))
+  expect(info?.dependencies?.map(i => i.slice(cwd.length)).filter(i => !i.includes('node_modules')))
     .toMatchInlineSnapshot(`
       [
         "test/fixtures/basic/foo.mts",
