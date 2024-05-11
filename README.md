@@ -71,6 +71,7 @@ graph TD
   class Native1,Native2 native;
   class Tsx1,Tsx2,Tsx3 tsx;
   class Jiti1,Jiti2 jiti;
+  linkStyle default stroke:#8888
 ```
 
 ### `native`
