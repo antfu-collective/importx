@@ -47,10 +47,10 @@ graph TD
   A[Auto] --> B{{"Is Cache disabled?"}}
   B --> |Yes| C[bundle-require]
   B --> |No| IsTS{{"Is importing TypeScript file?"}}
-  IsTS --> |No| Z[native import]
+  IsTS --> |No| Z([native import])
   IsTS --> |Yes| D{{"Supports native TypeScript?"}}
-  D --> |Yes| E[native import]
-  D --> |No| F{{"Node versions support tsx?"}}
+  D --> |Yes| E([native import])
+  D --> |No| F{{"Is Node.js version range supports tsx?"}}
   F --> |Yes| G[tsx]
   F --> |No| H[jiti]
 ```
