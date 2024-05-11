@@ -217,7 +217,7 @@ Importing a TypeScript module with `importx`:
 
 <!-- TABLE_START -->
 
-> Generated with version `v0.1.2` at 2024-05-11T19:12:27.740Z
+> Generated with version `v0.2.0` at 2024-05-11T19:23:36.035Z
 
 |  | native | tsx | jiti | bundle-require |
 | ------- | --- | --- | --- | --- |

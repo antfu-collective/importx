@@ -77,6 +77,11 @@
     "vite": "^5.2.11",
     "vitest": "^1.6.0"
   },
+  "pnpm": {
+    "patchedDependencies": {
+      "tsx@4.10.0": "patches/tsx@4.10.0.patch"
+    }
+  },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"
   },

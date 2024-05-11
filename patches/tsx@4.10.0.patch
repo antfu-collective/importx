@@ -1,0 +1,22 @@
+diff --git a/dist/esm/api/index.d.mts b/dist/esm/api/index.d.mts
+index 410548c286aeacaa2f2abe8f57dfd8893bf86e9c..eb82b64ea5b9ee23a478791084a4149841723ee5 100644
+--- a/dist/esm/api/index.d.mts
++++ b/dist/esm/api/index.d.mts
+@@ -1,9 +1,5 @@
+ type ScopedImport = (specifier: string, parentURL: string) => Promise<any>;
+ 
+-type Options$1 = {
+-    namespace?: string;
+-    onImport?: (url: string) => void;
+-};
+ type Unregister = () => Promise<void>;
+ type Register = {
+     (options: {
+@@ -13,7 +9,6 @@ type Register = {
+         import: ScopedImport;
+         unregister: Unregister;
+     };
+-    (options?: Options$1): Unregister;
+ };
+ declare const register: Register;
+ 

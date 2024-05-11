@@ -2,7 +2,6 @@
 import { fileURLToPath } from 'node:url'
 import fs from 'node:fs/promises'
 import process from 'node:process'
-import os from 'node:os'
 import { execaCommand } from 'execa'
 import c from 'picocolors'
 import pkg from '../package.json' with { type: 'json' }

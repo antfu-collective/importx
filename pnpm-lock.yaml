@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  tsx@4.10.0:
+    hash: dimd3e7tpfifemgyogvrzm47xy
+    path: patches/tsx@4.10.0.patch
+
 importers:
 
   .:
@@ -22,7 +27,7 @@ importers:
         version: 1.21.0
       tsx:
         specifier: ^4.10.0
-        version: 4.10.0
+        version: 4.10.0(patch_hash=dimd3e7tpfifemgyogvrzm47xy)
     devDependencies:
       '@antfu/eslint-config':
         specifier: ^2.17.0
@@ -4427,7 +4432,7 @@ snapshots:
 
   esno@4.7.0:
     dependencies:
-      tsx: 4.10.0
+      tsx: 4.10.0(patch_hash=dimd3e7tpfifemgyogvrzm47xy)
 
   espree@10.0.1:
     dependencies:
@@ -5447,7 +5452,7 @@ snapshots:
 
   tslib@2.6.2: {}
 
-  tsx@4.10.0:
+  tsx@4.10.0(patch_hash=dimd3e7tpfifemgyogvrzm47xy):
     dependencies:
       esbuild: 0.20.2
       get-tsconfig: 4.7.3
