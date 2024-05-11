@@ -38,17 +38,22 @@ const mod = await import('importx').then(x => x.import('./path/to/module.ts', im
 
 ## Loaders
 
+Check the [runtime/loader import feature table](./test/table.md) for comparison.
+
 ### `auto`
 
 Automatically choose the best loader based on the environment.
 
 ```mermaid
 graph TD
-  A[Auto] --> B{{"Is Cache disabled?"}}
-  B --> |Yes| C[bundle-require]
-  B --> |No| IsTS{{"Is importing TypeScript file?"}}
-  IsTS --> |No| Z([native import])
-  IsTS --> |Yes| D{{"Supports native TypeScript?"}}
+  A[Auto] --> IsTS{{"Is importing TypeScript file?"}}
+  IsTS --> |No| Cache{{"Import cache?"}}
+  Cache --> |Yes| B([native import])
+  Cache --> |No| tsx1[tsx]
+
+  IsTS --> |Yes| Cache2{{"Import cache?"}}
+  Cache2 --> |Yes| D{{"Supports native TypeScript?"}}
+  Cache2 --> |No| tsx2[tsx]
   D --> |Yes| E([native import])
   D --> |No| F{{"Is Node.js version range supports tsx?"}}
   F --> |Yes| G[tsx]
@@ -63,14 +68,22 @@ Use the native `import()` to import the module.
 
 Use [`tsx`](https://github.com/privatenumber/tsx)'s [`tsImport` API](https://tsx.is/node#tsimport) to import the module. Under the hood, it registers [Node.js loader API](https://nodejs.org/api/module.html#moduleregisterspecifier-parenturl-options) and uses [esbuild](https://esbuild.github.io/) to transpile TypeScript to JavaScript.
 
+#### Pros
+
+- Native Node.js loader API, consistent and future-proof.
+
 #### Limitations
 
-- Use the native Node.js module loader, the module cache can't be invalidated.
-- Requires Node.js `^18.18.0` or `^20.6.0`
+- Requires Node.js `^18.18.0`, `^20.6.0` or above.
 
 ### `jiti`
 
 Use [`jiti`](https://github.com/unjs/jiti) to import the module. It uses a bundled Babel parser to transpile modules. It runs in CJS mode and has its own cache and module runner.
+
+#### Pros
+
+- Self-contained, does not dependents on esbuild.
+- Own cache and module runner, better and flexible cache control.
 
 #### Limitations
 
@@ -81,10 +94,15 @@ Use [`jiti`](https://github.com/unjs/jiti) to import the module. It uses a bundl
 
 Use [`bundle-require`](https://github.com/egoist/bundle-require) to import the module. It uses `esbuild` to bundle the entry module, saves it to a temporary file, and then imports it.
 
+#### Pros
+
+- Get the file list of module dependencies. Helpful for hot-reloading or manifest generation.
+
 #### Limitations
 
 - It creates a temporary bundle file on importing (will external `node_modules`).
 - Can be inefficient where there are many TypeScript modules in the import tree.
+- Always import a new module, does not support module cache.
 
 ## Sponsors
 

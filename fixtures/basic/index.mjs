@@ -8,30 +8,50 @@ const barContent = await fs.readFile(barPath, 'utf8')
 
 const output = {
   loader: LOADER,
-  imports: false,
-  reimports: false,
+  import: false,
+  importNoCache: false,
+  importCache: false,
 }
 
 try {
-  const result1 = await import('../../dist/index.mjs')
+  const run1noCache = await import('../../dist/index.mjs')
     .then(x => x.import('./foo.mts', {
       loader: LOADER,
       cache: false,
       parentURL: import.meta.url,
+      ignoreImportxWarning: true,
+    }))
+
+  const run1cache = await import('../../dist/index.mjs')
+    .then(x => x.import('./foo.mts', {
+      loader: LOADER,
+      cache: true,
+      parentURL: import.meta.url,
+      ignoreImportxWarning: true,
     }))
 
   await fs.writeFile(barPath, 'export const bar = "newBar"', 'utf8')
 
-  output.imports = result1.default === 'Foo42bar42'
+  output.import = run1noCache.default === 'Foo42bar42'
 
-  const result2 = await import('../../dist/index.mjs')
+  const run2noCache = await import('../../dist/index.mjs')
     .then(x => x.import('./foo.mts', {
       loader: LOADER,
       cache: false,
       parentURL: import.meta.url,
+      ignoreImportxWarning: true,
     }))
 
-  output.reimports = result2.default !== result1.default
+  const run2cache = await import('../../dist/index.mjs')
+    .then(x => x.import('./foo.mts', {
+      loader: LOADER,
+      cache: true,
+      parentURL: import.meta.url,
+      ignoreImportxWarning: true,
+    }))
+
+  output.importNoCache = run2noCache.default !== run1noCache.default
+  output.importCache = run2cache === run1cache
 }
 finally {
   await fs.writeFile(barPath, barContent, 'utf8')
@@ -39,5 +59,5 @@ finally {
 
 console.log(JSON.stringify(output, null, 2))
 
-if (!output.imports)
+if (!output.import)
   process.exitCode = 1

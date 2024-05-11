@@ -44,19 +44,35 @@ export interface ImportTsOptions {
   }
   /**
    * Whether to cache the imported module.
+   *
+   * Setting to `null` means it doesn't matter for you.
+   *
    * By the spec of ESM, modules are always cached.
    *
    * Meaning that if you want to re-import a module without cache,
    * you can't use native ESM import.
    *
-   * Currently mode `native` and `tsx` does not support disabling cache.
+   * `cache: false` does not compatible with following loaders:
+   *  - `native`
    *
-   * When `false` is passed, the `auto` mode will fallback to `bundle-require`
+   * `cache: true` does not compatible with following loaders:
+   *  - `tsx`
+   *  - `bundle-require`
+   *
+   * When `false` is passed, the `auto` mode will fallback to `tsx`
    * for all files include non-TypeScript files.
    *
-   * @default true
+   * @default null
    */
-  cache?: boolean
+  cache?: boolean | null
+  /**
+   * Bypass the `importx` options validation and import anyway.
+   *
+   * The final behavior is determined by the loader and might not always work as your configuration.
+   *
+   * @default false
+   */
+  ignoreImportxWarning?: boolean
   /**
    * The URL of the parent module.
    * Usually you pass `import.meta.url` or `__filename` of the module you are doing the importing.
@@ -152,18 +168,21 @@ export async function importTs<T = any>(path: string, options: string | ImportTs
     loaderOptions = {},
     parentURL,
     cache = true,
+    ignoreImportxWarning = false,
     ...otherOptions
   } = options
 
   let loader = options.loader || 'auto'
   if (loader === 'auto') {
     if (cache === false) {
-      loader = 'bundle-require'
+      loader = 'tsx'
     }
     else {
       loader = isTypeScriptFile(path)
         ? await detectLoader()
         : 'native'
+      if (cache === true && (loader === 'tsx' || loader === 'bundle-require'))
+        loader = 'jiti'
     }
   }
 
@@ -171,6 +190,9 @@ export async function importTs<T = any>(path: string, options: string | ImportTs
 
   switch (loader) {
     case 'native': {
+      if (cache === false && !ignoreImportxWarning)
+        throw new Error('`cache: false` is not compatible with `native` loader')
+
       return import(
         path[0] === '.'
           ? fileURLToPath(new URL(path, parentURL))
@@ -180,6 +202,9 @@ export async function importTs<T = any>(path: string, options: string | ImportTs
     }
 
     case 'tsx': {
+      if (cache === true && !ignoreImportxWarning)
+        throw new Error('`cache: true` is not compatible with `tsx` loader')
+
       return import('tsx/esm/api')
         .then(r => r.tsImport(
           path,
@@ -205,6 +230,9 @@ export async function importTs<T = any>(path: string, options: string | ImportTs
     }
 
     case 'bundle-require': {
+      if (cache === true && !ignoreImportxWarning)
+        throw new Error('`cache: true` is not compatible with `native` loader')
+
       return import('bundle-require')
         .then(r => r.bundleRequire({
           ...loaderOptions.bundleRequire,

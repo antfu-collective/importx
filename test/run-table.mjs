@@ -26,8 +26,9 @@ for (const loader of loaders) {
     const object = {
       loader,
       runtime,
-      imports: false,
-      reimports: false,
+      import: false,
+      importNoCache: false,
+      importCache: false,
       errors: null,
     }
 
@@ -54,14 +55,20 @@ await fs.writeFile('test/table.json', JSON.stringify(records, null, 2), 'utf8')
 
 const md = `
 
-| runtime/loader | ${loaders.join(' | ')} |
+# Runtime / Loader compatibility table
+
+|  | ${loaders.join(' | ')} |
 | ------- | ${loaders.map(() => '---').join(' | ')} |
 ${runtimes.map(runtime => `| ${runtime} | ${loaders.map((loader) => {
   const record = records.find(x => x.loader === loader && x.runtime === runtime)
   if (!record)
     return 'N/A'
-  return `Import: ${record.imports ? '✔️' : '❌'}<br>Cache Disable: ${record.reimports ? '✔️' : '❌'}`
+  return [
+    `Import: ${record.import ? '✔️' : '❌'}`,
+    `Cache: ${record.importCache ? '✔️' : '❌'}`,
+    `No cache: ${record.importNoCache ? '✔️' : '❌'}`,
+  ].join('<br>')
 }).join(' | ')} |`).join('\n')}
-`
+`.trimStart()
 
 await fs.writeFile('test/table.md', md, 'utf8')

@@ -1,6 +1,8 @@
-| runtime/loader | native | tsx | jiti | bundle-require |
+# Runtime / Loader compatibility table
+
+|  | native | tsx | jiti | bundle-require |
 | ------- | --- | --- | --- | --- |
-| node | Import: ❌<br>Cache Disable: ❌ | Import: ✔️<br>Cache Disable: ✔️ | Import: ✔️<br>Cache Disable: ✔️ | Import: ✔️<br>Cache Disable: ✔️ |
-| tsx | Import: ✔️<br>Cache Disable: ❌ | N/A | N/A | N/A |
-| deno | Import: ✔️<br>Cache Disable: ❌ | N/A | N/A | N/A |
-| bun | Import: ✔️<br>Cache Disable: ❌ | N/A | N/A | N/A |
+| node | Import: ❌<br>Cache: ❌<br>No cache: ❌ | Import: ✔️<br>Cache: ❌<br>No cache: ✔️ | Import: ✔️<br>Cache: ✔️<br>No cache: ✔️ | Import: ✔️<br>Cache: ❌<br>No cache: ✔️ |
+| tsx | Import: ✔️<br>Cache: ✔️<br>No cache: ❌ | N/A | N/A | N/A |
+| deno | Import: ✔️<br>Cache: ✔️<br>No cache: ❌ | N/A | N/A | N/A |
+| bun | Import: ✔️<br>Cache: ✔️<br>No cache: ❌ | N/A | N/A | N/A |
