@@ -77,7 +77,7 @@ export interface ImportTsOptions {
    * The URL of the parent module.
    * Usually you pass `import.meta.url` or `__filename` of the module you are doing the importing.
    */
-  parentURL: string
+  parentURL: string | URL
   /**
    * The `with` option for native `import()` call.
    *
@@ -152,7 +152,7 @@ export function isTypeScriptFile(path: string) {
  * @param path The path to the file to import.
  * @param parentURL The URL of the parent module, usually `import.meta.url` or `__filename`.
  */
-export async function importTs<T = any>(path: string, parentURL: string): Promise<T>
+export async function importTs<T = any>(path: string, parentURL: string | URL): Promise<T>
 /**
  * Import a TypeScript module at runtime.
  *
@@ -160,8 +160,8 @@ export async function importTs<T = any>(path: string, parentURL: string): Promis
  * @param options Options
  */
 export async function importTs<T = any>(path: string, options: ImportTsOptions): Promise<T>
-export async function importTs<T = any>(path: string, options: string | ImportTsOptions): Promise<T> {
-  if (typeof options === 'string')
+export async function importTs<T = any>(path: string, options: string | URL | ImportTsOptions): Promise<T> {
+  if (typeof options === 'string' || options instanceof URL)
     options = { parentURL: options }
 
   const {
