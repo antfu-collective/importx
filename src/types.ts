@@ -50,12 +50,23 @@ export interface ImportxOptions {
    * `cache: true` does not compatible with following loaders:
    *  - `bundle-require`
    *
-   * When `false` is passed, the `auto` mode will fallback to `tsx`
-   * for all files include non-TypeScript files.
+   * Affects `auto` resolution:
+   * - When set to `false`, `native` will be fallback to `tsx` or `jiti`
    *
    * @default null
    */
   cache?: boolean | null
+  /**
+   * List dependencies of the module.
+   *
+   * Only available for `tsx` and `bundle-require` loader.
+   *
+   * Affects `auto` resolution:
+   * - When set to `true`, `jiti` will be fallback to `bundle-require`
+   *
+   * @default false
+   */
+  listDependencies?: boolean
   /**
    * Bypass the `importx` options validation and import anyway.
    *

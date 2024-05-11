@@ -24,34 +24,56 @@ const nodeVersionNumbers = globalThis?.process?.versions?.node?.split('.').map(N
 
 /**
  * Detect the 'auto' loader to use for importing the file.
+ * @private
  */
-export async function detectLoader(cache: boolean | null, isTsFile: boolean): Promise<SupportedLoader> {
-  if (cache === false)
-    return tsxOrJiti()
+export async function detectLoader(
+  cache: boolean | null,
+  listDependencies: boolean,
+  isTsFile: boolean,
+): Promise<SupportedLoader> {
+  if (cache === false || listDependencies) {
+    return listDependencies
+      ? tsxOrBundleRequire ()
+      : tsxOrJiti()
+  }
 
   if (!isTsFile || await isNativeTsImportSupported())
     return 'native'
 
-  return tsxOrJiti()
+  return listDependencies
+    ? tsxOrBundleRequire()
+    : tsxOrJiti()
 }
 
-async function tsxOrJiti() {
-  /**
-   * tsx is supported in Node.js 18.19.0+ and 20.8.0+
-   * Otherwise we fallback to jiti
-   *
-   * @see https://nodejs.org/api/module.html#moduleregisterspecifier-parenturl-options
-   */
+/**
+ * tsx is supported in Node.js 18.19.0+ and 20.8.0+
+ * Otherwise we fallback to jiti
+ *
+ * @see https://nodejs.org/api/module.html#moduleregisterspecifier-parenturl-options
+ */
+function isRuntimeSupportsTsx() {
   if (
     !nodeVersionNumbers
     || nodeVersionNumbers[0] < 18
     || (nodeVersionNumbers[0] === 18 && nodeVersionNumbers[1] < 19)
     || (nodeVersionNumbers[0] === 20 && nodeVersionNumbers[1] < 8)
   )
-    return 'jiti'
-
-  return 'tsx'
+    return false
+  return true
 }
+
+async function tsxOrJiti() {
+  if (isRuntimeSupportsTsx())
+    return 'tsx'
+  return 'jiti'
+}
+
+async function tsxOrBundleRequire() {
+  if (isRuntimeSupportsTsx())
+    return 'tsx'
+  return 'bundle-require'
+}
+
 const reIsTypeScriptFile = /\.[mc]?tsx?$/
 
 export function isTypeScriptFile(path: string) {

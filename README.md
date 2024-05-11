@@ -56,16 +56,21 @@ graph TD
   SupportTs --> |Yes| Native2
 
   RuntimeTsx --> |Yes| Tsx
-  RuntimeTsx --> |No| Jiti
+  RuntimeTsx --> |No| ListDeps
+
+  ListDeps --> |Yes| BundleRequire
+  ListDeps --> |No| Jiti
 
   IsTS{{"Is importing a TypeScript file?"}}
   SupportTs{{"Supports native TypeScript?"}}
-  Cache{{"Cache enabled?"}}
+  Cache[["Cache enabled?"]]
   Native1(["native import()"])
   Native2(["native import()"])
   RuntimeTsx{{"Is current runtime supports tsx?"}}
+  ListDeps[["Need to list dependencies?"]]
   Tsx([tsx loader])
   Jiti([jiti loader])
+  BundleRequire([bundle-require loader])
 
   classDef auto fill:#0f82,stroke:#0f83,stroke-width:2px;
   classDef question fill:#f9f2,stroke:#f9f3,stroke-width:2px;
@@ -74,13 +79,15 @@ graph TD
   classDef ts fill:#09f2,stroke:#09f3,stroke-width:2px;
   classDef tsx fill:#0fe2,stroke:#0fe3,stroke-width:2px;
   classDef jiti fill:#ffde2220,stroke:#ffde2230,stroke-width:2px;
+  classDef bundle fill:#5f32,stroke:#5f33,stroke-width:2px;
   class A auto;
   class RuntimeTsx question;
-  class Cache cache;
+  class Cache,ListDeps cache;
   class Native1,Native2,Native3 native;
   class IsTS,SupportTs ts;
   class Tsx tsx;
   class Jiti jiti;
+  class BundleRequire bundle;
   linkStyle default stroke:#8888
 ```
 
@@ -179,13 +186,27 @@ await import('importx')
   })
 ```
 
+## List Module Dependencies
+
+In cases like loading a config file for a dev server, where you need to watch for changes in the config file and reload the server, you may want to know the module's dependencies to watch for changes in them as well.
+
+`tsx` and `bundle-require` loaders support listing the dependencies of the module. You can get the list of dependencies by [getting the module info](#get-module-info). To ensure you use always have the dependencies list in `auto` mode, you can set the `listDependencies` option to `true`:
+
+```ts
+const mod = await import('importx')
+  .then(x => x.import('./path/to/module.ts', {
+    listDependencies: true,
+    parentURL: import.meta.url,
+  }))
+```
+
 ## Runtime-Loader Compatibility Table
 
 Importing a TypeScript module with `importx`:
 
 <!-- TABLE_START -->
 
-> Generated with version `v0.1.2` at 2024-05-11T18:26:38.090Z
+> Generated with version `v0.1.2` at 2024-05-11T19:12:27.740Z
 
 |  | native | tsx | jiti | bundle-require |
 | ------- | --- | --- | --- | --- |
@@ -195,6 +216,15 @@ Importing a TypeScript module with `importx`:
 | bun | Import: ✅<br>Cache: ✅<br>No cache: `N/A` | Import: ❌<br>Cache: ❌<br>No cache: ❌ | Import: ✅<br>Cache: ✅<br>No cache: ❌ | Import: ✅<br>Cache: ❌<br>No cache: ✅ |
 
 <!-- TABLE_END -->
+
+## Features-Loader Table
+
+|  | native | tsx | jiti | bundle-require |
+| --------------------------- | --- | --- | --- | --- |
+| Cache: `true`               | ✅ | ✅ | ✅ | ❌ |
+| Cache: `false`              | ❌ | ✅ | ✅ | ✅ |
+| List dependencies           | ❌ | ✅ | ❌ | ✅ |
+| Runtimes other than Node.js | ✅ | ❌ | ✅ | ✅ |
 
 ## Sponsors
 

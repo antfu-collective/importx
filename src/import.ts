@@ -38,6 +38,7 @@ export async function importx<T = any>(_specifier: string | URL, _options: strin
     loaderOptions = {},
     parentURL: inputUserUrl,
     cache = null,
+    listDependencies = false,
     ignoreImportxWarning = false,
     ...otherOptions
   } = options
@@ -48,7 +49,7 @@ export async function importx<T = any>(_specifier: string | URL, _options: strin
 
   let loader = options.loader || 'auto'
   if (loader === 'auto')
-    loader = await detectLoader(cache, isTypeScriptFile(specifier))
+    loader = await detectLoader(cache, listDependencies, isTypeScriptFile(specifier))
 
   const parentPath = (typeof inputUserUrl === 'string' && !inputUserUrl.includes('://'))
     ? inputUserUrl
