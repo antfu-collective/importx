@@ -44,16 +44,16 @@ Automatically choose the best loader based on the environment.
 
 ```mermaid
 graph TD
-  A((Auto)) --> IsTS{{"Is importing TypeScript file?"}}
+  A((Auto)) --> IsTS{{"Is importing a TypeScript file?"}}
   IsTS --> |No| Cache{{"Import cache?"}}
-  Cache --> |true,null| Native1([native import])
-  Cache --> |false| Tsx1([tsx])
+  Cache --> |true,null| Native1(["native import()"])
+  Cache --> |false| F
 
+  Cache2 --> |false| F
   IsTS --> |Yes| Cache2{{"Import cache?"}}
   Cache2 --> |true,null| D{{"Supports native TypeScript?"}}
-  Cache2 --> |false| Tsx2([tsx])
-  D --> |Yes| Native2([native import])
   D --> |No| Cache3{{"Import cache?"}}
+  D --> |Yes| Native2(["native import()"])
   Cache3 --> |true| Jiti1([jiti])
   Cache3 --> |null| F{{"Is Node.js version range supports tsx?"}}
   F --> |Yes| Tsx3([tsx])

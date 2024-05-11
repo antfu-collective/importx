@@ -112,7 +112,7 @@ const nodeVersionNumbers = globalThis?.process?.versions?.node?.split('.').map(N
  */
 async function detectLoader(cache: boolean | null, isTsFile: boolean): Promise<SupportedLoader> {
   if (cache === false)
-    return 'tsx'
+    return tsxOrJiti()
 
   if (!isTsFile || await isNativeTsImportSupported())
     return 'native'
@@ -120,6 +120,10 @@ async function detectLoader(cache: boolean | null, isTsFile: boolean): Promise<S
   if (cache === true)
     return 'jiti'
 
+  return tsxOrJiti()
+}
+
+async function tsxOrJiti() {
   if (!nodeVersionNumbers)
     return 'tsx'
 
