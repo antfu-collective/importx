@@ -1,0 +1,80 @@
+{
+  "name": "importx",
+  "type": "module",
+  "version": "0.0.0",
+  "packageManager": "pnpm@9.0.2",
+  "description": "Unified tool for importing TypeScript modules at runtime",
+  "author": "Anthony Fu <anthonyfu117@hotmail.com>",
+  "license": "MIT",
+  "funding": "https://github.com/sponsors/antfu",
+  "homepage": "https://github.com/antfu/importx#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antfu/importx.git"
+  },
+  "bugs": "https://github.com/antfu/importx/issues",
+  "keywords": [
+    "ts"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./dist/index.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist",
+    "dummy.mts"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub",
+    "lint": "eslint .",
+    "prepublishOnly": "nr build",
+    "release": "bumpp && npm publish",
+    "start": "esno src/index.ts",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit",
+    "prepare": "simple-git-hooks"
+  },
+  "dependencies": {
+    "bundle-require": "^4.1.0",
+    "jiti": "^1.21.0",
+    "tsx": "^4.9.4"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.14.0",
+    "@antfu/ni": "^0.21.12",
+    "@antfu/utils": "^0.7.7",
+    "@types/node": "^20.12.7",
+    "bumpp": "^9.4.0",
+    "eslint": "^9.0.0",
+    "esno": "^4.7.0",
+    "lint-staged": "^15.2.2",
+    "pnpm": "^9.0.2",
+    "rimraf": "^5.0.5",
+    "simple-git-hooks": "^2.11.1",
+    "typescript": "^5.4.5",
+    "unbuild": "^2.0.0",
+    "vite": "^5.2.9",
+    "vitest": "^1.5.0"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
+  }
+}
