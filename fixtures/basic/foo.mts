@@ -1,4 +1,5 @@
 import { capitalize } from '@antfu/utils'
+import { bar } from './bar.mts'
 
 const str: string | number = 'foo'
 
@@ -14,4 +15,4 @@ class A {
 
 const obj = new A(str, 42)
 
-export default capitalize(`${obj.a}${obj.b}${obj.c}`)
+export default capitalize(`${obj.a}${obj.b}${bar}${obj.c}`)

@@ -1,0 +1,51 @@
+[
+  {
+    "loader": "native",
+    "runtime": "node",
+    "imports": false,
+    "reimports": false,
+    "errors": "node:internal/modules/esm/get_format:160\n  throw new ERR_UNKNOWN_FILE_EXTENSION(ext, filepath);\n        ^\n\nTypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension \".mts\" for /Users/antfu/i/import-ts/fixtures/basic/foo.mts\n    at Object.getFileProtocolModuleFormat [as file:] (node:internal/modules/esm/get_format:160:9)\n    at defaultGetFormat (node:internal/modules/esm/get_format:203:36)\n    at defaultLoad (node:internal/modules/esm/load:143:22)\n    at async ModuleLoader.load (node:internal/modules/esm/loader:403:7)\n    at async ModuleLoader.moduleProvider (node:internal/modules/esm/loader:285:45)\n    at async link (node:internal/modules/esm/module_job:78:21) {\n  code: 'ERR_UNKNOWN_FILE_EXTENSION'\n}\n\nNode.js v20.12.2"
+  },
+  {
+    "loader": "native",
+    "runtime": "tsx",
+    "imports": true,
+    "reimports": false,
+    "errors": null
+  },
+  {
+    "loader": "native",
+    "runtime": "deno",
+    "imports": true,
+    "reimports": false,
+    "errors": null
+  },
+  {
+    "loader": "native",
+    "runtime": "bun",
+    "imports": true,
+    "reimports": false,
+    "errors": null
+  },
+  {
+    "loader": "tsx",
+    "runtime": "node",
+    "imports": true,
+    "reimports": true,
+    "errors": null
+  },
+  {
+    "loader": "jiti",
+    "runtime": "node",
+    "imports": true,
+    "reimports": true,
+    "errors": null
+  },
+  {
+    "loader": "bundle-require",
+    "runtime": "node",
+    "imports": true,
+    "reimports": true,
+    "errors": null
+  }
+]

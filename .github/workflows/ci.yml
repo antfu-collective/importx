@@ -123,7 +123,7 @@ jobs:
           deno-version: vx.x.x
 
       - name: loader:native with deno
-        run: deno run --unstable --allow-read --allow-env --allow-run ./fixtures/basic/index.mjs
+        run: deno run --allow-read --allow-env --allow-run ./fixtures/basic/index.mjs
         if: always()
         env:
           DEBUG: importx

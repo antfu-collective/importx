@@ -1,6 +1,7 @@
 /* eslint-disable node/prefer-global/process */
 
 import { fileURLToPath } from 'node:url'
+import { dirname } from 'node:path'
 import Debug from 'debug'
 
 const debug = Debug('importx')
@@ -193,6 +194,12 @@ export async function importTs<T = any>(path: string, options: string | ImportTs
       return import('jiti')
         .then(r => r.default(fileURLToPath(parentURL), {
           esmResolve: true,
+          ...(options.cache === false
+            ? {
+                cache: false,
+                requireCache: false,
+              }
+            : {}),
           ...loaderOptions.jiti,
         })(path))
     }
@@ -202,7 +209,7 @@ export async function importTs<T = any>(path: string, options: string | ImportTs
         .then(r => r.bundleRequire({
           ...loaderOptions.bundleRequire,
           filepath: path,
-          cwd: fileURLToPath(parentURL),
+          cwd: dirname(fileURLToPath(parentURL)),
         }))
         .then(r => r.mod)
     }
