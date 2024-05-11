@@ -8,10 +8,11 @@
 
 Unified tool for importing TypeScript modules at runtime.
 
+- [`auto`](#auto)
+- [`native`](#native)
 - [`tsx`](#tsx)
 - [`jiti`](#jiti)
 - [`bundle-require`](#bundle-require)
-- [`native`](#native)
 
 ## Motivation
 
@@ -19,7 +20,9 @@ It's a common need for tools to support importing TypeScript modules at runtime.
 
 There are so many ways to do that, each with its own trade-offs and limitations. This library aims to provide a simple, unified API for importing TypeScript modules, providing an easy-to-use API, and making it easy to switch between different loaders.
 
-By default, it also provides [a smart "auto" mode that decides the best loader based on the environment](#auto), trying to ease out their limitations and provide the best experience. The goal is for this library to swallow the complexity of the underlying implementations, where you can just focus on the feature set you need. This library will keep up-to-date with the latest loaders and the runtime environment.
+By default, it also provides [a smart "auto" mode that decides the best loader based on the environment](#auto), trying to ease out their limitations and provide the best experience.
+
+**The goal is for this library to swallow the complexity of the underlying implementations, where you can just focus on the feature set you need**. This library will keep up-to-date with the latest loaders and the runtime environment.
 
 ## Usage
 
