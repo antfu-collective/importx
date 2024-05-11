@@ -91,9 +91,13 @@ export interface ImportxModuleInfo {
    */
   specifier: string
   /**
-   * User passed parent URL.
+   * Parent URL, normalized to file URL.
    */
-  parentURL: string
+  parentURL: URL
+  /**
+   * Parent path, normalized to file path.
+   */
+  parentPath: string
   /**
    * Timestamp when import is initialized.
    */

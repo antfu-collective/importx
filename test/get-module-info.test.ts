@@ -18,6 +18,20 @@ it('should get module info', async () => {
   expect(info?.dependencies).not.toBeDefined()
 })
 
+it('should get module info with parent filepath', async () => {
+  const mod = await importx('./fixtures/basic/foo.mts', __filename)
+  const info = getModuleInfo(mod)
+
+  expect(mod.default).toBe(MOD_EXPORT)
+
+  expect(info).toBeDefined()
+  expect(info).toMatchObject({
+    loader: 'native', // because Vitest supports importing TypeScript files
+    specifier: './fixtures/basic/foo.mts',
+  })
+  expect(info?.dependencies).not.toBeDefined()
+})
+
 it('should get dependencies with tsx', async () => {
   const mod = await importx('./fixtures/basic/foo.mts', {
     loader: 'tsx',

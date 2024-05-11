@@ -35,7 +35,7 @@ export async function importx<T = any>(specifier: string, options: string | URL 
 
   const {
     loaderOptions = {},
-    parentURL,
+    parentURL: inputUserUrl,
     cache = null,
     ignoreImportxWarning = false,
     ...otherOptions
@@ -45,12 +45,16 @@ export async function importx<T = any>(specifier: string, options: string | URL 
   if (loader === 'auto')
     loader = await detectLoader(cache, isTypeScriptFile(specifier))
 
-  const parentPath = fileURLToPath(parentURL)
+  const parentPath = (typeof inputUserUrl === 'string' && !inputUserUrl.includes('://'))
+    ? inputUserUrl
+    : fileURLToPath(inputUserUrl)
+  const parentURL = pathToFileURL(parentPath)
 
   const info: ImportxModuleInfo = {
     loader,
     specifier,
-    parentURL: parentPath,
+    parentURL,
+    parentPath,
     timestampInit: Date.now(),
     timestampLoad: -1,
   }
