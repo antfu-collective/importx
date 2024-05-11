@@ -17,14 +17,9 @@ Unified tool for importing TypeScript modules at runtime.
 
 It's a common need for tools to support importing TypeScript modules at runtime. For example, to support configure files written in TypeScript.
 
-There are so many ways to do that, each with its own trade-offs and limitations. This library aims to provide a simple, unified API for importing TypeScript modules, balancing out their limitations, providing an easy-to-use API, and making it easy to switch between different loaders.
+There are so many ways to do that, each with its own trade-offs and limitations. This library aims to provide a simple, unified API for importing TypeScript modules, providing an easy-to-use API, and making it easy to switch between different loaders.
 
-By default, it also provides a smart "auto" mode that decides the best loader based on the environment:
-
-- Use native `import()` for runtimes that support directly importing TypeScript modules (Deno, Bun, or `ts-node`, `tsx` CLI).
-- Use `tsx` for modern module environments.
-- Use `jiti` for older Node.js that don't support `tsx`.
-- Use `bundle-require` when you want to import a module without the ESM cache.
+By default, it also provides [a smart "auto" mode that decides the best loader based on the environment](#auto), trying to ease out their limitations and provide the best experience. The goal is for this library to swallow the complexity of the underlying implementations, where you can just focus on the feature set you need. This library will keep up-to-date with the latest loaders and the runtime environment.
 
 ## Usage
 
@@ -34,6 +29,22 @@ npm i importx
 
 ```ts
 const mod = await import('importx').then(x => x.import('./path/to/module.ts', import.meta.url))
+```
+
+## Options
+
+You can turn the second argument of `import` into an object to provide options:
+
+```ts
+const mod = await import('importx').then(x => x.import('./path/to/module.ts', {
+  parentURL: import.meta.url, // *required
+
+  // The following options are their default values
+  cache: null, // false, if you want to always get a new module
+  listDependencies: false, // true, if you need to get the list of dependencies
+
+  loader: 'auto', // most of the time, you don't need to change this as they will be chosen automatically
+}))
 ```
 
 ## Loaders
