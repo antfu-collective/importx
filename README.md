@@ -44,52 +44,63 @@ Automatically choose the best loader based on the environment.
 
 ```mermaid
 graph TD
-  A((Auto)) --> IsTS{{"Is importing a TypeScript file?"}}
-  IsTS --> |No| Cache{{"Import cache?"}}
-  Cache --> |true,null| Native1(["native import()"])
-  Cache --> |false| F
+  A((Auto)) --> Cache
 
-  Cache2 --> |false| F
-  IsTS --> |Yes| Cache2{{"Import cache?"}}
-  Cache2 --> |true,null| D{{"Supports native TypeScript?"}}
-  D --> |No| Cache3{{"Import cache?"}}
-  D --> |Yes| Native2(["native import()"])
-  Cache3 --> |true| Jiti1([jiti])
-  Cache3 --> |null| F{{"Is current runtime supports tsx?"}}
-  F --> |Yes| Tsx3([tsx])
-  F --> |No| Jiti2([jiti])
+  Cache --> |false| RuntimeTsx
+  Cache --> |true / null| IsTS
+
+  IsTS --> |Yes| SupportTs
+  IsTS --> |No| Native1
+
+  SupportTs --> |No| RuntimeTsx
+  SupportTs --> |Yes| Native2
+
+  RuntimeTsx --> |Yes| Tsx
+  RuntimeTsx --> |No| Jiti
+
+  IsTS{{"Is importing a TypeScript file?"}}
+  SupportTs{{"Supports native TypeScript?"}}
+  Cache{{"Cache enabled?"}}
+  Native1(["native import()"])
+  Native2(["native import()"])
+  RuntimeTsx{{"Is current runtime supports tsx?"}}
+  Tsx([tsx loader])
+  Jiti([jiti loader])
 
   classDef auto fill:#0f82,stroke:#0f83,stroke-width:2px;
   classDef question fill:#f9f2,stroke:#f9f3,stroke-width:2px;
   classDef cache fill:#eb527120,stroke:#eb527133,stroke-width:2px;
   classDef native fill:#8882,stroke:#8883,stroke-width:2px;
-  classDef tsx fill:#09f2,stroke:#09f3,stroke-width:2px;
+  classDef ts fill:#09f2,stroke:#09f3,stroke-width:2px;
+  classDef tsx fill:#0fe2,stroke:#0fe3,stroke-width:2px;
   classDef jiti fill:#ffde2220,stroke:#ffde2230,stroke-width:2px;
   class A auto;
-  class IsTS,D,F question;
-  class Cache,Cache2,Cache3 cache;
-  class Native1,Native2 native;
-  class Tsx1,Tsx2,Tsx3 tsx;
-  class Jiti1,Jiti2 jiti;
+  class RuntimeTsx question;
+  class Cache cache;
+  class Native1,Native2,Native3 native;
+  class IsTS,SupportTs ts;
+  class Tsx tsx;
+  class Jiti jiti;
   linkStyle default stroke:#8888
 ```
 
 ### `native`
 
-Use the native `import()` to import the module.
+Use the native `import()` to import the module. According to the ESM spec, importing the same module multiple times will return the same module instance.
 
 ### `tsx`
 
-Use [`tsx`](https://github.com/privatenumber/tsx)'s [`tsImport` API](https://tsx.is/node#tsimport) to import the module. Under the hood, it registers [Node.js loader API](https://nodejs.org/api/module.html#moduleregisterspecifier-parenturl-options) and uses [esbuild](https://esbuild.github.io/) to transpile TypeScript to JavaScript.
+Use [`tsx`](https://github.com/privatenumber/tsx)'s [`tsImport` API](https://tsx.is/node/ts-import) to import the module. Under the hood, it registers [Node.js loader API](https://nodejs.org/api/module.html#moduleregisterspecifier-parenturl-options) and uses [esbuild](https://esbuild.github.io/) to transpile TypeScript to JavaScript.
 
 #### Pros
 
 - Native Node.js loader API, consistent and future-proof.
 - Get the file list of module dependencies. Helpful for hot-reloading or manifest generation.
+- Supports [scoped registration](https://tsx.is/node/esm#scoped-registration), does not affect the global environment.
 
 #### Limitations
 
-- Requires Node.js `^18.18.0`, `^20.6.0` or above.
+- Requires Node.js `^18.18.0`, `^20.6.0` or above. Does not work on other runtime yet.
 
 ### `jiti`
 
@@ -97,8 +108,8 @@ Use [`jiti`](https://github.com/unjs/jiti) to import the module. It uses a bundl
 
 #### Pros
 
-- Self-contained, does not dependents on esbuild.
-- Own cache and module runner, better and flexible cache control.
+- Self-contained, does not depend on esbuild.
+- Own cache and module runner, better and flexible cache control. Works on the majority of Node-compatible runtimes.
 
 #### Limitations
 
@@ -115,8 +126,9 @@ Use [`bundle-require`](https://github.com/egoist/bundle-require) to import the m
 
 #### Limitations
 
-- It creates a temporary bundle file on importing (will external `node_modules`).
+- It creates a temporary bundle file when importing (will external `node_modules`).
 - Can be inefficient where there are many TypeScript modules in the import tree.
+- Imports are using esbuild's resolution, which might have potential misalignment with Node.js.
 - Always import a new module, does not support module cache.
 
 ## Cache
@@ -173,14 +185,14 @@ Importing a TypeScript module with `importx`:
 
 <!-- TABLE_START -->
 
-> Generated with version `v0.1.0` at 2024-05-11T12:28:48.832Z
+> Generated with version `v0.1.2` at 2024-05-11T18:26:38.090Z
 
 |  | native | tsx | jiti | bundle-require |
 | ------- | --- | --- | --- | --- |
-| node | Import: ❌<br>Cache: ❌<br>No cache: ❌ | Import: ✅<br>Cache: ❌<br>No cache: ✅ | Import: ✅<br>Cache: ✅<br>No cache: ✅ | Import: ✅<br>Cache: ❌<br>No cache: ✅ |
-| tsx | Import: ✅<br>Cache: ✅<br>No cache: ❌ | Import: ✅<br>Cache: ❌<br>No cache: ✅ | Import: ✅<br>Cache: ✅<br>No cache: ✅ | Import: ✅<br>Cache: ❌<br>No cache: ✅ |
-| deno | Import: ✅<br>Cache: ✅<br>No cache: ❌ | Import: ❌<br>Cache: ❌<br>No cache: ❌ | Import: ✅<br>Cache: ✅<br>No cache: ✅ | Import: ❌<br>Cache: ❌<br>No cache: ❌ |
-| bun | Import: ✅<br>Cache: ✅<br>No cache: ❌ | Import: ❌<br>Cache: ❌<br>No cache: ❌ | Import: ✅<br>Cache: ✅<br>No cache: ❌ | Import: ✅<br>Cache: ❌<br>No cache: ✅ |
+| node | Import: ❌<br>Cache: ❌<br>No cache: `N/A` | Import: ✅<br>Cache: ✅<br>No cache: ✅ | Import: ✅<br>Cache: ✅<br>No cache: ✅ | Import: ✅<br>Cache: ❌<br>No cache: ✅ |
+| tsx | Import: ✅<br>Cache: ✅<br>No cache: `N/A` | Import: ✅<br>Cache: ✅<br>No cache: ✅ | Import: ✅<br>Cache: ✅<br>No cache: ✅ | Import: ✅<br>Cache: ❌<br>No cache: ✅ |
+| deno | Import: ✅<br>Cache: ✅<br>No cache: `N/A` | Import: ❌<br>Cache: ❌<br>No cache: ❌ | Import: ✅<br>Cache: ✅<br>No cache: ✅ | Import: ✅<br>Cache: ❌<br>No cache: ✅ |
+| bun | Import: ✅<br>Cache: ✅<br>No cache: `N/A` | Import: ❌<br>Cache: ❌<br>No cache: ❌ | Import: ✅<br>Cache: ✅<br>No cache: ❌ | Import: ✅<br>Cache: ❌<br>No cache: ✅ |
 
 <!-- TABLE_END -->
 

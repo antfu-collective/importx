@@ -16,7 +16,7 @@ export interface ImportxOptions {
     /**
      * Options for `tsx` loader.
      *
-     * @see https://tsx.is/node#tsimport
+     * @see https://tsx.is/node/ts-import
      */
     tsx?: Omit<Partial<Exclude<ArgumentTypes<typeof import('tsx/esm/api').tsImport>['1'], string>>, 'parentURL'>
     /**
@@ -48,7 +48,6 @@ export interface ImportxOptions {
    *  - `native`
    *
    * `cache: true` does not compatible with following loaders:
-   *  - `tsx`
    *  - `bundle-require`
    *
    * When `false` is passed, the `auto` mode will fallback to `tsx`
@@ -90,6 +89,14 @@ export interface ImportxModuleInfo {
    * User passed import specifier.
    */
   specifier: string
+  /**
+   * Resolved full path the specifier points to.
+   */
+  fullPath: string
+  /**
+   * Enable module cache or not
+   */
+  cache: boolean | null
   /**
    * Parent URL, normalized to file URL.
    */

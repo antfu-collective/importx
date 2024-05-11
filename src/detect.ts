@@ -32,9 +32,6 @@ export async function detectLoader(cache: boolean | null, isTsFile: boolean): Pr
   if (!isTsFile || await isNativeTsImportSupported())
     return 'native'
 
-  if (cache === true)
-    return 'jiti'
-
   return tsxOrJiti()
 }
 

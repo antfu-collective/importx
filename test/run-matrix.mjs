@@ -87,7 +87,7 @@ ${runtimes.map(runtime => `| ${runtime} | ${loaders.map((loader) => {
   return [
     `Import: ${record.import ? '✅' : '❌'}`,
     `Cache: ${record.importCache ? '✅' : '❌'}`,
-    `No cache: ${record.importNoCache ? '✅' : '❌'}`,
+    `No cache: ${record.loader === 'native' ? '`N/A`' : record.importNoCache ? '✅' : '❌'}`,
   ].join('<br>')
 }).join(' | ')} |`).join('\n')}
 `.trim()

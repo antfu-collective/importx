@@ -29,9 +29,10 @@ export async function importx<T = any>(specifier: string | URL, parentURL: strin
  * @param options Options
  */
 export async function importx<T = any>(specifier: string | URL, options: ImportxOptions): Promise<T>
-export async function importx<T = any>(_specifier: string | URL, options: string | URL | ImportxOptions): Promise<T> {
-  if (typeof options === 'string' || options instanceof URL)
-    options = { parentURL: options }
+export async function importx<T = any>(_specifier: string | URL, _options: string | URL | ImportxOptions): Promise<T> {
+  const options = (typeof _options === 'string' || _options instanceof URL)
+    ? { parentURL: _options }
+    : _options
 
   const {
     loaderOptions = {},
@@ -53,17 +54,22 @@ export async function importx<T = any>(_specifier: string | URL, options: string
     ? inputUserUrl
     : fileURLToPath(inputUserUrl)
   const parentURL = pathToFileURL(parentPath)
+  const fullPath = specifier[0] === '.'
+    ? fileURLToPath(new URL(specifier, parentURL))
+    : specifier
 
   const info: ImportxModuleInfo = {
     loader,
+    cache,
     specifier,
+    fullPath,
     parentURL,
     parentPath,
     timestampInit: Date.now(),
     timestampLoad: -1,
   }
 
-  debug(`[${loader}]`, 'Importing', specifier, 'from', parentURL)
+  debug(`[${loader}]`, 'Importing', fullPath, 'from', parentPath)
 
   async function run() {
     switch (loader) {
@@ -71,12 +77,7 @@ export async function importx<T = any>(_specifier: string | URL, options: string
         if (cache === false && !ignoreImportxWarning)
           throw new Error('`cache: false` is not compatible with `native` loader')
 
-        return import(
-          specifier[0] === '.'
-            ? fileURLToPath(new URL(specifier, parentURL))
-            : specifier,
-          otherOptions
-        )
+        return import(fullPath, otherOptions)
       }
 
       case 'tsx': {
@@ -86,17 +87,8 @@ export async function importx<T = any>(_specifier: string | URL, options: string
         const dependencies: string[] = []
         info.dependencies = dependencies
 
-        return import('tsx/esm/api')
-          .then(r => r.tsImport(
-            specifier,
-            {
-              onImport(url) {
-                dependencies.push(url)
-              },
-              ...loaderOptions.tsx,
-              parentURL: parentPath,
-            },
-          ))
+        return import('./loaders/tsx')
+          .then(r => r.loader(info, options))
       }
 
       case 'jiti': {
@@ -122,9 +114,7 @@ export async function importx<T = any>(_specifier: string | URL, options: string
           .then(r => r.bundleRequire({
             format: 'esm',
             ...loaderOptions.bundleRequire,
-            filepath: specifier[0] === '.'
-              ? fileURLToPath(new URL(specifier, parentURL))
-              : specifier,
+            filepath: fullPath,
             cwd,
           }))
           .then((r) => {
