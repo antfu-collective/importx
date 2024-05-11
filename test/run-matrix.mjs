@@ -67,10 +67,8 @@ if (process.env.CI) {
       `   No cache: ${record.importNoCache ? c.green('✅') : c.red('❌')}`,
     )
   }
+  // TODO: send this to action output: https://github.com/vitejs/vite-benchmark/blob/fed7d313e66b95fd4bc288cde93d69b3dffdbec4/runner/src/cli.ts#L107-L113
   console.log(messages.join('\n'))
-
-  // For GitHub Actions
-  console.log(`::notice title=Report::${messages.join('\n').replace(/%/g, '%25').replace(/\r/g, '%0D').replace(/\n/g, '%0A')}`)
 
   if (records.slice(1).some(x => !x.import))
     process.exit(1)
