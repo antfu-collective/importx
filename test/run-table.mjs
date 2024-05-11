@@ -2,6 +2,7 @@
 import { fileURLToPath } from 'node:url'
 import fs from 'node:fs/promises'
 import { execaCommand } from 'execa'
+import pkg from '../package.json' with { type: 'json' }
 
 const loaders = ['native', 'tsx', 'jiti', 'bundle-require']
 const runtimes = ['node', 'tsx', 'deno', 'bun']
@@ -53,9 +54,8 @@ for (const loader of loaders) {
 
 await fs.writeFile('test/table.json', JSON.stringify(records, null, 2), 'utf8')
 
-const md = `
-
-# Runtime / Loader compatibility table
+const table = `
+> Generated with version v${pkg.version} at ${new Date().toISOString()}
 
 |  | ${loaders.join(' | ')} |
 | ------- | ${loaders.map(() => '---').join(' | ')} |
@@ -69,6 +69,8 @@ ${runtimes.map(runtime => `| ${runtime} | ${loaders.map((loader) => {
     `No cache: ${record.importNoCache ? '✔️' : '❌'}`,
   ].join('<br>')
 }).join(' | ')} |`).join('\n')}
-`.trimStart()
+`.trim()
 
-await fs.writeFile('test/table.md', md, 'utf8')
+let readme = await fs.readFile('README.md', 'utf8')
+readme = readme.replace(/(<!-- TABLE_START -->)[\s\S]*(<!-- TABLE_END -->)/m, `$1\n\n${table}\n\n$2`)
+await fs.writeFile('README.md', readme, 'utf8')

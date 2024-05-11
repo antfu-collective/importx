@@ -38,8 +38,6 @@ const mod = await import('importx').then(x => x.import('./path/to/module.ts', im
 
 ## Loaders
 
-Check the [runtime/loader import feature table](./test/table.md) for comparison.
-
 ### `auto`
 
 Automatically choose the best loader based on the environment.
@@ -103,6 +101,50 @@ Use [`bundle-require`](https://github.com/egoist/bundle-require) to import the m
 - It creates a temporary bundle file on importing (will external `node_modules`).
 - Can be inefficient where there are many TypeScript modules in the import tree.
 - Always import a new module, does not support module cache.
+
+## Cache
+
+By definition, ESM modules are always cached by the runtime, which means you will get the same module instance when importing the same module multiple times. In some scenarios, like a dev server watching for config file changes, the cache may not be desired as you want to get the new module with the latest code on your disk.
+
+`importx` allows you to specify if you want to have the module cache or not, by providing the `cache` option:)
+
+```ts
+const mod = await import('importx')
+  .then(x => x.import('./path/to/module.ts', {
+    cache: false, // <-- this
+    parentURL: import.meta.url,
+  }))
+```
+
+Setting `cache: null` (default) means you don't care about the cache (if you only import the module once).
+
+Note that some loaders always have a cache, and some loaders always have no cache. With the `auto` loader, we will choose the best loader based on your need. Otherwise, an unsupported combination will throw an error. For example:
+
+```ts
+// This will throw an error because `bundle-require` does not support cache.
+const mod = await import('importx')
+  .then(x => x.import('./path/to/module.ts', {
+    cache: true,
+    loader: 'bundle-require',
+    parentURL: import.meta.url,
+    // ignoreImportxWarning: true // unless you have this
+  }))
+```
+
+## Runtime-Loader Compatibility Table
+
+<!-- TABLE_START -->
+
+> Generated with version v0.0.0 at 2024-05-11T03:54:52.301Z
+
+|  | native | tsx | jiti | bundle-require |
+| ------- | --- | --- | --- | --- |
+| node | Import: ❌<br>Cache: ❌<br>No cache: ❌ | Import: ✔️<br>Cache: ❌<br>No cache: ✔️ | Import: ✔️<br>Cache: ✔️<br>No cache: ✔️ | Import: ✔️<br>Cache: ❌<br>No cache: ✔️ |
+| tsx | Import: ✔️<br>Cache: ✔️<br>No cache: ❌ | N/A | N/A | N/A |
+| deno | Import: ✔️<br>Cache: ✔️<br>No cache: ❌ | N/A | N/A | N/A |
+| bun | Import: ✔️<br>Cache: ✔️<br>No cache: ❌ | N/A | N/A | N/A |
+
+<!-- TABLE_END -->
 
 ## Sponsors
 
