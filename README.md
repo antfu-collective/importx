@@ -44,18 +44,33 @@ Automatically choose the best loader based on the environment.
 
 ```mermaid
 graph TD
-  A[Auto] --> IsTS{{"Is importing TypeScript file?"}}
+  A((Auto)) --> IsTS{{"Is importing TypeScript file?"}}
   IsTS --> |No| Cache{{"Import cache?"}}
-  Cache --> |Yes| B([native import])
-  Cache --> |No| tsx1[tsx]
+  Cache --> |true,null| Native1([native import])
+  Cache --> |false| Tsx1([tsx])
 
   IsTS --> |Yes| Cache2{{"Import cache?"}}
-  Cache2 --> |Yes| D{{"Supports native TypeScript?"}}
-  Cache2 --> |No| tsx2[tsx]
-  D --> |Yes| E([native import])
-  D --> |No| F{{"Is Node.js version range supports tsx?"}}
-  F --> |Yes| G[tsx]
-  F --> |No| H[jiti]
+  Cache2 --> |true,null| D{{"Supports native TypeScript?"}}
+  Cache2 --> |false| Tsx2([tsx])
+  D --> |Yes| Native2([native import])
+  D --> |No| Cache3{{"Import cache?"}}
+  Cache3 --> |true| Jiti1([jiti])
+  Cache3 --> |null| F{{"Is Node.js version range supports tsx?"}}
+  F --> |Yes| Tsx3([tsx])
+  F --> |No| Jiti2([jiti])
+
+  classDef auto fill:#0f82,stroke:#0f83,stroke-width:2px;
+  classDef question fill:#f9f2,stroke:#f9f3,stroke-width:2px;
+  classDef cache fill:#eb527120,stroke:#eb527133,stroke-width:2px;
+  classDef native fill:#8882,stroke:#8883,stroke-width:2px;
+  classDef tsx fill:#09f2,stroke:#09f3,stroke-width:2px;
+  classDef jiti fill:#ffde2220,stroke:#ffde2230,stroke-width:2px;
+  class A auto;
+  class IsTS,D,F question;
+  class Cache,Cache2,Cache3 cache;
+  class Native1,Native2 native;
+  class Tsx1,Tsx2,Tsx3 tsx;
+  class Jiti1,Jiti2 jiti;
 ```
 
 ### `native`
