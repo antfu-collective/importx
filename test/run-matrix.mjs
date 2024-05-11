@@ -57,13 +57,21 @@ for (const loader of loaders) {
 await fs.writeFile('test/table.json', JSON.stringify(records, null, 2), 'utf8')
 
 if (process.env.CI) {
+  const messages = []
   for (const record of records) {
-    console.log('---')
-    console.log(`[${c.green(record.runtime)}]: ${c.yellow(record.loader)}:`)
-    console.log(`   Import:   ${record.import ? c.green('✅') : c.red('❌')}`)
-    console.log(`   Cache:    ${record.importCache ? c.green('✅') : c.red('❌')}`)
-    console.log(`   No cache: ${record.importNoCache ? c.green('✅') : c.red('❌')}`)
+    messages.push(
+      '-----------',
+      `${c.green(record.runtime)} - ${c.yellow(record.loader)}`,
+      `   Import:   ${record.import ? c.green('✅') : c.red('❌')}`,
+      `   Cache:    ${record.importCache ? c.green('✅') : c.red('❌')}`,
+      `   No cache: ${record.importNoCache ? c.green('✅') : c.red('❌')}`,
+    )
   }
+  console.log(messages.join('\n'))
+
+  // For GitHub Actions
+  console.log(`::notice title=Report::${messages.join('\n').replace(/%/g, '%25').replace(/\r/g, '%0D').replace(/\n/g, '%0A')}`)
+
   if (records.slice(1).some(x => !x.import))
     process.exit(1)
 }
