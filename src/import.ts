@@ -21,15 +21,15 @@ export function getModuleInfo(mod: any): ImportxModuleInfo | undefined {
  * @param specifier The path to the file to import.
  * @param parentURL The URL of the parent module, usually `import.meta.url` or `__filename`.
  */
-export async function importx<T = any>(specifier: string, parentURL: string | URL): Promise<T>
+export async function importx<T = any>(specifier: string | URL, parentURL: string | URL): Promise<T>
 /**
  * Import a TypeScript module at runtime.
  *
  * @param specifier The path to the file to import.
  * @param options Options
  */
-export async function importx<T = any>(specifier: string, options: ImportxOptions): Promise<T>
-export async function importx<T = any>(specifier: string, options: string | URL | ImportxOptions): Promise<T> {
+export async function importx<T = any>(specifier: string | URL, options: ImportxOptions): Promise<T>
+export async function importx<T = any>(_specifier: string | URL, options: string | URL | ImportxOptions): Promise<T> {
   if (typeof options === 'string' || options instanceof URL)
     options = { parentURL: options }
 
@@ -40,6 +40,10 @@ export async function importx<T = any>(specifier: string, options: string | URL 
     ignoreImportxWarning = false,
     ...otherOptions
   } = options
+
+  const specifier = (_specifier instanceof URL)
+    ? fileURLToPath(_specifier)
+    : _specifier
 
   let loader = options.loader || 'auto'
   if (loader === 'auto')
