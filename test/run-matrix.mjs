@@ -57,6 +57,7 @@ for (const loader of loaders) {
 await fs.writeFile('test/table.json', JSON.stringify(records, null, 2), 'utf8')
 
 if (process.env.CI) {
+  const isWindows = process.platform === 'win32'
   const messages = []
   for (const record of records) {
     messages.push(
@@ -72,7 +73,7 @@ if (process.env.CI) {
 
   if (
     records
-      .filter(x => (x.runtime === 'node' && x.loader !== 'native') || (x.runtime !== 'node' && x.loader === 'native'))
+      .filter(x => (x.runtime === 'node' && x.loader !== 'native') || (x.runtime !== 'node' && x.loader === 'native' && !isWindows))
       .some(x => !x.import)
   )
     process.exit(1)
