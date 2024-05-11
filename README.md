@@ -55,7 +55,7 @@ graph TD
   D --> |No| Cache3{{"Import cache?"}}
   D --> |Yes| Native2(["native import()"])
   Cache3 --> |true| Jiti1([jiti])
-  Cache3 --> |null| F{{"Is Node.js version range supports tsx?"}}
+  Cache3 --> |null| F{{"Is current runtime supports tsx?"}}
   F --> |Yes| Tsx3([tsx])
   F --> |No| Jiti2([jiti])
 
