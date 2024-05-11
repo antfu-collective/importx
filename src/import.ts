@@ -120,6 +120,7 @@ export async function importx<T = any>(_specifier: string | URL, options: string
         const cwd = dirname(parentPath)
         return import('bundle-require')
           .then(r => r.bundleRequire({
+            format: 'esm',
             ...loaderOptions.bundleRequire,
             filepath: specifier[0] === '.'
               ? fileURLToPath(new URL(specifier, parentURL))
