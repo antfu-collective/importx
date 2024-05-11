@@ -1,5 +1,5 @@
-/* eslint-disable node/prefer-global/process */
 /* eslint-disable no-console */
+import process from 'node:process'
 
 const LOADER = process.env.IMPORTX_LOADER || 'auto'
 
