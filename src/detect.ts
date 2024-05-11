@@ -39,18 +39,18 @@ export async function detectLoader(cache: boolean | null, isTsFile: boolean): Pr
 }
 
 async function tsxOrJiti() {
-  if (!nodeVersionNumbers)
-    return 'tsx'
-
   /**
    * tsx is supported in Node.js 18.19.0+ and 20.8.0+
    * Otherwise we fallback to jiti
    *
    * @see https://nodejs.org/api/module.html#moduleregisterspecifier-parenturl-options
    */
-  if (nodeVersionNumbers[0] < 18
+  if (
+    !nodeVersionNumbers
+    || nodeVersionNumbers[0] < 18
     || (nodeVersionNumbers[0] === 18 && nodeVersionNumbers[1] < 19)
-    || (nodeVersionNumbers[0] === 20 && nodeVersionNumbers[1] < 8))
+    || (nodeVersionNumbers[0] === 20 && nodeVersionNumbers[1] < 8)
+  )
     return 'jiti'
 
   return 'tsx'
