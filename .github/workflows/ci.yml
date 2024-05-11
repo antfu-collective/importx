@@ -83,21 +83,21 @@ jobs:
         run: nr build
 
       - name: loader:auto
-        run: node ./fixtuers/basic/index.mjs
+        run: node ./fixtures/basic/index.mjs
         if: always()
         env:
           DEBUG: importx
           IMPORTX_LOADER: auto
 
       - name: loader:jiti
-        run: node ./fixtuers/basic/index.mjs
+        run: node ./fixtures/basic/index.mjs
         if: always()
         env:
           DEBUG: importx
           IMPORTX_LOADER: jiti
 
       - name: loader:tsx
-        run: node ./fixtuers/basic/index.mjs
+        run: node ./fixtures/basic/index.mjs
         if: always()
         env:
           DEBUG: importx
@@ -111,7 +111,7 @@ jobs:
           IMPORTX_LOADER: bundle-require
 
       - name: loader:native with tsx cli
-        run: npx tsx fixtures/basic/index.mjs
+        run: npx tsx ./fixtures/basic/index.mjs
         if: always()
         env:
           DEBUG: importx
