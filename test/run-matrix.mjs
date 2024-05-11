@@ -70,7 +70,11 @@ if (process.env.CI) {
   // TODO: send this to action output: https://github.com/vitejs/vite-benchmark/blob/fed7d313e66b95fd4bc288cde93d69b3dffdbec4/runner/src/cli.ts#L107-L113
   console.log(messages.join('\n'))
 
-  if (records.slice(1).some(x => !x.import))
+  if (
+    records
+      .filter(x => (x.runtime === 'node' && x.loader !== 'native') || (x.runtime !== 'node' && x.loader === 'native'))
+      .some(x => !x.import)
+  )
     process.exit(1)
 }
 else {
