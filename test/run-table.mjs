@@ -64,9 +64,9 @@ ${runtimes.map(runtime => `| ${runtime} | ${loaders.map((loader) => {
   if (!record)
     return 'N/A'
   return [
-    `Import: ${record.import ? '✔️' : '❌'}`,
-    `Cache: ${record.importCache ? '✔️' : '❌'}`,
-    `No cache: ${record.importNoCache ? '✔️' : '❌'}`,
+    `Import: ${record.import ? '✅' : '❌'}`,
+    `Cache: ${record.importCache ? '✅' : '❌'}`,
+    `No cache: ${record.importNoCache ? '✅' : '❌'}`,
   ].join('<br>')
 }).join(' | ')} |`).join('\n')}
 `.trim()

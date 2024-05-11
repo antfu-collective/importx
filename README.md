@@ -135,14 +135,14 @@ const mod = await import('importx')
 
 <!-- TABLE_START -->
 
-> Generated with version v0.0.0 at 2024-05-11T03:54:52.301Z
+> Generated with version v0.0.1 at 2024-05-11T03:58:02.482Z
 
 |  | native | tsx | jiti | bundle-require |
 | ------- | --- | --- | --- | --- |
-| node | Import: ❌<br>Cache: ❌<br>No cache: ❌ | Import: ✔️<br>Cache: ❌<br>No cache: ✔️ | Import: ✔️<br>Cache: ✔️<br>No cache: ✔️ | Import: ✔️<br>Cache: ❌<br>No cache: ✔️ |
-| tsx | Import: ✔️<br>Cache: ✔️<br>No cache: ❌ | N/A | N/A | N/A |
-| deno | Import: ✔️<br>Cache: ✔️<br>No cache: ❌ | N/A | N/A | N/A |
-| bun | Import: ✔️<br>Cache: ✔️<br>No cache: ❌ | N/A | N/A | N/A |
+| node | Import: ❌<br>Cache: ❌<br>No cache: ❌ | Import: ✅<br>Cache: ❌<br>No cache: ✅ | Import: ✅<br>Cache: ✅<br>No cache: ✅ | Import: ✅<br>Cache: ❌<br>No cache: ✅ |
+| tsx | Import: ✅<br>Cache: ✅<br>No cache: ❌ | N/A | N/A | N/A |
+| deno | Import: ✅<br>Cache: ✅<br>No cache: ❌ | N/A | N/A | N/A |
+| bun | Import: ✅<br>Cache: ✅<br>No cache: ❌ | N/A | N/A | N/A |
 
 <!-- TABLE_END -->
 
