@@ -68,10 +68,15 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v2
 
-      - name: Set node
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: lts/*
+
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: vx.x.x
+
+      - uses: oven-sh/setup-bun@v1
 
       - name: Setup
         run: npm i -g @antfu/ni
@@ -82,73 +87,5 @@ jobs:
       - name: Build
         run: nr build
 
-      - name: loader:auto
-        run: node ./fixtures/basic/index.mjs
-        if: always()
-        env:
-          DEBUG: importx
-          IMPORTX_LOADER: auto
-
-      - name: loader:jiti
-        run: node ./fixtures/basic/index.mjs
-        if: always()
-        env:
-          DEBUG: importx
-          IMPORTX_LOADER: jiti
-
-      - name: loader:tsx
-        run: node ./fixtures/basic/index.mjs
-        if: always()
-        env:
-          DEBUG: importx
-          IMPORTX_LOADER: tsx
-
-      - name: loader:bundle-require
-        run: node ./fixtuers/basic/index.mjs
-        if: always()
-        env:
-          DEBUG: importx
-          IMPORTX_LOADER: bundle-require
-
-      - name: loader:native with tsx cli
-        run: npx tsx ./fixtures/basic/index.mjs
-        if: always()
-        env:
-          DEBUG: importx
-          IMPORTX_LOADER: native
-
-      - uses: denoland/setup-deno@v1
-        if: always()
-        with:
-          deno-version: vx.x.x
-
-      - name: loader:native with deno
-        run: deno run --allow-read --allow-env --allow-run ./fixtures/basic/index.mjs
-        if: always()
-        env:
-          DEBUG: importx
-          IMPORTX_LOADER: native
-
-      - name: loader:auto with deno
-        run: deno run --unstable --allow-read --allow-env --allow-run ./fixtures/basic/index.mjs
-        if: always()
-        env:
-          DEBUG: importx
-          IMPORTX_LOADER: auto
-
-      - uses: oven-sh/setup-bun@v1
-        if: always()
-
-      - name: loader:native with bun
-        run: bun run ./fixtures/basic/index.mjs
-        if: always()
-        env:
-          DEBUG: importx
-          IMPORTX_LOADER: native
-
-      - name: loader:auto with bun
-        run: bun run ./fixtures/basic/index.mjs
-        if: always()
-        env:
-          DEBUG: importx
-          IMPORTX_LOADER: auto
+      - name: Matrix
+        run: node ./test/run-matrix.js

@@ -1,7 +1,9 @@
 /* eslint-disable no-console */
 import { fileURLToPath } from 'node:url'
 import fs from 'node:fs/promises'
+import process from 'node:process'
 import { execaCommand } from 'execa'
+import c from 'picocolors'
 import pkg from '../package.json' with { type: 'json' }
 
 const loaders = ['native', 'tsx', 'jiti', 'bundle-require']
@@ -54,7 +56,19 @@ for (const loader of loaders) {
 
 await fs.writeFile('test/table.json', JSON.stringify(records, null, 2), 'utf8')
 
-const table = `
+if (process.env.CI) {
+  for (const record of records) {
+    console.log('---')
+    console.log(`[${c.green(record.runtime)}]: ${c.yellow(record.loader)}:`)
+    console.log(`   Import:   ${record.import ? c.green('✅') : c.red('❌')}`)
+    console.log(`   Cache:    ${record.importCache ? c.green('✅') : c.red('❌')}`)
+    console.log(`   No cache: ${record.importNoCache ? c.green('✅') : c.red('❌')}`)
+  }
+  if (records.slice(1).some(x => !x.import))
+    process.exit(1)
+}
+else {
+  const table = `
 > Generated with version v${pkg.version} at ${new Date().toISOString()}
 
 |  | ${loaders.join(' | ')} |
@@ -71,6 +85,7 @@ ${runtimes.map(runtime => `| ${runtime} | ${loaders.map((loader) => {
 }).join(' | ')} |`).join('\n')}
 `.trim()
 
-let readme = await fs.readFile('README.md', 'utf8')
-readme = readme.replace(/(<!-- TABLE_START -->)[\s\S]*(<!-- TABLE_END -->)/m, `$1\n\n${table}\n\n$2`)
-await fs.writeFile('README.md', readme, 'utf8')
+  let readme = await fs.readFile('README.md', 'utf8')
+  readme = readme.replace(/(<!-- TABLE_START -->)[\s\S]*(<!-- TABLE_END -->)/m, `$1\n\n${table}\n\n$2`)
+  await fs.writeFile('README.md', readme, 'utf8')
+}

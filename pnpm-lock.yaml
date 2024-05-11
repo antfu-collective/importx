@@ -54,6 +54,9 @@ importers:
       lint-staged:
         specifier: ^15.2.2
         version: 15.2.2
+      picocolors:
+        specifier: ^1.0.0
+        version: 1.0.0
       pnpm:
         specifier: ^9.0.2
         version: 9.0.2
