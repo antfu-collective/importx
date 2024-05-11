@@ -89,3 +89,6 @@ jobs:
 
       - name: Matrix
         run: node ./test/run-matrix.mjs
+
+      - name: Unit Test
+        run: nr test

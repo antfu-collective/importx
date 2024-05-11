@@ -17,7 +17,7 @@ Unified tool for importing TypeScript modules at runtime.
 
 It's a common need for tools to support importing TypeScript modules at runtime. For example, to support configure files written in TypeScript.
 
-There are so many ways to do that, each with its own trade-offs and limitations. This library aims to provide a simple, unified API for importing TypeScript modules and swap loaders as ease.
+There are so many ways to do that, each with its own trade-offs and limitations. This library aims to provide a simple, unified API for importing TypeScript modules, balancing out their limitations, providing an easy-to-use API, and making it easy to switch between different loaders.
 
 By default, it also provides a smart "auto" mode that decides the best loader based on the environment:
 
@@ -85,6 +85,7 @@ Use [`tsx`](https://github.com/privatenumber/tsx)'s [`tsImport` API](https://tsx
 #### Pros
 
 - Native Node.js loader API, consistent and future-proof.
+- Get the file list of module dependencies. Helpful for hot-reloading or manifest generation.
 
 #### Limitations
 
@@ -147,20 +148,39 @@ const mod = await import('importx')
   }))
 ```
 
+## Get Module Info
+
+You can get the extra module information by passing the module instance to `getModuleInfo`:
+
+```ts
+await import('importx')
+  .then(async (x) => {
+    const mod = await x.import('./path/to/module.ts', import.meta.url)
+    const info = x.getModuleInfo(mod)
+    console.log(
+      info.loader, // the final loader used
+      info.timestampInit, // timestamp when the module is initialized
+      info.timestampLoad, // timestamp when the module is imported
+      info.dependencies, // list of dependencies (available only in `tsx` and `bundle-require` loader),
+      (info.timestampLoad - info.timestampInit) // time taken to load the module (in ms)
+    )
+  })
+```
+
 ## Runtime-Loader Compatibility Table
 
 Importing a TypeScript module with `importx`:
 
 <!-- TABLE_START -->
 
-> Generated with version v0.0.2 at 2024-05-11T04:17:16.249Z
+> Generated with version `v0.0.3` at 2024-05-11T11:50:32.206Z
 
 |  | native | tsx | jiti | bundle-require |
 | ------- | --- | --- | --- | --- |
 | node | Import: ❌<br>Cache: ❌<br>No cache: ❌ | Import: ✅<br>Cache: ❌<br>No cache: ✅ | Import: ✅<br>Cache: ✅<br>No cache: ✅ | Import: ✅<br>Cache: ❌<br>No cache: ✅ |
-| tsx | Import: ✅<br>Cache: ✅<br>No cache: ❌ | N/A | N/A | N/A |
-| deno | Import: ✅<br>Cache: ✅<br>No cache: ❌ | N/A | N/A | N/A |
-| bun | Import: ✅<br>Cache: ✅<br>No cache: ❌ | N/A | N/A | N/A |
+| tsx | Import: ✅<br>Cache: ✅<br>No cache: ❌ | Import: ✅<br>Cache: ❌<br>No cache: ✅ | Import: ✅<br>Cache: ✅<br>No cache: ✅ | Import: ✅<br>Cache: ❌<br>No cache: ✅ |
+| deno | Import: ✅<br>Cache: ✅<br>No cache: ❌ | Import: ❌<br>Cache: ❌<br>No cache: ❌ | Import: ✅<br>Cache: ✅<br>No cache: ✅ | Import: ❌<br>Cache: ❌<br>No cache: ❌ |
+| bun | Import: ✅<br>Cache: ✅<br>No cache: ❌ | Import: ❌<br>Cache: ❌<br>No cache: ❌ | Import: ✅<br>Cache: ✅<br>No cache: ❌ | Import: ✅<br>Cache: ❌<br>No cache: ✅ |
 
 <!-- TABLE_END -->
 

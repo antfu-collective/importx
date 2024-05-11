@@ -1,7 +1,7 @@
 /* eslint-disable node/prefer-global/process */
 
-import { fileURLToPath } from 'node:url'
-import { dirname } from 'node:path'
+import { fileURLToPath, pathToFileURL } from 'node:url'
+import { dirname, join } from 'node:path'
 import Debug from 'debug'
 
 const debug = Debug('importx')
@@ -10,7 +10,7 @@ type ArgumentTypes<T> = T extends (...args: infer U) => any ? U : never
 
 export type SupportedLoader = 'tsx' | 'jiti' | 'bundle-require' | 'native'
 
-export interface ImportTsOptions {
+export interface ImportxOptions {
   /**
    * Loader to use for importing the file.
    * @default 'auto'
@@ -86,6 +86,39 @@ export interface ImportTsOptions {
   with?: ImportCallOptions['with']
 }
 
+export interface ImportxModuleInfo {
+  /**
+   * Resolved loader used to import the module.
+   */
+  loader: SupportedLoader
+  /**
+   * User passed import specifier.
+   */
+  specifier: string
+  /**
+   * User passed parent URL.
+   */
+  parentURL: string
+  /**
+   * Timestamp when import is initialized.
+   */
+  timestampInit: number
+  /**
+   * Timestamp when import is completed.
+   */
+  timestampLoad: number
+  /**
+   * List of dependencies of the module, presented as full file URLs.
+   * Only available for `tsx` and `bundle-require` loader.
+   * Will be `undefined` for other loaders.
+   */
+  dependencies?: string[]
+  /**
+   * If an single module instance is imported multiple times, this will be the previous import info.
+   */
+  previousImportInfo?: ImportxModuleInfo
+}
+
 let _isNativeTsImportSupported: boolean | undefined
 
 /**
@@ -149,96 +182,139 @@ export function isTypeScriptFile(path: string) {
   return reIsTypeScriptFile.test(path)
 }
 
+const _moduleInfoMap = new WeakMap<any, ImportxModuleInfo>()
+
+/**
+ * Get the importx module info from a module instance.
+ * Returns `undefined` if the module is not imported by `importx`.
+ */
+export function getModuleInfo(mod: any): ImportxModuleInfo | undefined {
+  return _moduleInfoMap.get(mod)
+}
+
 /**
  * Import a TypeScript module at runtime.
  *
- * @param path The path to the file to import.
+ * @param specifier The path to the file to import.
  * @param parentURL The URL of the parent module, usually `import.meta.url` or `__filename`.
  */
-export async function importTs<T = any>(path: string, parentURL: string | URL): Promise<T>
+export async function importx<T = any>(specifier: string, parentURL: string | URL): Promise<T>
 /**
  * Import a TypeScript module at runtime.
  *
- * @param path The path to the file to import.
+ * @param specifier The path to the file to import.
  * @param options Options
  */
-export async function importTs<T = any>(path: string, options: ImportTsOptions): Promise<T>
-export async function importTs<T = any>(path: string, options: string | URL | ImportTsOptions): Promise<T> {
+export async function importx<T = any>(specifier: string, options: ImportxOptions): Promise<T>
+export async function importx<T = any>(specifier: string, options: string | URL | ImportxOptions): Promise<T> {
   if (typeof options === 'string' || options instanceof URL)
     options = { parentURL: options }
 
   const {
     loaderOptions = {},
     parentURL,
-    cache = true,
+    cache = null,
     ignoreImportxWarning = false,
     ...otherOptions
   } = options
 
   let loader = options.loader || 'auto'
   if (loader === 'auto')
-    loader = await detectLoader(cache, isTypeScriptFile(path))
+    loader = await detectLoader(cache, isTypeScriptFile(specifier))
 
-  debug(`[${loader}]`, 'Importing', path, 'from', parentURL)
+  const parentPath = fileURLToPath(parentURL)
 
-  switch (loader) {
-    case 'native': {
-      if (cache === false && !ignoreImportxWarning)
-        throw new Error('`cache: false` is not compatible with `native` loader')
+  const info: ImportxModuleInfo = {
+    loader,
+    specifier,
+    parentURL: parentPath,
+    timestampInit: Date.now(),
+    timestampLoad: -1,
+  }
 
-      return import(
-        path[0] === '.'
-          ? fileURLToPath(new URL(path, parentURL))
-          : path,
-        otherOptions
-      )
-    }
+  debug(`[${loader}]`, 'Importing', specifier, 'from', parentURL)
 
-    case 'tsx': {
-      if (cache === true && !ignoreImportxWarning)
-        throw new Error('`cache: true` is not compatible with `tsx` loader')
+  async function run() {
+    switch (loader) {
+      case 'native': {
+        if (cache === false && !ignoreImportxWarning)
+          throw new Error('`cache: false` is not compatible with `native` loader')
 
-      return import('tsx/esm/api')
-        .then(r => r.tsImport(
-          path,
-          {
-            ...loaderOptions.tsx,
-            parentURL: fileURLToPath(parentURL),
-          },
-        ))
-    }
+        return import(
+          specifier[0] === '.'
+            ? fileURLToPath(new URL(specifier, parentURL))
+            : specifier,
+          otherOptions
+        )
+      }
 
-    case 'jiti': {
-      return import('jiti')
-        .then(r => r.default(fileURLToPath(parentURL), {
-          esmResolve: true,
-          ...(options.cache === false
-            ? {
-                cache: false,
-                requireCache: false,
-              }
-            : {}),
-          ...loaderOptions.jiti,
-        })(path))
-    }
+      case 'tsx': {
+        if (cache === true && !ignoreImportxWarning)
+          throw new Error('`cache: true` is not compatible with `tsx` loader')
 
-    case 'bundle-require': {
-      if (cache === true && !ignoreImportxWarning)
-        throw new Error('`cache: true` is not compatible with `native` loader')
+        const dependencies: string[] = []
+        info.dependencies = dependencies
 
-      return import('bundle-require')
-        .then(r => r.bundleRequire({
-          ...loaderOptions.bundleRequire,
-          filepath: path,
-          cwd: dirname(fileURLToPath(parentURL)),
-        }))
-        .then(r => r.mod)
-    }
-    default: {
-      throw new Error(`Unknown loader: ${loader}`)
+        return import('tsx/esm/api')
+          .then(r => r.tsImport(
+            specifier,
+            {
+              onImport(url) {
+                dependencies.push(url)
+              },
+              ...loaderOptions.tsx,
+              parentURL: parentPath,
+            },
+          ))
+      }
+
+      case 'jiti': {
+        return import('jiti')
+          .then(r => r.default(parentPath, {
+            esmResolve: true,
+            ...(cache === false
+              ? {
+                  cache: false,
+                  requireCache: false,
+                }
+              : {}),
+            ...loaderOptions.jiti,
+          })(specifier))
+      }
+
+      case 'bundle-require': {
+        if (cache === true && !ignoreImportxWarning)
+          throw new Error('`cache: true` is not compatible with `native` loader')
+
+        const cwd = dirname(parentPath)
+        return import('bundle-require')
+          .then(r => r.bundleRequire({
+            ...loaderOptions.bundleRequire,
+            filepath: specifier[0] === '.'
+              ? fileURLToPath(new URL(specifier, parentURL))
+              : specifier,
+            cwd,
+          }))
+          .then((r) => {
+            info.dependencies = r.dependencies
+              .map(d => pathToFileURL(join(cwd, d)).href)
+            return r.mod
+          })
+      }
+      default: {
+        throw new Error(`Unknown loader: ${loader}`)
+      }
     }
   }
+
+  const mod = await run()
+  info.timestampLoad = Date.now()
+  const previous = _moduleInfoMap.get(mod)
+  if (previous)
+    info.previousImportInfo = previous
+  _moduleInfoMap.set(mod, info)
+  return mod
 }
 
 // Alias for easier import
-export { importTs as import }
+export { importx as import }

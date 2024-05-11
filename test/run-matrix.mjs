@@ -2,6 +2,7 @@
 import { fileURLToPath } from 'node:url'
 import fs from 'node:fs/promises'
 import process from 'node:process'
+import os from 'node:os'
 import { execaCommand } from 'execa'
 import c from 'picocolors'
 import pkg from '../package.json' with { type: 'json' }
@@ -16,14 +17,14 @@ const runtimesMap = {
   bun: 'bun',
 }
 
-const entry = fileURLToPath(new URL('../fixtures/basic/index.mjs', import.meta.url))
+const entry = fileURLToPath(new URL('./fixtures/matrix/index.mjs', import.meta.url))
 
 const records = []
 
 for (const loader of loaders) {
   for (const runtime of runtimes) {
-    if (runtime !== 'node' && loader !== 'native')
-      continue
+    // if (runtime !== 'node' && loader !== 'native')
+    //   continue
     console.log(`loading using ${loader} on ${runtime}`)
 
     const object = {
@@ -75,7 +76,7 @@ if (process.env.CI) {
 }
 else {
   const table = `
-> Generated with version v${pkg.version} at ${new Date().toISOString()}
+> Generated with version \`v${pkg.version}\` at ${new Date().toISOString()}
 
 |  | ${loaders.join(' | ')} |
 | ------- | ${loaders.map(() => '---').join(' | ')} |

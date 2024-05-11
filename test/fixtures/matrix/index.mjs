@@ -3,7 +3,7 @@ import process from 'node:process'
 import fs from 'node:fs/promises'
 
 const LOADER = process.env.IMPORTX_LOADER || 'auto'
-const barPath = new URL('./bar.mts', import.meta.url)
+const barPath = new URL('../basic/bar.mts', import.meta.url)
 const barContent = await fs.readFile(barPath, 'utf8')
 
 const output = {
@@ -14,16 +14,16 @@ const output = {
 }
 
 try {
-  const run1noCache = await import('../../dist/index.mjs')
-    .then(x => x.import('./foo.mts', {
+  const run1noCache = await import('../../../dist/index.mjs')
+    .then(x => x.import('../basic/foo.mts', {
       loader: LOADER,
       cache: false,
       parentURL: import.meta.url,
       ignoreImportxWarning: true,
     }))
 
-  const run1cache = await import('../../dist/index.mjs')
-    .then(x => x.import('./foo.mts', {
+  const run1cache = await import('../../../dist/index.mjs')
+    .then(x => x.import('../basic/foo.mts', {
       loader: LOADER,
       cache: true,
       parentURL: import.meta.url,
@@ -34,16 +34,16 @@ try {
 
   output.import = run1noCache.default === 'Foo42bar42'
 
-  const run2noCache = await import('../../dist/index.mjs')
-    .then(x => x.import('./foo.mts', {
+  const run2noCache = await import('../../../dist/index.mjs')
+    .then(x => x.import('../basic/foo.mts', {
       loader: LOADER,
       cache: false,
       parentURL: import.meta.url,
       ignoreImportxWarning: true,
     }))
 
-  const run2cache = await import('../../dist/index.mjs')
-    .then(x => x.import('./foo.mts', {
+  const run2cache = await import('../../../dist/index.mjs')
+    .then(x => x.import('../basic/foo.mts', {
       loader: LOADER,
       cache: true,
       parentURL: import.meta.url,
