@@ -87,17 +87,8 @@ export async function importx<T = any>(_specifier: string | URL, _options: strin
       }
 
       case 'jiti': {
-        return import('jiti')
-          .then(r => r.default(parentPath, {
-            esmResolve: true,
-            ...(cache === false
-              ? {
-                  cache: false,
-                  requireCache: false,
-                }
-              : {}),
-            ...loaderOptions.jiti,
-          })(specifier))
+        return import('./loaders/jiti')
+          .then(r => r.loader(info, options))
       }
 
       case 'bundle-require': {

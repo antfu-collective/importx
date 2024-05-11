@@ -11,6 +11,7 @@ const output = {
   import: false,
   importNoCache: false,
   importCache: false,
+  dependencies: false,
 }
 
 try {
@@ -29,6 +30,9 @@ try {
       parentURL: import.meta.url,
       ignoreImportxWarning: true,
     }))
+
+  const info = await import('../../../dist/index.mjs').then(x => x.getModuleInfo(run1cache))
+  output.dependencies = !!info.dependencies?.length
 
   await fs.writeFile(barPath, 'export const bar = "newBar"', 'utf8')
 

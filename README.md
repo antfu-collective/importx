@@ -45,7 +45,6 @@ const mod = await import('importx').then(x => x.import('./path/to/module.ts', {
   // The following options are their default values
   cache: null, // false, if you want to always get a new module
   listDependencies: false, // true, if you need to get the list of dependencies
-
   loader: 'auto', // most of the time, you don't need to change this as they will be chosen automatically
 }))
 ```
@@ -220,14 +219,14 @@ Importing a TypeScript module with `importx`:
 
 <!-- TABLE_START -->
 
-> Generated with version `v0.2.0` at 2024-05-11T19:23:36.035Z
+> Generated with version `v0.2.0` at 2024-05-11T22:29:00.566Z
 
 |  | native | tsx | jiti | bundle-require |
 | ------- | --- | --- | --- | --- |
-| node | Import: ❌<br>Cache: ❌<br>No cache: `N/A` | Import: ✅<br>Cache: ✅<br>No cache: ✅ | Import: ✅<br>Cache: ✅<br>No cache: ✅ | Import: ✅<br>Cache: ❌<br>No cache: ✅ |
-| tsx | Import: ✅<br>Cache: ✅<br>No cache: `N/A` | Import: ✅<br>Cache: ✅<br>No cache: ✅ | Import: ✅<br>Cache: ✅<br>No cache: ✅ | Import: ✅<br>Cache: ❌<br>No cache: ✅ |
-| deno | Import: ✅<br>Cache: ✅<br>No cache: `N/A` | Import: ❌<br>Cache: ❌<br>No cache: ❌ | Import: ✅<br>Cache: ✅<br>No cache: ✅ | Import: ✅<br>Cache: ❌<br>No cache: ✅ |
-| bun | Import: ✅<br>Cache: ✅<br>No cache: `N/A` | Import: ❌<br>Cache: ❌<br>No cache: ❌ | Import: ✅<br>Cache: ✅<br>No cache: ❌ | Import: ✅<br>Cache: ❌<br>No cache: ✅ |
+| node | Import: ❌<br>Cache: ❌<br>No cache: ❌<br>Deps: ❌ | Import: ✅<br>Cache: ✅<br>No cache: ✅<br>Deps: ✅ | Import: ✅<br>Cache: ✅<br>No cache: ✅<br>Deps: ✅ | Import: ✅<br>Cache: ❌<br>No cache: ✅<br>Deps: ✅ |
+| tsx | Import: ✅<br>Cache: ✅<br>No cache: ❌<br>Deps: ❌ | Import: ✅<br>Cache: ✅<br>No cache: ✅<br>Deps: ✅ | Import: ✅<br>Cache: ✅<br>No cache: ✅<br>Deps: ✅ | Import: ✅<br>Cache: ❌<br>No cache: ✅<br>Deps: ✅ |
+| deno | Import: ✅<br>Cache: ✅<br>No cache: ❌<br>Deps: ❌ | Import: ❌<br>Cache: ❌<br>No cache: ❌<br>Deps: ❌ | Import: ✅<br>Cache: ✅<br>No cache: ✅<br>Deps: ✅ | Import: ✅<br>Cache: ❌<br>No cache: ✅<br>Deps: ✅ |
+| bun | Import: ✅<br>Cache: ✅<br>No cache: ❌<br>Deps: ❌ | Import: ❌<br>Cache: ❌<br>No cache: ❌<br>Deps: ❌ | Import: ✅<br>Cache: ✅<br>No cache: ❌<br>Deps: ✅ | Import: ✅<br>Cache: ❌<br>No cache: ✅<br>Deps: ✅ |
 
 <!-- TABLE_END -->
 
@@ -237,7 +236,7 @@ Importing a TypeScript module with `importx`:
 | --------------------------- | --- | --- | --- | --- |
 | Cache: `true`               | ✅ | ✅ | ✅ | ❌ |
 | Cache: `false`              | ❌ | ✅ | ✅ | ✅ |
-| List dependencies           | ❌ | ✅ | ❌ | ✅ |
+| List dependencies           | ❌ | ✅ | ✅ | ✅ |
 | Runtimes other than Node.js | ✅ | ❌ | ✅ | ✅ |
 
 ## Sponsors
