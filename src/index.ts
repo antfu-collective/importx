@@ -105,12 +105,22 @@ export async function isNativeTsImportSupported(): Promise<boolean> {
   return _isNativeTsImportSupported
 }
 
-async function _detectLoaderImpl(): Promise<SupportedLoader> {
-  if (await isNativeTsImportSupported())
+const nodeVersionNumbers = globalThis?.process?.versions?.node?.split('.').map(Number)
+
+/**
+ * Detect the 'auto' loader to use for importing the file.
+ */
+async function detectLoader(cache: boolean | null, isTsFile: boolean): Promise<SupportedLoader> {
+  if (cache === false)
+    return 'tsx'
+
+  if (!isTsFile || await isNativeTsImportSupported())
     return 'native'
 
-  const nodeVersion = globalThis?.process?.versions?.node?.split('.').map(Number)
-  if (!nodeVersion)
+  if (cache === true)
+    return 'jiti'
+
+  if (!nodeVersionNumbers)
     return 'tsx'
 
   /**
@@ -120,30 +130,19 @@ async function _detectLoaderImpl(): Promise<SupportedLoader> {
    * @see https://nodejs.org/api/module.html#moduleregisterspecifier-parenturl-options
    */
   if (
-    nodeVersion[0] < 18
-    || (nodeVersion[0] === 18 && nodeVersion[1] < 19)
-    || (nodeVersion[0] === 20 && nodeVersion[1] < 8)
+    nodeVersionNumbers[0] < 18
+    || (nodeVersionNumbers[0] === 18 && nodeVersionNumbers[1] < 19)
+    || (nodeVersionNumbers[0] === 20 && nodeVersionNumbers[1] < 8)
   )
     return 'jiti'
 
   return 'tsx'
 }
 
-let _loader: Promise<SupportedLoader>
-
-/**
- * Detect the 'auto' loader to use for importing the file.
- */
-export async function detectLoader() {
-  if (!_loader)
-    _loader = _detectLoaderImpl()
-  return _loader
-}
-
 const reIsTypeScriptFile = /\.[mc]?tsx?$/
 
 export function isTypeScriptFile(path: string) {
-  return path.match(reIsTypeScriptFile)
+  return reIsTypeScriptFile.test(path)
 }
 
 /**
@@ -173,18 +172,8 @@ export async function importTs<T = any>(path: string, options: string | URL | Im
   } = options
 
   let loader = options.loader || 'auto'
-  if (loader === 'auto') {
-    if (cache === false) {
-      loader = 'tsx'
-    }
-    else {
-      loader = isTypeScriptFile(path)
-        ? await detectLoader()
-        : 'native'
-      if (cache === true && (loader === 'tsx' || loader === 'bundle-require'))
-        loader = 'jiti'
-    }
-  }
+  if (loader === 'auto')
+    loader = await detectLoader(cache, isTypeScriptFile(path))
 
   debug(`[${loader}]`, 'Importing', path, 'from', parentURL)
 

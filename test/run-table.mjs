@@ -46,7 +46,7 @@ for (const loader of loaders) {
     if (stderr)
       object.errors = stderr
 
-    console.log(object, { stdout })
+    console.log(object)
 
     records.push(object)
   }

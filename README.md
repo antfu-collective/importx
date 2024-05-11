@@ -133,9 +133,11 @@ const mod = await import('importx')
 
 ## Runtime-Loader Compatibility Table
 
+Importing a TypeScript module with `importx`:
+
 <!-- TABLE_START -->
 
-> Generated with version v0.0.1 at 2024-05-11T03:58:02.482Z
+> Generated with version v0.0.2 at 2024-05-11T04:17:16.249Z
 
 |  | native | tsx | jiti | bundle-require |
 | ------- | --- | --- | --- | --- |
