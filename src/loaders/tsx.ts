@@ -20,7 +20,7 @@ export async function loader(info: ImportxModuleInfo, options: ImportxOptions) {
       }))
     }
 
-    return await api.get(info.fullPath)!.import(
+    return await (api.get(info.fullPath)! as any).import(
       info.specifier,
       info.parentPath,
     )
