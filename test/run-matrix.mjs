@@ -100,6 +100,6 @@ ${runtimes.map(runtime => `| ${runtime} | ${loaders.map((loader) => {
 `.trim()
 
   let readme = await fs.readFile('README.md', 'utf8')
-  readme = readme.replace(/(<!-- TABLE_START -->)[\s\S]*(<!-- TABLE_END -->)/m, `$1\n\n${table}\n\n$2`)
+  readme = readme.replace(/(<!-- TABLE_START -->)[\s\S]*(<!-- TABLE_END -->)/, `$1\n\n${table}\n\n$2`)
   await fs.writeFile('README.md', readme, 'utf8')
 }

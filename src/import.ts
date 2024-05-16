@@ -43,9 +43,14 @@ export async function importx<T = any>(_specifier: string | URL, _options: strin
     ...otherOptions
   } = options
 
-  const specifier = (_specifier instanceof URL)
+  let specifier = (_specifier instanceof URL)
     ? fileURLToPath(_specifier)
     : _specifier
+
+  // Normalize Windows path
+  specifier = specifier.match(/^[a-z]:/i)
+    ? pathToFileURL(specifier).href
+    : specifier
 
   let loader = options.loader || 'auto'
   if (loader === 'auto')
@@ -62,9 +67,7 @@ export async function importx<T = any>(_specifier: string | URL, _options: strin
   const info: ImportxModuleInfo = {
     loader,
     cache,
-    specifier: specifier.match(/^[a-z]:/i)
-      ? `file:///${specifier}`.replace(/\\/g, '/')
-      : specifier,
+    specifier,
     fullPath,
     parentURL,
     parentPath,
