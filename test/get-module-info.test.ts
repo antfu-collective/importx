@@ -1,4 +1,6 @@
 /* eslint-disable antfu/no-import-dist */
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { expect, it } from 'vitest'
 import { getModuleInfo, importx } from '../dist/index.mjs'
 
@@ -82,4 +84,22 @@ it('should get dependencies with bundle-require', async () => {
         "test/fixtures/basic/foo.mts",
       ]
     `)
+})
+
+it('importing absolute paths should work', async () => {
+  const _dirname = dirname(fileURLToPath(import.meta.url))
+  const specifier = join(_dirname, './fixtures/basic/foo.mts')
+  const mod = await importx(specifier, _dirname)
+  const info = getModuleInfo(mod)
+
+  expect(mod.default).toBe(MOD_EXPORT)
+
+  expect(info).toBeDefined()
+  expect(info?.loader).toBe('native')
+  expect(info?.specifier?.match(/^[a-z]:/i) ? `file:///${specifier}`.replace(/\\/g, '/') : specifier).toBe(specifier)
+  // expect(info).toMatchObject({
+  //   loader: 'native', // because Vitest supports importing TypeScript files
+  //   specifier: './fixtures/basic/foo.mts',
+  // })
+  expect(info?.dependencies).not.toBeDefined()
 })
