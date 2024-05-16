@@ -62,7 +62,9 @@ export async function importx<T = any>(_specifier: string | URL, _options: strin
   const info: ImportxModuleInfo = {
     loader,
     cache,
-    specifier,
+    specifier: specifier.match(/^[a-z]:/i)
+      ? `file:///${specifier}`.replace(/\\/g, '/')
+      : specifier,
     fullPath,
     parentURL,
     parentPath,
