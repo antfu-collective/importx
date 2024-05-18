@@ -238,6 +238,9 @@ Importing a TypeScript module with `importx`:
 | Cache: `false`              | ❌ | ✅ | ✅ | ✅ |
 | List dependencies           | ❌ | ✅ | ✅ | ✅ |
 | Runtimes other than Node.js | ✅ | ❌ | ✅ | ✅ |
+| Runtime module type*        | ESM | ESM | CJS | ESM/CJS |
+
+> *This indicates what's the module type for each loader to evaluate the modules. For `CJS`, it means the laoder transpiles the module to CJS and executes it in CJS mode, which may have some limitations like top-level await.
 
 ## Sponsors
 
