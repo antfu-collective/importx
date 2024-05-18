@@ -1,4 +1,76 @@
-import type { SupportedLoader } from './types'
+import type { FeaturesOptions, SupportedLoader } from './types'
+
+export interface LoaderMatrix {
+  name: SupportedLoader
+  supported?: boolean
+  cache: boolean[]
+  listDependencies: boolean[]
+  type: ('module' | 'commonjs')[]
+  importTS: boolean[]
+}
+
+export interface LoaderDetectionContext extends Required<FeaturesOptions> {
+  isTs: boolean
+}
+
+let _loaderMatrix: LoaderMatrix[]
+
+/**
+ * Internal function for tests
+ */
+export async function _createLoaderMatrix(options: {
+  isNativeTsImportSupported: boolean
+  isRuntimeSupportsTsx: boolean
+}) {
+  const matrix: LoaderMatrix[] = [
+    {
+      name: 'native',
+      cache: [true],
+      listDependencies: [false],
+      type: ['module', 'commonjs'],
+      importTS: options.isNativeTsImportSupported
+        ? [true, false]
+        : [false],
+    },
+    {
+      name: 'tsx',
+      supported: options.isRuntimeSupportsTsx,
+      type: ['module'],
+      cache: [true, false],
+      listDependencies: [true, false],
+      importTS: [true, false],
+    },
+    {
+      name: 'jiti',
+      type: ['commonjs'],
+      cache: [true, false],
+      listDependencies: [true, false],
+      importTS: [true, false],
+    },
+    {
+      name: 'bundle-require',
+      type: ['commonjs', 'module'],
+      cache: [false],
+      listDependencies: [true],
+      importTS: [true, false],
+    },
+  ]
+
+  return matrix
+    .filter(i => i.supported !== false)
+}
+
+export async function getLoaderMatrix(): Promise<LoaderMatrix[]> {
+  if (_loaderMatrix)
+    return _loaderMatrix
+
+  _loaderMatrix = await _createLoaderMatrix({
+    isNativeTsImportSupported: await isNativeTsImportSupported(),
+    isRuntimeSupportsTsx: isRuntimeSupportsTsx(),
+  })
+
+  return _loaderMatrix
+}
 
 let _isNativeTsImportSupported: boolean | undefined
 /**
@@ -27,41 +99,24 @@ const nodeVersionNumbers = globalThis?.process?.versions?.node?.split('.').map(N
  * @private
  */
 export async function detectLoader(
-  cache: boolean | null,
-  listDependencies: boolean,
-  isTsFile: boolean,
-): Promise<SupportedLoader> {
-  return detectLoaderLogic(
-    cache,
-    listDependencies,
-    isTsFile,
-    await isNativeTsImportSupported(),
-    isRuntimeSupportsTsx(),
-  )
-}
+  context: LoaderDetectionContext,
+  matrix?: LoaderMatrix[],
+): Promise<SupportedLoader | null> {
+  matrix = matrix || await getLoaderMatrix()
 
-export function detectLoaderLogic(
-  cache: boolean | null,
-  listDependencies: boolean,
-  isTsFile: boolean,
-  isNativeTsImportSupported: boolean,
-  isTsxSupported: boolean,
-): SupportedLoader {
-  function getLoader() {
-    if (isTsxSupported)
-      return 'tsx'
-    if (listDependencies)
-      return 'bundle-require'
-    return 'jiti'
+  for (const loader of matrix) {
+    if (context.excludeLoaders?.includes(loader.name))
+      continue
+    if (
+      (context.cache === null || loader.cache.includes(context.cache))
+      && (context.listDependencies === null || loader.listDependencies.includes(context.listDependencies))
+      && (context.type === null || loader.type.includes(context.type))
+      && loader.importTS.includes(context.isTs)
+    )
+      return loader.name
   }
 
-  if (cache === false || listDependencies)
-    return getLoader()
-
-  if (!isTsFile || isNativeTsImportSupported)
-    return 'native'
-
-  return getLoader()
+  return null
 }
 
 /**

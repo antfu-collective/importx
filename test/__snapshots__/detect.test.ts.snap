@@ -1,97 +1,289 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`tsx=✅ | cache=✅ | deps=✅ | isTS=✅ | nativeTS=✅ 1`] = `"tsx"`;
+exports[`tsx=✅ | cache=✅ | deps=✅ | type=commonjs | isTS=✅ | nativeTS=✅ 1`] = `"jiti"`;
 
-exports[`tsx=✅ | cache=✅ | deps=✅ | isTS=✅ | nativeTS=❌ 1`] = `"tsx"`;
+exports[`tsx=✅ | cache=✅ | deps=✅ | type=commonjs | isTS=✅ | nativeTS=❌ 1`] = `"jiti"`;
 
-exports[`tsx=✅ | cache=✅ | deps=✅ | isTS=❌ | nativeTS=✅ 1`] = `"tsx"`;
+exports[`tsx=✅ | cache=✅ | deps=✅ | type=commonjs | isTS=❌ | nativeTS=✅ 1`] = `"jiti"`;
 
-exports[`tsx=✅ | cache=✅ | deps=✅ | isTS=❌ | nativeTS=❌ 1`] = `"tsx"`;
+exports[`tsx=✅ | cache=✅ | deps=✅ | type=commonjs | isTS=❌ | nativeTS=❌ 1`] = `"jiti"`;
 
-exports[`tsx=✅ | cache=✅ | deps=❌ | isTS=✅ | nativeTS=✅ 1`] = `"native"`;
+exports[`tsx=✅ | cache=✅ | deps=✅ | type=module | isTS=✅ | nativeTS=✅ 1`] = `"tsx"`;
 
-exports[`tsx=✅ | cache=✅ | deps=❌ | isTS=✅ | nativeTS=❌ 1`] = `"tsx"`;
+exports[`tsx=✅ | cache=✅ | deps=✅ | type=module | isTS=✅ | nativeTS=❌ 1`] = `"tsx"`;
 
-exports[`tsx=✅ | cache=✅ | deps=❌ | isTS=❌ | nativeTS=✅ 1`] = `"native"`;
+exports[`tsx=✅ | cache=✅ | deps=✅ | type=module | isTS=❌ | nativeTS=✅ 1`] = `"tsx"`;
 
-exports[`tsx=✅ | cache=✅ | deps=❌ | isTS=❌ | nativeTS=❌ 1`] = `"native"`;
+exports[`tsx=✅ | cache=✅ | deps=✅ | type=module | isTS=❌ | nativeTS=❌ 1`] = `"tsx"`;
 
-exports[`tsx=✅ | cache=❌ | deps=✅ | isTS=✅ | nativeTS=✅ 1`] = `"tsx"`;
+exports[`tsx=✅ | cache=✅ | deps=✅ | type=❓ | isTS=✅ | nativeTS=✅ 1`] = `"tsx"`;
 
-exports[`tsx=✅ | cache=❌ | deps=✅ | isTS=✅ | nativeTS=❌ 1`] = `"tsx"`;
+exports[`tsx=✅ | cache=✅ | deps=✅ | type=❓ | isTS=✅ | nativeTS=❌ 1`] = `"tsx"`;
 
-exports[`tsx=✅ | cache=❌ | deps=✅ | isTS=❌ | nativeTS=✅ 1`] = `"tsx"`;
+exports[`tsx=✅ | cache=✅ | deps=✅ | type=❓ | isTS=❌ | nativeTS=✅ 1`] = `"tsx"`;
 
-exports[`tsx=✅ | cache=❌ | deps=✅ | isTS=❌ | nativeTS=❌ 1`] = `"tsx"`;
+exports[`tsx=✅ | cache=✅ | deps=✅ | type=❓ | isTS=❌ | nativeTS=❌ 1`] = `"tsx"`;
 
-exports[`tsx=✅ | cache=❌ | deps=❌ | isTS=✅ | nativeTS=✅ 1`] = `"tsx"`;
+exports[`tsx=✅ | cache=✅ | deps=❌ | type=commonjs | isTS=✅ | nativeTS=✅ 1`] = `"native"`;
 
-exports[`tsx=✅ | cache=❌ | deps=❌ | isTS=✅ | nativeTS=❌ 1`] = `"tsx"`;
+exports[`tsx=✅ | cache=✅ | deps=❌ | type=commonjs | isTS=✅ | nativeTS=❌ 1`] = `"jiti"`;
 
-exports[`tsx=✅ | cache=❌ | deps=❌ | isTS=❌ | nativeTS=✅ 1`] = `"tsx"`;
+exports[`tsx=✅ | cache=✅ | deps=❌ | type=commonjs | isTS=❌ | nativeTS=✅ 1`] = `"native"`;
 
-exports[`tsx=✅ | cache=❌ | deps=❌ | isTS=❌ | nativeTS=❌ 1`] = `"tsx"`;
+exports[`tsx=✅ | cache=✅ | deps=❌ | type=commonjs | isTS=❌ | nativeTS=❌ 1`] = `"native"`;
 
-exports[`tsx=✅ | cache=❓ | deps=✅ | isTS=✅ | nativeTS=✅ 1`] = `"tsx"`;
+exports[`tsx=✅ | cache=✅ | deps=❌ | type=module | isTS=✅ | nativeTS=✅ 1`] = `"native"`;
 
-exports[`tsx=✅ | cache=❓ | deps=✅ | isTS=✅ | nativeTS=❌ 1`] = `"tsx"`;
+exports[`tsx=✅ | cache=✅ | deps=❌ | type=module | isTS=✅ | nativeTS=❌ 1`] = `"tsx"`;
 
-exports[`tsx=✅ | cache=❓ | deps=✅ | isTS=❌ | nativeTS=✅ 1`] = `"tsx"`;
+exports[`tsx=✅ | cache=✅ | deps=❌ | type=module | isTS=❌ | nativeTS=✅ 1`] = `"native"`;
 
-exports[`tsx=✅ | cache=❓ | deps=✅ | isTS=❌ | nativeTS=❌ 1`] = `"tsx"`;
+exports[`tsx=✅ | cache=✅ | deps=❌ | type=module | isTS=❌ | nativeTS=❌ 1`] = `"native"`;
 
-exports[`tsx=✅ | cache=❓ | deps=❌ | isTS=✅ | nativeTS=✅ 1`] = `"native"`;
+exports[`tsx=✅ | cache=✅ | deps=❌ | type=❓ | isTS=✅ | nativeTS=✅ 1`] = `"native"`;
 
-exports[`tsx=✅ | cache=❓ | deps=❌ | isTS=✅ | nativeTS=❌ 1`] = `"tsx"`;
+exports[`tsx=✅ | cache=✅ | deps=❌ | type=❓ | isTS=✅ | nativeTS=❌ 1`] = `"tsx"`;
 
-exports[`tsx=✅ | cache=❓ | deps=❌ | isTS=❌ | nativeTS=✅ 1`] = `"native"`;
+exports[`tsx=✅ | cache=✅ | deps=❌ | type=❓ | isTS=❌ | nativeTS=✅ 1`] = `"native"`;
 
-exports[`tsx=✅ | cache=❓ | deps=❌ | isTS=❌ | nativeTS=❌ 1`] = `"native"`;
+exports[`tsx=✅ | cache=✅ | deps=❌ | type=❓ | isTS=❌ | nativeTS=❌ 1`] = `"native"`;
 
-exports[`tsx=❌ | cache=✅ | deps=✅ | isTS=✅ | nativeTS=✅ 1`] = `"bundle-require"`;
+exports[`tsx=✅ | cache=❌ | deps=✅ | type=commonjs | isTS=✅ | nativeTS=✅ 1`] = `"jiti"`;
 
-exports[`tsx=❌ | cache=✅ | deps=✅ | isTS=✅ | nativeTS=❌ 1`] = `"bundle-require"`;
+exports[`tsx=✅ | cache=❌ | deps=✅ | type=commonjs | isTS=✅ | nativeTS=❌ 1`] = `"jiti"`;
 
-exports[`tsx=❌ | cache=✅ | deps=✅ | isTS=❌ | nativeTS=✅ 1`] = `"bundle-require"`;
+exports[`tsx=✅ | cache=❌ | deps=✅ | type=commonjs | isTS=❌ | nativeTS=✅ 1`] = `"jiti"`;
 
-exports[`tsx=❌ | cache=✅ | deps=✅ | isTS=❌ | nativeTS=❌ 1`] = `"bundle-require"`;
+exports[`tsx=✅ | cache=❌ | deps=✅ | type=commonjs | isTS=❌ | nativeTS=❌ 1`] = `"jiti"`;
 
-exports[`tsx=❌ | cache=✅ | deps=❌ | isTS=✅ | nativeTS=✅ 1`] = `"native"`;
+exports[`tsx=✅ | cache=❌ | deps=✅ | type=module | isTS=✅ | nativeTS=✅ 1`] = `"tsx"`;
 
-exports[`tsx=❌ | cache=✅ | deps=❌ | isTS=✅ | nativeTS=❌ 1`] = `"jiti"`;
+exports[`tsx=✅ | cache=❌ | deps=✅ | type=module | isTS=✅ | nativeTS=❌ 1`] = `"tsx"`;
 
-exports[`tsx=❌ | cache=✅ | deps=❌ | isTS=❌ | nativeTS=✅ 1`] = `"native"`;
+exports[`tsx=✅ | cache=❌ | deps=✅ | type=module | isTS=❌ | nativeTS=✅ 1`] = `"tsx"`;
 
-exports[`tsx=❌ | cache=✅ | deps=❌ | isTS=❌ | nativeTS=❌ 1`] = `"native"`;
+exports[`tsx=✅ | cache=❌ | deps=✅ | type=module | isTS=❌ | nativeTS=❌ 1`] = `"tsx"`;
 
-exports[`tsx=❌ | cache=❌ | deps=✅ | isTS=✅ | nativeTS=✅ 1`] = `"bundle-require"`;
+exports[`tsx=✅ | cache=❌ | deps=✅ | type=❓ | isTS=✅ | nativeTS=✅ 1`] = `"tsx"`;
 
-exports[`tsx=❌ | cache=❌ | deps=✅ | isTS=✅ | nativeTS=❌ 1`] = `"bundle-require"`;
+exports[`tsx=✅ | cache=❌ | deps=✅ | type=❓ | isTS=✅ | nativeTS=❌ 1`] = `"tsx"`;
 
-exports[`tsx=❌ | cache=❌ | deps=✅ | isTS=❌ | nativeTS=✅ 1`] = `"bundle-require"`;
+exports[`tsx=✅ | cache=❌ | deps=✅ | type=❓ | isTS=❌ | nativeTS=✅ 1`] = `"tsx"`;
 
-exports[`tsx=❌ | cache=❌ | deps=✅ | isTS=❌ | nativeTS=❌ 1`] = `"bundle-require"`;
+exports[`tsx=✅ | cache=❌ | deps=✅ | type=❓ | isTS=❌ | nativeTS=❌ 1`] = `"tsx"`;
 
-exports[`tsx=❌ | cache=❌ | deps=❌ | isTS=✅ | nativeTS=✅ 1`] = `"jiti"`;
+exports[`tsx=✅ | cache=❌ | deps=❌ | type=commonjs | isTS=✅ | nativeTS=✅ 1`] = `"jiti"`;
 
-exports[`tsx=❌ | cache=❌ | deps=❌ | isTS=✅ | nativeTS=❌ 1`] = `"jiti"`;
+exports[`tsx=✅ | cache=❌ | deps=❌ | type=commonjs | isTS=✅ | nativeTS=❌ 1`] = `"jiti"`;
 
-exports[`tsx=❌ | cache=❌ | deps=❌ | isTS=❌ | nativeTS=✅ 1`] = `"jiti"`;
+exports[`tsx=✅ | cache=❌ | deps=❌ | type=commonjs | isTS=❌ | nativeTS=✅ 1`] = `"jiti"`;
 
-exports[`tsx=❌ | cache=❌ | deps=❌ | isTS=❌ | nativeTS=❌ 1`] = `"jiti"`;
+exports[`tsx=✅ | cache=❌ | deps=❌ | type=commonjs | isTS=❌ | nativeTS=❌ 1`] = `"jiti"`;
 
-exports[`tsx=❌ | cache=❓ | deps=✅ | isTS=✅ | nativeTS=✅ 1`] = `"bundle-require"`;
+exports[`tsx=✅ | cache=❌ | deps=❌ | type=module | isTS=✅ | nativeTS=✅ 1`] = `"tsx"`;
 
-exports[`tsx=❌ | cache=❓ | deps=✅ | isTS=✅ | nativeTS=❌ 1`] = `"bundle-require"`;
+exports[`tsx=✅ | cache=❌ | deps=❌ | type=module | isTS=✅ | nativeTS=❌ 1`] = `"tsx"`;
 
-exports[`tsx=❌ | cache=❓ | deps=✅ | isTS=❌ | nativeTS=✅ 1`] = `"bundle-require"`;
+exports[`tsx=✅ | cache=❌ | deps=❌ | type=module | isTS=❌ | nativeTS=✅ 1`] = `"tsx"`;
 
-exports[`tsx=❌ | cache=❓ | deps=✅ | isTS=❌ | nativeTS=❌ 1`] = `"bundle-require"`;
+exports[`tsx=✅ | cache=❌ | deps=❌ | type=module | isTS=❌ | nativeTS=❌ 1`] = `"tsx"`;
 
-exports[`tsx=❌ | cache=❓ | deps=❌ | isTS=✅ | nativeTS=✅ 1`] = `"native"`;
+exports[`tsx=✅ | cache=❌ | deps=❌ | type=❓ | isTS=✅ | nativeTS=✅ 1`] = `"tsx"`;
 
-exports[`tsx=❌ | cache=❓ | deps=❌ | isTS=✅ | nativeTS=❌ 1`] = `"jiti"`;
+exports[`tsx=✅ | cache=❌ | deps=❌ | type=❓ | isTS=✅ | nativeTS=❌ 1`] = `"tsx"`;
 
-exports[`tsx=❌ | cache=❓ | deps=❌ | isTS=❌ | nativeTS=✅ 1`] = `"native"`;
+exports[`tsx=✅ | cache=❌ | deps=❌ | type=❓ | isTS=❌ | nativeTS=✅ 1`] = `"tsx"`;
 
-exports[`tsx=❌ | cache=❓ | deps=❌ | isTS=❌ | nativeTS=❌ 1`] = `"native"`;
+exports[`tsx=✅ | cache=❌ | deps=❌ | type=❓ | isTS=❌ | nativeTS=❌ 1`] = `"tsx"`;
+
+exports[`tsx=✅ | cache=❓ | deps=✅ | type=commonjs | isTS=✅ | nativeTS=✅ 1`] = `"jiti"`;
+
+exports[`tsx=✅ | cache=❓ | deps=✅ | type=commonjs | isTS=✅ | nativeTS=❌ 1`] = `"jiti"`;
+
+exports[`tsx=✅ | cache=❓ | deps=✅ | type=commonjs | isTS=❌ | nativeTS=✅ 1`] = `"jiti"`;
+
+exports[`tsx=✅ | cache=❓ | deps=✅ | type=commonjs | isTS=❌ | nativeTS=❌ 1`] = `"jiti"`;
+
+exports[`tsx=✅ | cache=❓ | deps=✅ | type=module | isTS=✅ | nativeTS=✅ 1`] = `"tsx"`;
+
+exports[`tsx=✅ | cache=❓ | deps=✅ | type=module | isTS=✅ | nativeTS=❌ 1`] = `"tsx"`;
+
+exports[`tsx=✅ | cache=❓ | deps=✅ | type=module | isTS=❌ | nativeTS=✅ 1`] = `"tsx"`;
+
+exports[`tsx=✅ | cache=❓ | deps=✅ | type=module | isTS=❌ | nativeTS=❌ 1`] = `"tsx"`;
+
+exports[`tsx=✅ | cache=❓ | deps=✅ | type=❓ | isTS=✅ | nativeTS=✅ 1`] = `"tsx"`;
+
+exports[`tsx=✅ | cache=❓ | deps=✅ | type=❓ | isTS=✅ | nativeTS=❌ 1`] = `"tsx"`;
+
+exports[`tsx=✅ | cache=❓ | deps=✅ | type=❓ | isTS=❌ | nativeTS=✅ 1`] = `"tsx"`;
+
+exports[`tsx=✅ | cache=❓ | deps=✅ | type=❓ | isTS=❌ | nativeTS=❌ 1`] = `"tsx"`;
+
+exports[`tsx=✅ | cache=❓ | deps=❌ | type=commonjs | isTS=✅ | nativeTS=✅ 1`] = `"native"`;
+
+exports[`tsx=✅ | cache=❓ | deps=❌ | type=commonjs | isTS=✅ | nativeTS=❌ 1`] = `"jiti"`;
+
+exports[`tsx=✅ | cache=❓ | deps=❌ | type=commonjs | isTS=❌ | nativeTS=✅ 1`] = `"native"`;
+
+exports[`tsx=✅ | cache=❓ | deps=❌ | type=commonjs | isTS=❌ | nativeTS=❌ 1`] = `"native"`;
+
+exports[`tsx=✅ | cache=❓ | deps=❌ | type=module | isTS=✅ | nativeTS=✅ 1`] = `"native"`;
+
+exports[`tsx=✅ | cache=❓ | deps=❌ | type=module | isTS=✅ | nativeTS=❌ 1`] = `"tsx"`;
+
+exports[`tsx=✅ | cache=❓ | deps=❌ | type=module | isTS=❌ | nativeTS=✅ 1`] = `"native"`;
+
+exports[`tsx=✅ | cache=❓ | deps=❌ | type=module | isTS=❌ | nativeTS=❌ 1`] = `"native"`;
+
+exports[`tsx=✅ | cache=❓ | deps=❌ | type=❓ | isTS=✅ | nativeTS=✅ 1`] = `"native"`;
+
+exports[`tsx=✅ | cache=❓ | deps=❌ | type=❓ | isTS=✅ | nativeTS=❌ 1`] = `"tsx"`;
+
+exports[`tsx=✅ | cache=❓ | deps=❌ | type=❓ | isTS=❌ | nativeTS=✅ 1`] = `"native"`;
+
+exports[`tsx=✅ | cache=❓ | deps=❌ | type=❓ | isTS=❌ | nativeTS=❌ 1`] = `"native"`;
+
+exports[`tsx=❌ | cache=✅ | deps=✅ | type=commonjs | isTS=✅ | nativeTS=✅ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=✅ | deps=✅ | type=commonjs | isTS=✅ | nativeTS=❌ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=✅ | deps=✅ | type=commonjs | isTS=❌ | nativeTS=✅ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=✅ | deps=✅ | type=commonjs | isTS=❌ | nativeTS=❌ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=✅ | deps=✅ | type=module | isTS=✅ | nativeTS=✅ 1`] = `null`;
+
+exports[`tsx=❌ | cache=✅ | deps=✅ | type=module | isTS=✅ | nativeTS=❌ 1`] = `null`;
+
+exports[`tsx=❌ | cache=✅ | deps=✅ | type=module | isTS=❌ | nativeTS=✅ 1`] = `null`;
+
+exports[`tsx=❌ | cache=✅ | deps=✅ | type=module | isTS=❌ | nativeTS=❌ 1`] = `null`;
+
+exports[`tsx=❌ | cache=✅ | deps=✅ | type=❓ | isTS=✅ | nativeTS=✅ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=✅ | deps=✅ | type=❓ | isTS=✅ | nativeTS=❌ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=✅ | deps=✅ | type=❓ | isTS=❌ | nativeTS=✅ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=✅ | deps=✅ | type=❓ | isTS=❌ | nativeTS=❌ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=✅ | deps=❌ | type=commonjs | isTS=✅ | nativeTS=✅ 1`] = `"native"`;
+
+exports[`tsx=❌ | cache=✅ | deps=❌ | type=commonjs | isTS=✅ | nativeTS=❌ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=✅ | deps=❌ | type=commonjs | isTS=❌ | nativeTS=✅ 1`] = `"native"`;
+
+exports[`tsx=❌ | cache=✅ | deps=❌ | type=commonjs | isTS=❌ | nativeTS=❌ 1`] = `"native"`;
+
+exports[`tsx=❌ | cache=✅ | deps=❌ | type=module | isTS=✅ | nativeTS=✅ 1`] = `"native"`;
+
+exports[`tsx=❌ | cache=✅ | deps=❌ | type=module | isTS=✅ | nativeTS=❌ 1`] = `null`;
+
+exports[`tsx=❌ | cache=✅ | deps=❌ | type=module | isTS=❌ | nativeTS=✅ 1`] = `"native"`;
+
+exports[`tsx=❌ | cache=✅ | deps=❌ | type=module | isTS=❌ | nativeTS=❌ 1`] = `"native"`;
+
+exports[`tsx=❌ | cache=✅ | deps=❌ | type=❓ | isTS=✅ | nativeTS=✅ 1`] = `"native"`;
+
+exports[`tsx=❌ | cache=✅ | deps=❌ | type=❓ | isTS=✅ | nativeTS=❌ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=✅ | deps=❌ | type=❓ | isTS=❌ | nativeTS=✅ 1`] = `"native"`;
+
+exports[`tsx=❌ | cache=✅ | deps=❌ | type=❓ | isTS=❌ | nativeTS=❌ 1`] = `"native"`;
+
+exports[`tsx=❌ | cache=❌ | deps=✅ | type=commonjs | isTS=✅ | nativeTS=✅ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=❌ | deps=✅ | type=commonjs | isTS=✅ | nativeTS=❌ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=❌ | deps=✅ | type=commonjs | isTS=❌ | nativeTS=✅ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=❌ | deps=✅ | type=commonjs | isTS=❌ | nativeTS=❌ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=❌ | deps=✅ | type=module | isTS=✅ | nativeTS=✅ 1`] = `"bundle-require"`;
+
+exports[`tsx=❌ | cache=❌ | deps=✅ | type=module | isTS=✅ | nativeTS=❌ 1`] = `"bundle-require"`;
+
+exports[`tsx=❌ | cache=❌ | deps=✅ | type=module | isTS=❌ | nativeTS=✅ 1`] = `"bundle-require"`;
+
+exports[`tsx=❌ | cache=❌ | deps=✅ | type=module | isTS=❌ | nativeTS=❌ 1`] = `"bundle-require"`;
+
+exports[`tsx=❌ | cache=❌ | deps=✅ | type=❓ | isTS=✅ | nativeTS=✅ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=❌ | deps=✅ | type=❓ | isTS=✅ | nativeTS=❌ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=❌ | deps=✅ | type=❓ | isTS=❌ | nativeTS=✅ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=❌ | deps=✅ | type=❓ | isTS=❌ | nativeTS=❌ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=❌ | deps=❌ | type=commonjs | isTS=✅ | nativeTS=✅ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=❌ | deps=❌ | type=commonjs | isTS=✅ | nativeTS=❌ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=❌ | deps=❌ | type=commonjs | isTS=❌ | nativeTS=✅ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=❌ | deps=❌ | type=commonjs | isTS=❌ | nativeTS=❌ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=❌ | deps=❌ | type=module | isTS=✅ | nativeTS=✅ 1`] = `null`;
+
+exports[`tsx=❌ | cache=❌ | deps=❌ | type=module | isTS=✅ | nativeTS=❌ 1`] = `null`;
+
+exports[`tsx=❌ | cache=❌ | deps=❌ | type=module | isTS=❌ | nativeTS=✅ 1`] = `null`;
+
+exports[`tsx=❌ | cache=❌ | deps=❌ | type=module | isTS=❌ | nativeTS=❌ 1`] = `null`;
+
+exports[`tsx=❌ | cache=❌ | deps=❌ | type=❓ | isTS=✅ | nativeTS=✅ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=❌ | deps=❌ | type=❓ | isTS=✅ | nativeTS=❌ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=❌ | deps=❌ | type=❓ | isTS=❌ | nativeTS=✅ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=❌ | deps=❌ | type=❓ | isTS=❌ | nativeTS=❌ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=❓ | deps=✅ | type=commonjs | isTS=✅ | nativeTS=✅ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=❓ | deps=✅ | type=commonjs | isTS=✅ | nativeTS=❌ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=❓ | deps=✅ | type=commonjs | isTS=❌ | nativeTS=✅ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=❓ | deps=✅ | type=commonjs | isTS=❌ | nativeTS=❌ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=❓ | deps=✅ | type=module | isTS=✅ | nativeTS=✅ 1`] = `"bundle-require"`;
+
+exports[`tsx=❌ | cache=❓ | deps=✅ | type=module | isTS=✅ | nativeTS=❌ 1`] = `"bundle-require"`;
+
+exports[`tsx=❌ | cache=❓ | deps=✅ | type=module | isTS=❌ | nativeTS=✅ 1`] = `"bundle-require"`;
+
+exports[`tsx=❌ | cache=❓ | deps=✅ | type=module | isTS=❌ | nativeTS=❌ 1`] = `"bundle-require"`;
+
+exports[`tsx=❌ | cache=❓ | deps=✅ | type=❓ | isTS=✅ | nativeTS=✅ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=❓ | deps=✅ | type=❓ | isTS=✅ | nativeTS=❌ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=❓ | deps=✅ | type=❓ | isTS=❌ | nativeTS=✅ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=❓ | deps=✅ | type=❓ | isTS=❌ | nativeTS=❌ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=❓ | deps=❌ | type=commonjs | isTS=✅ | nativeTS=✅ 1`] = `"native"`;
+
+exports[`tsx=❌ | cache=❓ | deps=❌ | type=commonjs | isTS=✅ | nativeTS=❌ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=❓ | deps=❌ | type=commonjs | isTS=❌ | nativeTS=✅ 1`] = `"native"`;
+
+exports[`tsx=❌ | cache=❓ | deps=❌ | type=commonjs | isTS=❌ | nativeTS=❌ 1`] = `"native"`;
+
+exports[`tsx=❌ | cache=❓ | deps=❌ | type=module | isTS=✅ | nativeTS=✅ 1`] = `"native"`;
+
+exports[`tsx=❌ | cache=❓ | deps=❌ | type=module | isTS=✅ | nativeTS=❌ 1`] = `null`;
+
+exports[`tsx=❌ | cache=❓ | deps=❌ | type=module | isTS=❌ | nativeTS=✅ 1`] = `"native"`;
+
+exports[`tsx=❌ | cache=❓ | deps=❌ | type=module | isTS=❌ | nativeTS=❌ 1`] = `"native"`;
+
+exports[`tsx=❌ | cache=❓ | deps=❌ | type=❓ | isTS=✅ | nativeTS=✅ 1`] = `"native"`;
+
+exports[`tsx=❌ | cache=❓ | deps=❌ | type=❓ | isTS=✅ | nativeTS=❌ 1`] = `"jiti"`;
+
+exports[`tsx=❌ | cache=❓ | deps=❌ | type=❓ | isTS=❌ | nativeTS=✅ 1`] = `"native"`;
+
+exports[`tsx=❌ | cache=❓ | deps=❌ | type=❓ | isTS=❌ | nativeTS=❌ 1`] = `"native"`;

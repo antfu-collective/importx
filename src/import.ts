@@ -2,6 +2,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url'
 import { dirname, join } from 'node:path'
 import Debug from 'debug'
 import type { ImportxModuleInfo, ImportxOptions } from './types'
+import type { LoaderDetectionContext } from './detect'
 import { detectLoader, isTypeScriptFile } from './detect'
 
 const debug = Debug('importx')
@@ -38,7 +39,9 @@ export async function importx<T = any>(_specifier: string | URL, _options: strin
     loaderOptions = {},
     parentURL: inputUserUrl,
     cache = null,
-    listDependencies = false,
+    type = null,
+    excludeLoaders = [],
+    listDependencies = null,
     ignoreImportxWarning = false,
     ...otherOptions
   } = options
@@ -53,8 +56,19 @@ export async function importx<T = any>(_specifier: string | URL, _options: strin
     : specifier
 
   let loader = options.loader || 'auto'
-  if (loader === 'auto')
-    loader = await detectLoader(cache, listDependencies, isTypeScriptFile(specifier))
+  if (loader === 'auto') {
+    const context: LoaderDetectionContext = {
+      cache,
+      listDependencies,
+      type,
+      isTs: isTypeScriptFile(specifier),
+      excludeLoaders,
+    }
+    const _loader = await detectLoader(context)
+    if (!_loader)
+      throw new Error(`[importx] Cannot find a suitable loader for given requirements ${JSON.stringify(context)}`)
+    loader = _loader
+  }
 
   const parentPath = (typeof inputUserUrl === 'string' && !inputUserUrl.includes('://'))
     ? inputUserUrl
@@ -103,7 +117,7 @@ export async function importx<T = any>(_specifier: string | URL, _options: strin
         const cwd = dirname(parentPath)
         return import('bundle-require')
           .then(r => r.bundleRequire({
-            format: 'esm',
+            format: type === 'commonjs' ? 'cjs' : 'esm',
             ...loaderOptions.bundleRequire,
             filepath: fullPath,
             cwd,

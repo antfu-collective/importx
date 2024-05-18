@@ -2,7 +2,60 @@ type ArgumentTypes<T> = T extends (...args: infer U) => any ? U : never
 
 export type SupportedLoader = 'tsx' | 'jiti' | 'bundle-require' | 'native'
 
-export interface ImportxOptions {
+export interface FeaturesOptions {
+  /**
+   * Whether to cache the imported module.
+   *
+   * Setting to `null` means it doesn't matter for you.
+   *
+   * By the spec of ESM, modules are always cached.
+   *
+   * Meaning that if you want to re-import a module without cache,
+   * you can't use native ESM import.
+   *
+   * `cache: false` does not compatible with following loaders:
+   *  - `native`
+   *
+   * `cache: true` does not compatible with following loaders:
+   *  - `bundle-require`
+   *
+   * Affects `auto` resolution:
+   * - When set to `false`, `native` will be fallback to `tsx` or `jiti`
+   *
+   * @default null
+   */
+  cache?: boolean | null
+  /**
+   * List dependencies of the module.
+   *
+   * Only available for `tsx` and `bundle-require` loader.
+   *
+   * Affects `auto` resolution:
+   * - When set to `true`, `jiti` will be fallback to `bundle-require`
+   *
+   * Setting to `null` means it doesn't matter for you.
+   *
+   * @default null
+   */
+  listDependencies?: boolean | null
+  /**
+   * Whether module resolution and evaluation type
+   *
+   * Setting to `null` means it doesn't matter for you.
+   *
+   * @default null
+   */
+  type?: 'module' | 'commonjs' | null
+
+  /**
+   * Exclude loaders from being used.
+   *
+   * Only affects `auto` resolution.
+   */
+  excludeLoaders?: SupportedLoader[]
+}
+
+export interface ImportxOptions extends FeaturesOptions {
   /**
    * Loader to use for importing the file.
    * @default 'auto'
@@ -34,39 +87,6 @@ export interface ImportxOptions {
      */
     bundleRequire?: Omit<Partial<import('bundle-require').Options>, 'filepath' | 'cwd'>
   }
-  /**
-   * Whether to cache the imported module.
-   *
-   * Setting to `null` means it doesn't matter for you.
-   *
-   * By the spec of ESM, modules are always cached.
-   *
-   * Meaning that if you want to re-import a module without cache,
-   * you can't use native ESM import.
-   *
-   * `cache: false` does not compatible with following loaders:
-   *  - `native`
-   *
-   * `cache: true` does not compatible with following loaders:
-   *  - `bundle-require`
-   *
-   * Affects `auto` resolution:
-   * - When set to `false`, `native` will be fallback to `tsx` or `jiti`
-   *
-   * @default null
-   */
-  cache?: boolean | null
-  /**
-   * List dependencies of the module.
-   *
-   * Only available for `tsx` and `bundle-require` loader.
-   *
-   * Affects `auto` resolution:
-   * - When set to `true`, `jiti` will be fallback to `bundle-require`
-   *
-   * @default false
-   */
-  listDependencies?: boolean
   /**
    * Bypass the `importx` options validation and import anyway.
    *
