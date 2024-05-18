@@ -91,7 +91,7 @@ export async function importx<T = any>(_specifier: string | URL, _options: strin
           .then(r => r.loader(info, options))
           .catch((e) => {
             if ('message' in e && /tsconfig\.json['"] not found/.test(e.message)) {
-              console.warn('WARNING: tsconfig.json not found, fallback to jiti loader:')
+              console.warn('tsconfig.json not found, fallback to jiti loader:')
               console.error(e)
               return import('./loaders/jiti')
                 .then(r => r.loader(info, options))
