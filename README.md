@@ -219,14 +219,14 @@ Importing a TypeScript module with `importx`:
 
 <!-- TABLE_START -->
 
-> Generated with version `v0.2.0` at 2024-05-11T22:29:00.566Z
+> Generated with version `v0.3.2` at 2024-05-28T10:56:44.031Z
 
 |  | native | tsx | jiti | bundle-require |
 | ------- | --- | --- | --- | --- |
-| node | Import: ❌<br>Cache: ❌<br>No cache: ❌<br>Deps: ❌ | Import: ✅<br>Cache: ✅<br>No cache: ✅<br>Deps: ✅ | Import: ✅<br>Cache: ✅<br>No cache: ✅<br>Deps: ✅ | Import: ✅<br>Cache: ❌<br>No cache: ✅<br>Deps: ✅ |
-| tsx | Import: ✅<br>Cache: ✅<br>No cache: ❌<br>Deps: ❌ | Import: ✅<br>Cache: ✅<br>No cache: ✅<br>Deps: ✅ | Import: ✅<br>Cache: ✅<br>No cache: ✅<br>Deps: ✅ | Import: ✅<br>Cache: ❌<br>No cache: ✅<br>Deps: ✅ |
-| deno | Import: ✅<br>Cache: ✅<br>No cache: ❌<br>Deps: ❌ | Import: ❌<br>Cache: ❌<br>No cache: ❌<br>Deps: ❌ | Import: ✅<br>Cache: ✅<br>No cache: ✅<br>Deps: ✅ | Import: ✅<br>Cache: ❌<br>No cache: ✅<br>Deps: ✅ |
-| bun | Import: ✅<br>Cache: ✅<br>No cache: ❌<br>Deps: ❌ | Import: ❌<br>Cache: ❌<br>No cache: ❌<br>Deps: ❌ | Import: ✅<br>Cache: ✅<br>No cache: ❌<br>Deps: ✅ | Import: ✅<br>Cache: ❌<br>No cache: ✅<br>Deps: ✅ |
+| node | Import: ❌<br>Cache: ❌<br>No cache: ❌<br>Deps: ❌<br>Mixed: ❌ | Import: ✅<br>Cache: ✅<br>No cache: ✅<br>Deps: ✅<br>Mixed: ❌ | Import: ✅<br>Cache: ✅<br>No cache: ✅<br>Deps: ✅<br>Mixed: ✅ | Import: ✅<br>Cache: ❌<br>No cache: ✅<br>Deps: ✅<br>Mixed: ✅ |
+| tsx | Import: ✅<br>Cache: ✅<br>No cache: ❌<br>Deps: ❌<br>Mixed: ✅ | Import: ✅<br>Cache: ✅<br>No cache: ✅<br>Deps: ✅<br>Mixed: ✅ | Import: ✅<br>Cache: ✅<br>No cache: ✅<br>Deps: ✅<br>Mixed: ✅ | Import: ✅<br>Cache: ❌<br>No cache: ✅<br>Deps: ✅<br>Mixed: ✅ |
+| deno | Import: ✅<br>Cache: ✅<br>No cache: ❌<br>Deps: ❌<br>Mixed: ❌ | Import: ❌<br>Cache: ❌<br>No cache: ❌<br>Deps: ❌<br>Mixed: ❌ | Import: ✅<br>Cache: ✅<br>No cache: ✅<br>Deps: ✅<br>Mixed: ✅ | Import: ✅<br>Cache: ❌<br>No cache: ✅<br>Deps: ✅<br>Mixed: ✅ |
+| bun | Import: ✅<br>Cache: ✅<br>No cache: ❌<br>Deps: ❌<br>Mixed: ✅ | Import: ❌<br>Cache: ❌<br>No cache: ❌<br>Deps: ❌<br>Mixed: ❌ | Import: ✅<br>Cache: ✅<br>No cache: ❌<br>Deps: ✅<br>Mixed: ✅ | Import: ✅<br>Cache: ❌<br>No cache: ✅<br>Deps: ✅<br>Mixed: ✅ |
 
 <!-- TABLE_END -->
 

@@ -68,6 +68,7 @@ if (process.env.CI) {
       `   Cache:     ${record.importCache ? c.green('✅') : c.red('❌')}`,
       `   No cache:  ${record.importNoCache ? c.green('✅') : c.red('❌')}`,
       `   Deps:      ${record.dependencies ? c.green('✅') : c.red('❌')}`,
+      `   CJS Mixed: ${record.mixed ? c.green('✅') : c.red('❌')}`,
     )
   }
   // TODO: send this to action output: https://github.com/vitejs/vite-benchmark/blob/fed7d313e66b95fd4bc288cde93d69b3dffdbec4/runner/src/cli.ts#L107-L113
@@ -95,6 +96,7 @@ ${runtimes.map(runtime => `| ${runtime} | ${loaders.map((loader) => {
     `Cache: ${record.importCache ? '✅' : '❌'}`,
     `No cache: ${record.importNoCache ? '✅' : '❌'}`,
     `Deps: ${record.dependencies ? '✅' : '❌'}`,
+    `Mixed: ${record.mixed ? '✅' : '❌'}`,
   ].join('<br>')
 }).join(' | ')} |`).join('\n')}
 `.trim()

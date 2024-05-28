@@ -12,6 +12,7 @@ const output = {
   importNoCache: false,
   importCache: false,
   dependencies: false,
+  mixed: false,
 }
 
 try {
@@ -59,6 +60,25 @@ try {
 }
 finally {
   await fs.writeFile(barPath, barContent, 'utf8')
+}
+
+const mixedRun = await import('../../../dist/index.mjs')
+  .then(x => x.import('../basic/mixed.ts', {
+    loader: LOADER,
+    cache: true,
+    parentURL: import.meta.url,
+    ignoreImportxWarning: true,
+  }))
+  .catch((e) => {
+    console.error(e)
+    output.mixed = false
+  })
+
+if (mixedRun && mixedRun.thousand === 1000) {
+  output.mixed = true
+}
+else {
+  console.error(`Mixed import mismatch ${JSON.stringify(mixedRun, null, 2)}`)
 }
 
 console.log(JSON.stringify(output, null, 2))
