@@ -35,7 +35,7 @@ export async function _createLoaderMatrix(options: {
     {
       name: 'tsx',
       supported: options.isRuntimeSupportsTsx,
-      type: ['module'],
+      type: ['module', 'commonjs'],
       cache: [true, false],
       listDependencies: [true, false],
       importTS: [true, false],
@@ -49,7 +49,7 @@ export async function _createLoaderMatrix(options: {
     },
     {
       name: 'bundle-require',
-      type: ['commonjs', 'module'],
+      type: ['module', 'commonjs'],
       cache: [false],
       listDependencies: [true],
       importTS: [true, false],

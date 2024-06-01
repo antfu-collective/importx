@@ -13,6 +13,7 @@ const output = {
   importCache: false,
   dependencies: false,
   mixed: false,
+  cjs: false,
   constEnum: false,
 }
 
@@ -85,6 +86,24 @@ async function runMixed() {
     })
 }
 
+async function runCjs() {
+  const importx = await import('../../dist/index.mjs')
+  await importx.import('./cts/index.ts', {
+    loader: LOADER,
+    cache: true,
+    parentURL: import.meta.url,
+    ignoreImportxWarning: true,
+  })
+    .then((mod) => {
+      if (mod && mod.thousand === 1000) {
+        output.cjs = true
+      }
+      else {
+        console.error(`CJS import mismatch ${JSON.stringify(mod, null, 2)}`)
+      }
+    })
+}
+
 async function runConstEnum() {
   const importx = await import('../../dist/index.mjs')
   await importx.import('./ts-const-enum/index.ts', {
@@ -106,6 +125,11 @@ try {
   await runMain()
     .catch((e) => {
       console.error(e)
+    })
+  await runCjs()
+    .catch((e) => {
+      console.error(e)
+      output.cjs = false
     })
   await runConstEnum()
     .catch((e) => {

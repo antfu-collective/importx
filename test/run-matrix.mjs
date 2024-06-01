@@ -34,6 +34,7 @@ for (const loader of loaders) {
       importCache: false,
       dependencies: false,
       constEnum: false,
+      cjs: false,
       errors: null,
     }
 
@@ -65,12 +66,13 @@ if (process.env.CI) {
     messages.push(
       '-----------',
       `${c.green(record.runtime)} - ${c.yellow(record.loader)}`,
-      `   Import:     ${record.import ? c.green('✅') : c.red('❌')}`,
-      `   Cache:      ${record.importCache ? c.green('✅') : c.red('❌')}`,
-      `   No cache:   ${record.importNoCache ? c.green('✅') : c.red('❌')}`,
-      `   Deps:       ${record.dependencies ? c.green('✅') : c.red('❌')}`,
-      `   CJS Mixed:  ${record.mixed ? c.green('✅') : c.red('❌')}`,
-      `   Const enum: ${record.constEnum ? c.green('✅') : c.red('❌')}`,
+      `   Import:           ${record.import ? c.green('✅') : c.red('❌')}`,
+      `   Cache:            ${record.importCache ? c.green('✅') : c.red('❌')}`,
+      `   No cache:         ${record.importNoCache ? c.green('✅') : c.red('❌')}`,
+      `   Deps:             ${record.dependencies ? c.green('✅') : c.red('❌')}`,
+      `   CJS:              ${record.cjs ? c.green('✅') : c.red('❌')}`,
+      `   CJS & ESM Mixed:  ${record.mixed ? c.green('✅') : c.red('❌')}`,
+      `   Const enum:       ${record.constEnum ? c.green('✅') : c.red('❌')}`,
     )
   }
   // TODO: send this to action output: https://github.com/vitejs/vite-benchmark/blob/fed7d313e66b95fd4bc288cde93d69b3dffdbec4/runner/src/cli.ts#L107-L113
@@ -99,6 +101,7 @@ ${runtimes.map(runtime => `| ${runtime} | ${loaders.map((loader) => {
     `Cache: ${record.importCache ? '✅' : '❌'}`,
     `No cache: ${record.importNoCache ? '✅' : '❌'}`,
     `Deps: ${record.dependencies ? '✅' : '❌'}`,
+    `CJS Import: ${record.cjs ? '✅' : '❌'}`,
     `ESM/CJS Mixed: ${record.mixed ? '✅' : '❌'}`,
     `Const Enum: ${record.constEnum ? '✅' : '❌'}`,
   ].join('<br>')

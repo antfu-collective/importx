@@ -54,6 +54,7 @@
     "debug": "^4.3.5",
     "esbuild": "^0.20.2",
     "jiti": "^1.21.0",
+    "pkg-types": "^1.1.1",
     "tsx": "^4.11.0"
   },
   "devDependencies": {
