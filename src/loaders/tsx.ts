@@ -11,8 +11,10 @@ export async function loader(info: ImportxModuleInfo, options: ImportxOptions) {
 
   let isCJS = options.type === 'commonjs' || !!info.fullPath.match(/\.c[tj]s$/)
   if (!isCJS && info.fullPath.match(/\.[tj]s$/)) {
-    const pkg = await import('pkg-types').then(r => r.readPackageJSON(info.fullPath))
-    isCJS = pkg.type !== 'module'
+    const pkg = await import('pkg-types')
+      .then(r => r.readPackageJSON(info.fullPath))
+      .catch(() => ({ type: 'commonjs' }))
+    isCJS = pkg?.type === undefined || pkg?.type === 'commonjs'
   }
 
   if (isCJS) {
