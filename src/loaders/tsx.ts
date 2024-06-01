@@ -29,7 +29,7 @@ export async function loader(info: ImportxModuleInfo, options: ImportxOptions) {
     const mod = require(info.specifier, info.parentPath)
 
     if (options.listDependencies) {
-      const resolvedPath = require.resolve(info.specifier, info.parentURL)
+      const resolvedPath = require.resolve(info.specifier, info.parentPath)
       const cache = require.cache[resolvedPath]
       if (cache) {
         dependencies.push(...collectDependencies(cache))

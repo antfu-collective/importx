@@ -1,5 +1,5 @@
 import { fileURLToPath, pathToFileURL } from 'node:url'
-import { dirname, join } from 'node:path'
+import { dirname, join } from 'pathe'
 import Debug from 'debug'
 import type { ImportxModuleInfo, ImportxOptions } from './types'
 import type { LoaderDetectionContext } from './detect'
