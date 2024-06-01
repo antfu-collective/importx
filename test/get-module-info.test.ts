@@ -2,7 +2,6 @@
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'pathe'
 import { expect, it } from 'vitest'
-// @ts-expect-error - no types
 import { getModuleInfo, importx } from '../dist/index.mjs'
 
 const MOD_EXPORT = 'Foo42bar42'
