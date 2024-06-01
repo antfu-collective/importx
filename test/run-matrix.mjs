@@ -4,6 +4,7 @@ import fs from 'node:fs/promises'
 import process from 'node:process'
 import { execaCommand } from 'execa'
 import c from 'picocolors'
+import strip from 'strip-ansi'
 import pkg from '../package.json' with { type: 'json' }
 
 const loaders = ['native', 'tsx', 'jiti', 'bundle-require']
@@ -20,8 +21,8 @@ const entry = fileURLToPath(new URL('./fixtures/matrix.mjs', import.meta.url))
 
 const records = []
 
-for (const loader of loaders) {
-  for (const runtime of runtimes) {
+for (const runtime of runtimes) {
+  for (const loader of loaders) {
     // if (runtime !== 'node' && loader !== 'native')
     //   continue
     console.log(`loading using ${loader} on ${runtime}`)
@@ -59,28 +60,31 @@ for (const loader of loaders) {
 
 await fs.writeFile('test/table.json', JSON.stringify(records, null, 2), 'utf8')
 
+const list = []
+for (const record of records) {
+  list.push(
+    '===========',
+    `runtime: ${c.green(record.runtime)}`,
+    `loader:  ${c.yellow(record.loader)}`,
+    `-----------`,
+    `Import:           ${record.import ? c.green('✅') : c.red('❌')}`,
+    `Cache:            ${record.importCache ? c.green('✅') : c.red('❌')}`,
+    `No cache:         ${record.importNoCache ? c.green('✅') : c.red('❌')}`,
+    `Deps:             ${record.dependencies ? c.green('✅') : c.red('❌')}`,
+    `CTS:              ${record.cjs ? c.green('✅') : c.red('❌')}`,
+    `CJS & ESM Mixed:  ${record.mixed ? c.green('✅') : c.red('❌')}`,
+    `Const enum:       ${record.constEnum ? c.green('✅') : c.red('❌')}`,
+    '',
+  )
+}
+
 if (process.env.CI) {
-  const isWindows = process.platform === 'win32'
-  const messages = []
-  for (const record of records) {
-    messages.push(
-      '-----------',
-      `${c.green(record.runtime)} - ${c.yellow(record.loader)}`,
-      `   Import:           ${record.import ? c.green('✅') : c.red('❌')}`,
-      `   Cache:            ${record.importCache ? c.green('✅') : c.red('❌')}`,
-      `   No cache:         ${record.importNoCache ? c.green('✅') : c.red('❌')}`,
-      `   Deps:             ${record.dependencies ? c.green('✅') : c.red('❌')}`,
-      `   CJS:              ${record.cjs ? c.green('✅') : c.red('❌')}`,
-      `   CJS & ESM Mixed:  ${record.mixed ? c.green('✅') : c.red('❌')}`,
-      `   Const enum:       ${record.constEnum ? c.green('✅') : c.red('❌')}`,
-    )
-  }
   // TODO: send this to action output: https://github.com/vitejs/vite-benchmark/blob/fed7d313e66b95fd4bc288cde93d69b3dffdbec4/runner/src/cli.ts#L107-L113
-  console.log(messages.join('\n'))
+  console.log(list.join('\n'))
 
   if (
     records
-      .filter(x => (x.runtime === 'node' && x.loader !== 'native') || (x.runtime !== 'node' && x.loader === 'native' && !isWindows))
+      .filter(x => (x.runtime === 'node' && x.loader !== 'native'))
       .some(x => !x.import)
   ) {
     process.exit(1)
@@ -101,7 +105,7 @@ ${runtimes.map(runtime => `| ${runtime} | ${loaders.map((loader) => {
     `Cache: ${record.importCache ? '✅' : '❌'}`,
     `No cache: ${record.importNoCache ? '✅' : '❌'}`,
     `Deps: ${record.dependencies ? '✅' : '❌'}`,
-    `CJS Import: ${record.cjs ? '✅' : '❌'}`,
+    `CTS Import: ${record.cjs ? '✅' : '❌'}`,
     `ESM/CJS Mixed: ${record.mixed ? '✅' : '❌'}`,
     `Const Enum: ${record.constEnum ? '✅' : '❌'}`,
   ].join('<br>')
@@ -111,4 +115,6 @@ ${runtimes.map(runtime => `| ${runtime} | ${loaders.map((loader) => {
   let readme = await fs.readFile('README.md', 'utf8')
   readme = readme.replace(/(<!-- TABLE_START -->)[\s\S]*(<!-- TABLE_END -->)/, `$1\n\n${table}\n\n$2`)
   await fs.writeFile('README.md', readme, 'utf8')
+
+  await fs.writeFile('test/matrix-output.txt', strip(list.join('\n')), 'utf-8')
 }

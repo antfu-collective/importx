@@ -1,0 +1,191 @@
+===========
+runtime: node
+loader:  native
+-----------
+Import:           ❌
+Cache:            ❌
+No cache:         ❌
+Deps:             ❌
+CTS:              ❌
+CJS & ESM Mixed:  ❌
+Const enum:       ❌
+
+===========
+runtime: node
+loader:  tsx
+-----------
+Import:           ✅
+Cache:            ✅
+No cache:         ✅
+Deps:             ✅
+CTS:              ✅
+CJS & ESM Mixed:  ❌
+Const enum:       ✅
+
+===========
+runtime: node
+loader:  jiti
+-----------
+Import:           ✅
+Cache:            ✅
+No cache:         ✅
+Deps:             ✅
+CTS:              ✅
+CJS & ESM Mixed:  ✅
+Const enum:       ✅
+
+===========
+runtime: node
+loader:  bundle-require
+-----------
+Import:           ✅
+Cache:            ❌
+No cache:         ✅
+Deps:             ✅
+CTS:              ❌
+CJS & ESM Mixed:  ✅
+Const enum:       ✅
+
+===========
+runtime: tsx
+loader:  native
+-----------
+Import:           ✅
+Cache:            ✅
+No cache:         ❌
+Deps:             ❌
+CTS:              ✅
+CJS & ESM Mixed:  ✅
+Const enum:       ✅
+
+===========
+runtime: tsx
+loader:  tsx
+-----------
+Import:           ✅
+Cache:            ✅
+No cache:         ✅
+Deps:             ✅
+CTS:              ✅
+CJS & ESM Mixed:  ✅
+Const enum:       ✅
+
+===========
+runtime: tsx
+loader:  jiti
+-----------
+Import:           ✅
+Cache:            ✅
+No cache:         ✅
+Deps:             ✅
+CTS:              ✅
+CJS & ESM Mixed:  ✅
+Const enum:       ✅
+
+===========
+runtime: tsx
+loader:  bundle-require
+-----------
+Import:           ✅
+Cache:            ❌
+No cache:         ✅
+Deps:             ✅
+CTS:              ❌
+CJS & ESM Mixed:  ✅
+Const enum:       ✅
+
+===========
+runtime: deno
+loader:  native
+-----------
+Import:           ✅
+Cache:            ✅
+No cache:         ❌
+Deps:             ❌
+CTS:              ❌
+CJS & ESM Mixed:  ❌
+Const enum:       ❌
+
+===========
+runtime: deno
+loader:  tsx
+-----------
+Import:           ❌
+Cache:            ❌
+No cache:         ❌
+Deps:             ❌
+CTS:              ❌
+CJS & ESM Mixed:  ❌
+Const enum:       ❌
+
+===========
+runtime: deno
+loader:  jiti
+-----------
+Import:           ✅
+Cache:            ✅
+No cache:         ✅
+Deps:             ✅
+CTS:              ✅
+CJS & ESM Mixed:  ✅
+Const enum:       ✅
+
+===========
+runtime: deno
+loader:  bundle-require
+-----------
+Import:           ✅
+Cache:            ❌
+No cache:         ✅
+Deps:             ✅
+CTS:              ❌
+CJS & ESM Mixed:  ✅
+Const enum:       ✅
+
+===========
+runtime: bun
+loader:  native
+-----------
+Import:           ✅
+Cache:            ✅
+No cache:         ❌
+Deps:             ❌
+CTS:              ✅
+CJS & ESM Mixed:  ✅
+Const enum:       ✅
+
+===========
+runtime: bun
+loader:  tsx
+-----------
+Import:           ❌
+Cache:            ❌
+No cache:         ❌
+Deps:             ❌
+CTS:              ✅
+CJS & ESM Mixed:  ❌
+Const enum:       ❌
+
+===========
+runtime: bun
+loader:  jiti
+-----------
+Import:           ✅
+Cache:            ✅
+No cache:         ❌
+Deps:             ✅
+CTS:              ✅
+CJS & ESM Mixed:  ✅
+Const enum:       ✅
+
+===========
+runtime: bun
+loader:  bundle-require
+-----------
+Import:           ✅
+Cache:            ❌
+No cache:         ✅
+Deps:             ✅
+CTS:              ❌
+CJS & ESM Mixed:  ✅
+Const enum:       ✅
