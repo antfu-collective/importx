@@ -112,8 +112,9 @@ export async function detectLoader(
       && (context.listDependencies === null || loader.listDependencies.includes(context.listDependencies))
       && (context.type === null || loader.type.includes(context.type))
       && loader.importTS.includes(context.isTs)
-    )
+    ) {
       return loader.name
+    }
   }
 
   return null
@@ -131,8 +132,9 @@ function isRuntimeSupportsTsx() {
     || nodeVersionNumbers[0] < 18
     || (nodeVersionNumbers[0] === 18 && nodeVersionNumbers[1] < 19)
     || (nodeVersionNumbers[0] === 20 && nodeVersionNumbers[1] < 8)
-  )
+  ) {
     return false
+  }
   return true
 }
 

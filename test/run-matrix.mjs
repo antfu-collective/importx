@@ -16,7 +16,7 @@ const runtimesMap = {
   bun: 'bun',
 }
 
-const entry = fileURLToPath(new URL('./fixtures/matrix/index.mjs', import.meta.url))
+const entry = fileURLToPath(new URL('./fixtures/matrix.mjs', import.meta.url))
 
 const records = []
 
@@ -33,6 +33,7 @@ for (const loader of loaders) {
       importNoCache: false,
       importCache: false,
       dependencies: false,
+      constEnum: false,
       errors: null,
     }
 
@@ -64,11 +65,12 @@ if (process.env.CI) {
     messages.push(
       '-----------',
       `${c.green(record.runtime)} - ${c.yellow(record.loader)}`,
-      `   Import:    ${record.import ? c.green('✅') : c.red('❌')}`,
-      `   Cache:     ${record.importCache ? c.green('✅') : c.red('❌')}`,
-      `   No cache:  ${record.importNoCache ? c.green('✅') : c.red('❌')}`,
-      `   Deps:      ${record.dependencies ? c.green('✅') : c.red('❌')}`,
-      `   CJS Mixed: ${record.mixed ? c.green('✅') : c.red('❌')}`,
+      `   Import:     ${record.import ? c.green('✅') : c.red('❌')}`,
+      `   Cache:      ${record.importCache ? c.green('✅') : c.red('❌')}`,
+      `   No cache:   ${record.importNoCache ? c.green('✅') : c.red('❌')}`,
+      `   Deps:       ${record.dependencies ? c.green('✅') : c.red('❌')}`,
+      `   CJS Mixed:  ${record.mixed ? c.green('✅') : c.red('❌')}`,
+      `   Const enum: ${record.constEnum ? c.green('✅') : c.red('❌')}`,
     )
   }
   // TODO: send this to action output: https://github.com/vitejs/vite-benchmark/blob/fed7d313e66b95fd4bc288cde93d69b3dffdbec4/runner/src/cli.ts#L107-L113
@@ -78,8 +80,9 @@ if (process.env.CI) {
     records
       .filter(x => (x.runtime === 'node' && x.loader !== 'native') || (x.runtime !== 'node' && x.loader === 'native' && !isWindows))
       .some(x => !x.import)
-  )
+  ) {
     process.exit(1)
+  }
 }
 else {
   const table = `
@@ -96,7 +99,8 @@ ${runtimes.map(runtime => `| ${runtime} | ${loaders.map((loader) => {
     `Cache: ${record.importCache ? '✅' : '❌'}`,
     `No cache: ${record.importNoCache ? '✅' : '❌'}`,
     `Deps: ${record.dependencies ? '✅' : '❌'}`,
-    `Mixed: ${record.mixed ? '✅' : '❌'}`,
+    `ESM/CJS Mixed: ${record.mixed ? '✅' : '❌'}`,
+    `Const Enum: ${record.constEnum ? '✅' : '❌'}`,
   ].join('<br>')
 }).join(' | ')} |`).join('\n')}
 `.trim()
