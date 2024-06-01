@@ -50,7 +50,7 @@
     "prepare": "simple-git-hooks"
   },
   "dependencies": {
-    "bundle-require": "^4.1.0",
+    "bundle-require": "^5.0.0",
     "debug": "^4.3.5",
     "esbuild": "^0.20.2",
     "jiti": "^1.21.0",
@@ -59,7 +59,7 @@
     "tsx": "^4.11.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.19.1",
+    "@antfu/eslint-config": "^2.19.2",
     "@antfu/ni": "^0.21.12",
     "@antfu/utils": "^0.7.8",
     "@types/debug": "^4.1.12",
