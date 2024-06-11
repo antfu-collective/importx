@@ -6,7 +6,7 @@ import { getModuleInfo, importx } from '../dist/index.mjs'
 
 it('should work with cts', async () => {
   const _dirname = dirname(fileURLToPath(import.meta.url))
-  const specifier = join(_dirname, './fixtures/cts/index.ts')
+  const specifier = join(_dirname, './fixtures/cts/index.cts')
   const mod = await importx(specifier, {
     parentURL: _dirname,
     loader: 'jiti', // TODO: test for tsx as well

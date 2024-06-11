@@ -13,7 +13,7 @@ const output = {
   importCache: false,
   dependencies: false,
   mixed: false,
-  cjs: false,
+  cts: false,
   constEnum: false,
 }
 
@@ -86,9 +86,9 @@ async function runMixed() {
     })
 }
 
-async function runCjs() {
+async function runCts() {
   const importx = await import('../../dist/index.mjs')
-  await importx.import('./cts/index.ts', {
+  await importx.import('./cts/index.cts', {
     loader: LOADER,
     cache: true,
     parentURL: import.meta.url,
@@ -96,10 +96,10 @@ async function runCjs() {
   })
     .then((mod) => {
       if (mod && mod.thousand === 1000) {
-        output.cjs = true
+        output.cts = true
       }
       else {
-        console.error(`CJS import mismatch ${JSON.stringify(mod, null, 2)}`)
+        console.error(`CTS import mismatch ${JSON.stringify(mod, null, 2)}`)
       }
     })
 }
@@ -126,10 +126,10 @@ try {
     .catch((e) => {
       console.error(e)
     })
-  await runCjs()
+  await runCts()
     .catch((e) => {
       console.error(e)
-      output.cjs = false
+      output.cts = false
     })
   await runConstEnum()
     .catch((e) => {

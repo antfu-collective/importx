@@ -5,7 +5,8 @@ import process from 'node:process'
 import { execaCommand } from 'execa'
 import c from 'picocolors'
 import strip from 'strip-ansi'
-import pkg from '../package.json' with { type: 'json' }
+
+const pkg = JSON.parse(await fs.readFile(new URL('../package.json', import.meta.url), 'utf8'))
 
 const loaders = ['native', 'tsx', 'jiti', 'bundle-require']
 const runtimes = ['node', 'tsx', 'deno', 'bun']
@@ -35,7 +36,7 @@ for (const runtime of runtimes) {
       importCache: false,
       dependencies: false,
       constEnum: false,
-      cjs: false,
+      cts: false,
       errors: null,
     }
 
@@ -71,7 +72,7 @@ for (const record of records) {
     `Cache:            ${record.importCache ? c.green('✅') : c.red('❌')}`,
     `No cache:         ${record.importNoCache ? c.green('✅') : c.red('❌')}`,
     `Deps:             ${record.dependencies ? c.green('✅') : c.red('❌')}`,
-    `CTS:              ${record.cjs ? c.green('✅') : c.red('❌')}`,
+    `CTS:              ${record.cts ? c.green('✅') : c.red('❌')}`,
     `CJS & ESM Mixed:  ${record.mixed ? c.green('✅') : c.red('❌')}`,
     `Const enum:       ${record.constEnum ? c.green('✅') : c.red('❌')}`,
     '',
@@ -105,7 +106,7 @@ ${runtimes.map(runtime => `| ${runtime} | ${loaders.map((loader) => {
     `Cache: ${record.importCache ? '✅' : '❌'}`,
     `No cache: ${record.importNoCache ? '✅' : '❌'}`,
     `Deps: ${record.dependencies ? '✅' : '❌'}`,
-    `CTS Import: ${record.cjs ? '✅' : '❌'}`,
+    `CTS Import: ${record.cts ? '✅' : '❌'}`,
     `ESM/CJS Mixed: ${record.mixed ? '✅' : '❌'}`,
     `Const Enum: ${record.constEnum ? '✅' : '❌'}`,
   ].join('<br>')
