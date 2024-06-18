@@ -72,7 +72,6 @@ async function runMixed() {
   const importx = await import('../../dist/index.mjs')
   await importx.import('./mixed/index.ts', {
     loader: LOADER,
-    cache: true,
     parentURL: import.meta.url,
     ignoreImportxWarning: true,
   })
@@ -90,7 +89,6 @@ async function runCts() {
   const importx = await import('../../dist/index.mjs')
   await importx.import('./cts/index.cts', {
     loader: LOADER,
-    cache: true,
     parentURL: import.meta.url,
     ignoreImportxWarning: true,
   })

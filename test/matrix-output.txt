@@ -18,8 +18,8 @@ Import:           ✅
 Cache:            ✅
 No cache:         ✅
 Deps:             ✅
-CTS:              ❌
-CJS & ESM Mixed:  ❌
+CTS:              ✅
+CJS & ESM Mixed:  ✅
 Const enum:       ✅
 
 ===========
@@ -66,8 +66,8 @@ Import:           ✅
 Cache:            ✅
 No cache:         ✅
 Deps:             ✅
-CTS:              ❌
-CJS & ESM Mixed:  ❌
+CTS:              ✅
+CJS & ESM Mixed:  ✅
 Const enum:       ✅
 
 ===========

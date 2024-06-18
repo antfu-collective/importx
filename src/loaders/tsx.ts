@@ -35,8 +35,8 @@ export async function loader(info: ImportxModuleInfo, options: ImportxOptions) {
       onImport(url) {
         dependencies.push(url)
       },
-      ...options.loaderOptions?.tsx,
       parentURL: info.parentPath,
+      ...options.loaderOptions?.tsx,
     },
   )
 }
