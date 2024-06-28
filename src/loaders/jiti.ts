@@ -3,7 +3,6 @@ import type { ImportxModuleInfo, ImportxOptions } from '../types'
 
 export async function loader(info: ImportxModuleInfo, options: ImportxOptions): Promise<any> {
   const jiti = JITI(info.parentPath, {
-    esmResolve: true,
     ...(info.cache === false
       ? {
           cache: false,
@@ -12,7 +11,7 @@ export async function loader(info: ImportxModuleInfo, options: ImportxOptions): 
       : {}),
     ...options.loaderOptions?.jiti,
   })
-  const mod = jiti(info.specifier)
+  const mod = await jiti.import(info.specifier)
   info.dependencies = Object
     .values(jiti.cache || {})
     .map((i: any) => i.filename)

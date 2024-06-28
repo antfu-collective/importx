@@ -35,7 +35,7 @@ Deps:             ✅
 CTS:              ✅
 CJS & ESM Mixed:  ✅
 Const enum:       ✅
-Import ESM Dep:   ❌
+Import ESM Dep:   ✅
 
 ===========
 runtime: node
@@ -87,7 +87,7 @@ Deps:             ✅
 CTS:              ✅
 CJS & ESM Mixed:  ✅
 Const enum:       ✅
-Import ESM Dep:   ❌
+Import ESM Dep:   ✅
 
 ===========
 runtime: tsx
@@ -139,7 +139,7 @@ Deps:             ✅
 CTS:              ✅
 CJS & ESM Mixed:  ✅
 Const enum:       ✅
-Import ESM Dep:   ❌
+Import ESM Dep:   ✅
 
 ===========
 runtime: deno
@@ -185,13 +185,13 @@ runtime: bun
 loader:  jiti
 -----------
 Import:           ✅
-Cache:            ✅
+Cache:            ❌
 No cache:         ❌
 Deps:             ✅
 CTS:              ✅
 CJS & ESM Mixed:  ✅
 Const enum:       ✅
-Import ESM Dep:   ❌
+Import ESM Dep:   ✅
 
 ===========
 runtime: bun

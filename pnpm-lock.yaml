@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  jiti: npm:jiti-nightly@latest
+
 importers:
 
   .:
@@ -18,8 +21,8 @@ importers:
         specifier: ^0.20.2
         version: 0.20.2
       jiti:
-        specifier: ^1.21.6
-        version: 1.21.6
+        specifier: npm:jiti-nightly@latest
+        version: jiti-nightly@2.0.0-1719567925.9a36d0e
       pathe:
         specifier: ^1.1.2
         version: 1.1.2
@@ -2066,6 +2069,10 @@ packages:
   jackspeak@2.3.5:
     resolution: {integrity: sha512-Ratx+B8WeXLAtRJn26hrhY8S1+Jz6pxPMrkrdkgb/NstTNiqMhX0/oFVu5wX+g5n6JlEu2LPsDJmY8nRP4+alw==}
     engines: {node: '>=14'}
+
+  jiti-nightly@2.0.0-1719567925.9a36d0e:
+    resolution: {integrity: sha512-0xc11QKV2GtYy9ouO1SuNt2fqIqDs61Z1Ec7hhGUGeHDKcvBTyhWp0yY4XfBKaBMI/dG6krCCGRwfzrwJyIOQw==}
+    hasBin: true
 
   jiti@1.21.6:
     resolution: {integrity: sha512-2yTgeWTWzMWkHu6Jp9NKgePDaYHbntiwvYuuJLbbN9vl7DC9DvXKOB2BC3ZZ92D3cvV/aflH0osDfwpHepQ53w==}
@@ -4918,6 +4925,8 @@ snapshots:
       '@isaacs/cliui': 8.0.2
     optionalDependencies:
       '@pkgjs/parseargs': 0.11.0
+
+  jiti-nightly@2.0.0-1719567925.9a36d0e: {}
 
   jiti@1.21.6: {}
 

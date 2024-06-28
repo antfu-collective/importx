@@ -137,6 +137,7 @@ it('importEsmDep', async () => {
     loader: LOADER,
     parentURL: import.meta.url,
     ignoreImportxWarning: true,
+    cache: false,
   })
   return mod && mod.default === true
 })
