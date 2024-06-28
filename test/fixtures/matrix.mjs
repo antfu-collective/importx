@@ -8,16 +8,31 @@ const barContent = await fs.readFile(barPath, 'utf8')
 
 const output = {
   loader: LOADER,
-  import: false,
-  importNoCache: false,
-  importCache: false,
-  dependencies: false,
-  mixed: false,
-  cts: false,
-  constEnum: false,
 }
 
-async function runMain() {
+const promises = []
+
+/**
+ * @param {string} key
+ * @param {() => void} fn
+ */
+function it(key, fn) {
+  promises.push(async () => {
+    try {
+      const result = await fn()
+      if (result === false)
+        output[key] = false
+      else
+        output[key] = true
+    }
+    catch (e) {
+      console.error(e)
+      output[key] = false
+    }
+  })
+}
+
+it('main', async () => {
   const importx = await import('../../dist/index.mjs')
   try {
     const run1noCache = await importx.import('./basic/foo.mts', {
@@ -66,86 +81,71 @@ async function runMain() {
   finally {
     await fs.writeFile(barPath, barContent, 'utf8')
   }
-}
+})
 
-async function runMixed() {
+it('mixed', async () => {
   const importx = await import('../../dist/index.mjs')
-  await importx.import('./mixed/index.ts', {
+  const mod = await importx.import('./mixed/index.ts', {
     loader: LOADER,
     parentURL: import.meta.url,
     ignoreImportxWarning: true,
   })
-    .then((mod) => {
-      if (mod && mod.thousand === 1000) {
-        output.mixed = true
-      }
-      else {
-        console.error(`Mixed import mismatch ${JSON.stringify(mod, null, 2)}`)
-      }
-    })
-}
+  if (mod && mod.thousand === 1000) {
+    return true
+  }
+  else {
+    console.error(`Mixed import mismatch ${JSON.stringify(mod, null, 2)}`)
+    return false
+  }
+})
 
-async function runCts() {
+it('cts', async () => {
   const importx = await import('../../dist/index.mjs')
-  await importx.import('./cts/index.cts', {
+  const mod = await importx.import('./cts/index.cts', {
     loader: LOADER,
     parentURL: import.meta.url,
     ignoreImportxWarning: true,
   })
-    .then((mod) => {
-      if (mod && mod.thousand === 1000) {
-        output.cts = true
-      }
-      else {
-        console.error(`CTS import mismatch ${JSON.stringify(mod, null, 2)}`)
-      }
-    })
-}
+  if (mod && mod.thousand === 1000) {
+    return true
+  }
+  else {
+    console.error(`CTS import mismatch ${JSON.stringify(mod, null, 2)}`)
+    return false
+  }
+})
 
-async function runConstEnum() {
+it('constEnum', async () => {
   const importx = await import('../../dist/index.mjs')
-  await importx.import('./ts-const-enum/index.ts', {
+  const mod = await importx.import('./ts-const-enum/index.ts', {
     loader: LOADER,
     parentURL: import.meta.url,
     ignoreImportxWarning: true,
   })
-    .then((mod) => {
-      if (mod && mod.sum === 3) {
-        output.constEnum = true
-      }
-      else {
-        console.error(`Const enum import mismatch ${JSON.stringify(mod, null, 2)}`)
-      }
-    })
+  if (mod && mod.sum === 3) {
+    return true
+  }
+  else {
+    console.error(`Const enum import mismatch ${JSON.stringify(mod, null, 2)}`)
+    return false
+  }
+})
+
+it('importEsmDep', async () => {
+  const importx = await import('../../dist/index.mjs')
+  const mod = await importx.import('./import-esm-dep/index.ts', {
+    loader: LOADER,
+    parentURL: import.meta.url,
+    ignoreImportxWarning: true,
+  })
+  return mod && mod.default === true
+})
+
+for (const promise of promises) {
+  await promise()
 }
 
-try {
-  await runMain()
-    .catch((e) => {
-      console.error(e)
-    })
-  await runCts()
-    .catch((e) => {
-      console.error(e)
-      output.cts = false
-    })
-  await runConstEnum()
-    .catch((e) => {
-      console.error(e)
-      output.constEnum = false
-    })
-  await runMixed()
-    .catch((e) => {
-      console.error(e)
-      output.mixed = false
-    })
-}
-catch (e) {
-  console.error(e)
-}
-finally {
-  console.log(JSON.stringify(output, null, 2))
-}
+console.log(JSON.stringify(output, null, 2))
 
 if (!output.import)
   process.exitCode = 1

@@ -34,6 +34,7 @@ for (const runtime of runtimes) {
       import: false,
       importNoCache: false,
       importCache: false,
+      importEsmDep: false,
       dependencies: false,
       constEnum: false,
       cts: false,
@@ -75,6 +76,7 @@ for (const record of records) {
     `CTS:              ${record.cts ? c.green('✅') : c.red('❌')}`,
     `CJS & ESM Mixed:  ${record.mixed ? c.green('✅') : c.red('❌')}`,
     `Const enum:       ${record.constEnum ? c.green('✅') : c.red('❌')}`,
+    `Import ESM Dep:   ${record.importEsmDep ? c.green('✅') : c.red('❌')}`,
     '',
   )
 }
@@ -109,6 +111,7 @@ ${runtimes.map(runtime => `| ${runtime} | ${loaders.map((loader) => {
     `CTS Import: ${record.cts ? '✅' : '❌'}`,
     `ESM/CJS Mixed: ${record.mixed ? '✅' : '❌'}`,
     `Const Enum: ${record.constEnum ? '✅' : '❌'}`,
+    `Import ESM Dep: ${record.importEsmDep ? '✅' : '❌'}`,
   ].join('<br>')
 }).join(' | ')} |`).join('\n')}
 `.trim()

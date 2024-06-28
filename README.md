@@ -219,14 +219,14 @@ Importing a TypeScript module with `importx`:
 
 <!-- TABLE_START -->
 
-> Generated with version `v0.3.6` at 2024-06-18T12:23:28.729Z
+> Generated with version `v0.3.7` at 2024-06-28T10:07:29.630Z
 
 |  | native | tsx | jiti | bundle-require |
 | ------- | --- | --- | --- | --- |
-| node | Import: ❌<br>Cache: ❌<br>No cache: ❌<br>Deps: ❌<br>CTS Import: ❌<br>ESM/CJS Mixed: ❌<br>Const Enum: ❌ | Import: ✅<br>Cache: ✅<br>No cache: ✅<br>Deps: ✅<br>CTS Import: ✅<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅ | Import: ✅<br>Cache: ✅<br>No cache: ✅<br>Deps: ✅<br>CTS Import: ✅<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅ | Import: ✅<br>Cache: ❌<br>No cache: ✅<br>Deps: ✅<br>CTS Import: ❌<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅ |
-| tsx | Import: ✅<br>Cache: ✅<br>No cache: ❌<br>Deps: ❌<br>CTS Import: ✅<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅ | Import: ✅<br>Cache: ✅<br>No cache: ✅<br>Deps: ✅<br>CTS Import: ✅<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅ | Import: ✅<br>Cache: ✅<br>No cache: ✅<br>Deps: ✅<br>CTS Import: ✅<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅ | Import: ✅<br>Cache: ❌<br>No cache: ✅<br>Deps: ✅<br>CTS Import: ❌<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅ |
-| deno | Import: ✅<br>Cache: ✅<br>No cache: ❌<br>Deps: ❌<br>CTS Import: ❌<br>ESM/CJS Mixed: ❌<br>Const Enum: ❌ | Import: ❌<br>Cache: ❌<br>No cache: ❌<br>Deps: ❌<br>CTS Import: ❌<br>ESM/CJS Mixed: ❌<br>Const Enum: ❌ | Import: ✅<br>Cache: ✅<br>No cache: ✅<br>Deps: ✅<br>CTS Import: ✅<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅ | Import: ✅<br>Cache: ❌<br>No cache: ✅<br>Deps: ✅<br>CTS Import: ❌<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅ |
-| bun | Import: ✅<br>Cache: ✅<br>No cache: ❌<br>Deps: ❌<br>CTS Import: ✅<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅ | Import: ❌<br>Cache: ❌<br>No cache: ❌<br>Deps: ❌<br>CTS Import: ❌<br>ESM/CJS Mixed: ❌<br>Const Enum: ❌ | Import: ✅<br>Cache: ✅<br>No cache: ❌<br>Deps: ✅<br>CTS Import: ✅<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅ | Import: ✅<br>Cache: ❌<br>No cache: ✅<br>Deps: ✅<br>CTS Import: ❌<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅ |
+| node | Import: ❌<br>Cache: ❌<br>No cache: ❌<br>Deps: ❌<br>CTS Import: ❌<br>ESM/CJS Mixed: ❌<br>Const Enum: ❌<br>Import ESM Dep: ❌ | Import: ✅<br>Cache: ✅<br>No cache: ✅<br>Deps: ✅<br>CTS Import: ✅<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅<br>Import ESM Dep: ✅ | Import: ✅<br>Cache: ✅<br>No cache: ✅<br>Deps: ✅<br>CTS Import: ✅<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅<br>Import ESM Dep: ❌ | Import: ✅<br>Cache: ❌<br>No cache: ✅<br>Deps: ✅<br>CTS Import: ❌<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅<br>Import ESM Dep: ✅ |
+| tsx | Import: ✅<br>Cache: ✅<br>No cache: ❌<br>Deps: ❌<br>CTS Import: ✅<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅<br>Import ESM Dep: ✅ | Import: ✅<br>Cache: ✅<br>No cache: ✅<br>Deps: ✅<br>CTS Import: ✅<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅<br>Import ESM Dep: ✅ | Import: ✅<br>Cache: ✅<br>No cache: ✅<br>Deps: ✅<br>CTS Import: ✅<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅<br>Import ESM Dep: ❌ | Import: ✅<br>Cache: ❌<br>No cache: ✅<br>Deps: ✅<br>CTS Import: ❌<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅<br>Import ESM Dep: ✅ |
+| deno | Import: ✅<br>Cache: ✅<br>No cache: ❌<br>Deps: ❌<br>CTS Import: ❌<br>ESM/CJS Mixed: ❌<br>Const Enum: ❌<br>Import ESM Dep: ✅ | Import: ❌<br>Cache: ❌<br>No cache: ❌<br>Deps: ❌<br>CTS Import: ❌<br>ESM/CJS Mixed: ❌<br>Const Enum: ❌<br>Import ESM Dep: ❌ | Import: ✅<br>Cache: ✅<br>No cache: ✅<br>Deps: ✅<br>CTS Import: ✅<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅<br>Import ESM Dep: ❌ | Import: ✅<br>Cache: ❌<br>No cache: ✅<br>Deps: ✅<br>CTS Import: ❌<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅<br>Import ESM Dep: ✅ |
+| bun | Import: ✅<br>Cache: ✅<br>No cache: ❌<br>Deps: ❌<br>CTS Import: ✅<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅<br>Import ESM Dep: ✅ | Import: ❌<br>Cache: ❌<br>No cache: ❌<br>Deps: ❌<br>CTS Import: ❌<br>ESM/CJS Mixed: ❌<br>Const Enum: ❌<br>Import ESM Dep: ❌ | Import: ✅<br>Cache: ✅<br>No cache: ❌<br>Deps: ✅<br>CTS Import: ✅<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅<br>Import ESM Dep: ❌ | Import: ✅<br>Cache: ❌<br>No cache: ✅<br>Deps: ✅<br>CTS Import: ❌<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅<br>Import ESM Dep: ✅ |
 
 <!-- TABLE_END -->
 
@@ -238,6 +238,8 @@ Importing a TypeScript module with `importx`:
 | Cache: `false`              | ❌ | ✅ | ✅ | ✅ |
 | List dependencies           | ❌ | ✅ | ✅ | ✅ |
 | Runtimes other than Node.js | ✅ | ❌ | ✅ | ✅ |
+| Native ESM Import           | ✅ | ✅ | ❌ | ✅ |
+| Top-level await             | ✅ | ✅ | ❌ | ✅ |
 | Runtime module type*        | ESM | ESM | CJS | ESM/CJS |
 
 > *This indicates what's the module type for each loader to evaluate the modules. For `CJS`, it means the loader transpiles the module to CJS and executes it in CJS mode, which may have some limitations like top-level await.
