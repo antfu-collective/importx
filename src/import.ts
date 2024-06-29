@@ -1,7 +1,7 @@
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { dirname, join } from 'pathe'
 import Debug from 'debug'
-import type { ImportxModuleInfo, ImportxOptions } from './types'
+import type { ImportxModuleInfo, ImportxOptions, SupportedLoader } from './types'
 import type { LoaderDetectionContext } from './detect'
 import { detectLoader, isTypeScriptFile } from './detect'
 
@@ -55,7 +55,7 @@ export async function importx<T = any>(_specifier: string | URL, _options: strin
     ? pathToFileURL(specifier).href
     : specifier
 
-  let loader = options.loader || 'auto'
+  let loader = options.loader || getLoaderFromEnv() || 'auto'
   if (loader === 'auto') {
     const context: LoaderDetectionContext = {
       cache,
@@ -141,6 +141,14 @@ export async function importx<T = any>(_specifier: string | URL, _options: strin
     info.previousImportInfo = previous
   _moduleInfoMap.set(mod, info)
   return mod
+}
+
+function getLoaderFromEnv(): SupportedLoader | undefined {
+  // eslint-disable-next-line node/prefer-global/process
+  if (typeof process !== 'undefined' && process.env)
+    // eslint-disable-next-line node/prefer-global/process
+    return (process.env.IMPORTX_LOADER as SupportedLoader) || undefined
+  return undefined
 }
 
 // Alias for easier import

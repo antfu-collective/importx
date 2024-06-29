@@ -49,6 +49,8 @@ const mod = await import('importx').then(x => x.import('./path/to/module.ts', {
 }))
 ```
 
+When `loader` is not provided in the options explicitly, it will read from `IMPORTX_LOADER` environment variable, and then fall back to the `auto`.
+
 ## Loaders
 
 ### `auto`
