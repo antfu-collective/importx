@@ -121,7 +121,7 @@ export async function detectLoader(
 }
 
 /**
- * tsx is supported in 20.8.0+
+ * tsx is supported in v18.18.0+ and 20.8.0+
  * Otherwise we fallback to jiti
  *
  * @see https://nodejs.org/api/module.html#moduleregisterspecifier-parenturl-options
@@ -129,9 +129,8 @@ export async function detectLoader(
 function isRuntimeSupportsTsx() {
   if (
     !nodeVersionNumbers
-    // || nodeVersionNumbers[0] < 18
-    // || (nodeVersionNumbers[0] === 18 && nodeVersionNumbers[1] < 19)
-    || nodeVersionNumbers[0] < 20
+    || nodeVersionNumbers[0] < 18
+    || (nodeVersionNumbers[0] === 18 && nodeVersionNumbers[1] < 19)
     || (nodeVersionNumbers[0] === 20 && nodeVersionNumbers[1] < 8)
   ) {
     return false
