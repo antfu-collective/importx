@@ -1,8 +1,8 @@
-import JITI from 'jiti'
+import { createJiti } from 'jiti'
 import type { ImportxModuleInfo, ImportxOptions } from '../types'
 
 export async function loader(info: ImportxModuleInfo, options: ImportxOptions): Promise<any> {
-  const jiti = JITI(info.parentPath, {
+  const jiti = createJiti(info.parentPath, {
     ...(info.cache === false
       ? {
           cache: false,
