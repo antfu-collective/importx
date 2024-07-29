@@ -135,7 +135,7 @@ Use [`jiti`](https://github.com/unjs/jiti) to import the module. It uses a bundl
 
 #### Limitations
 
-- [Does not support top-level await yet](https://github.com/unjs/jiti/issues/72)
+- ~~[Does not support top-level await yet](https://github.com/unjs/jiti/issues/72)~~ (supported in v2)
 - Runs in CJS mode (transpiles all TS/ESM to CJS)
 
 ### `bundle-require`
@@ -262,8 +262,8 @@ Importing a TypeScript module with `importx`:
 | Cache: `false`              | ❌ | ✅ | ✅ | ✅ |
 | List dependencies           | ❌ | ✅ | ✅ | ✅ |
 | Runtimes other than Node.js | ✅ | ❌ | ✅ | ✅ |
-| Native ESM Import           | ✅ | ✅ | ❌ | ✅ |
-| Top-level await             | ✅ | ✅ | ❌ | ✅ |
+| Native ESM Import           | ✅ | ✅ | ✅ | ✅ |
+| Top-level await             | ✅ | ✅ | ✅ | ✅ |
 | Runtime module type*        | ESM | ESM | CJS | ESM/CJS |
 
 > *This indicates what's the module type for each loader to evaluate the modules. For `CJS`, it means the loader transpiles the module to CJS and executes it in CJS mode, which may have some limitations like top-level await.
