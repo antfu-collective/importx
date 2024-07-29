@@ -121,7 +121,7 @@ export async function detectLoader(
 }
 
 /**
- * tsx is supported in Node.js 18.19.0+ and 20.8.0+
+ * tsx is supported in v18.18.0+ and 20.8.0+
  * Otherwise we fallback to jiti
  *
  * @see https://nodejs.org/api/module.html#moduleregisterspecifier-parenturl-options

@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  jiti: npm:jiti-nightly@latest
+  jiti: 2.0.0-beta.2
 
 importers:
 
@@ -21,8 +21,8 @@ importers:
         specifier: ^0.20.2
         version: 0.20.2
       jiti:
-        specifier: npm:jiti-nightly@latest
-        version: jiti-nightly@2.0.0-1719567925.9a36d0e
+        specifier: 2.0.0-beta.2
+        version: 2.0.0-beta.2
       pathe:
         specifier: ^1.1.2
         version: 1.1.2
@@ -2157,12 +2157,8 @@ packages:
   isexe@2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
 
-  jiti-nightly@2.0.0-1719567925.9a36d0e:
-    resolution: {integrity: sha512-0xc11QKV2GtYy9ouO1SuNt2fqIqDs61Z1Ec7hhGUGeHDKcvBTyhWp0yY4XfBKaBMI/dG6krCCGRwfzrwJyIOQw==}
-    hasBin: true
-
-  jiti@1.21.6:
-    resolution: {integrity: sha512-2yTgeWTWzMWkHu6Jp9NKgePDaYHbntiwvYuuJLbbN9vl7DC9DvXKOB2BC3ZZ92D3cvV/aflH0osDfwpHepQ53w==}
+  jiti@2.0.0-beta.2:
+    resolution: {integrity: sha512-c+PHQZakiQuMKbnhvrjZUvrK6E/AfmTOf4P+E3Y4FNVHcNMX9e/XrnbEvO+m4wS6ZjsvhHh/POQTlfy8uXFc0A==}
     hasBin: true
 
   js-tokens@4.0.0:
@@ -4254,7 +4250,7 @@ snapshots:
       defu: 6.1.4
       dotenv: 16.4.5
       giget: 1.2.1
-      jiti: 1.21.6
+      jiti: 2.0.0-beta.2
       mlly: 1.7.0
       ohash: 1.1.3
       pathe: 1.1.2
@@ -5125,9 +5121,7 @@ snapshots:
 
   isexe@2.0.0: {}
 
-  jiti-nightly@2.0.0-1719567925.9a36d0e: {}
-
-  jiti@1.21.6: {}
+  jiti@2.0.0-beta.2: {}
 
   js-tokens@4.0.0: {}
 
@@ -5332,7 +5326,7 @@ snapshots:
       esbuild: 0.18.20
       fs-extra: 11.1.1
       globby: 13.2.2
-      jiti: 1.21.6
+      jiti: 2.0.0-beta.2
       mlly: 1.7.0
       mri: 1.2.0
       pathe: 1.1.2
@@ -5855,7 +5849,7 @@ snapshots:
       esbuild: 0.19.12
       globby: 13.2.2
       hookable: 5.5.3
-      jiti: 1.21.6
+      jiti: 2.0.0-beta.2
       magic-string: 0.30.5
       mkdist: 1.3.0(typescript@5.5.4)
       mlly: 1.7.0
@@ -5888,7 +5882,7 @@ snapshots:
       '@babel/standalone': 7.22.13
       '@babel/types': 7.22.11
       defu: 6.1.4
-      jiti: 1.21.6
+      jiti: 2.0.0-beta.2
       mri: 1.2.0
       scule: 1.0.0
     transitivePeerDependencies:

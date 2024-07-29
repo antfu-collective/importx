@@ -1,7 +1,7 @@
 {
   "name": "importx",
   "type": "module",
-  "version": "0.3.7",
+  "version": "0.3.11",
   "packageManager": "pnpm@9.6.0",
   "description": "Unified tool for importing TypeScript modules at runtime",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
@@ -81,7 +81,7 @@
     "vitest": "^2.0.4"
   },
   "resolutions": {
-    "jiti": "npm:jiti-nightly@latest"
+    "jiti": "2.0.0-beta.2"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"

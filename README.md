@@ -49,11 +49,13 @@ const mod = await import('importx').then(x => x.import('./path/to/module.ts', {
 }))
 ```
 
+When `loader` is not provided in the options explicitly, it will read from `IMPORTX_LOADER` environment variable, and then fall back to the `auto`.
+
 ## Loaders
 
 ### `auto`
 
-Automatically choose the best loader based on the environment.
+Automatically choose the best loader based on the environment (if the below graph doesn't render, [click here to view it on GitHub](https://github.com/antfu-collective/importx#auto)).
 
 ```mermaid
 graph TD
