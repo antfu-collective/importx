@@ -18,7 +18,7 @@ importers:
         specifier: ^4.3.6
         version: 4.3.6
       esbuild:
-        specifier: '>=0.20.2'
+        specifier: ^0.20.2 || ^0.21.0 || ^0.22.0 || ^0.23.0
         version: 0.21.5
       jiti:
         specifier: 2.0.0-beta.2

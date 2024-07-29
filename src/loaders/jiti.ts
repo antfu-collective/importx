@@ -3,7 +3,6 @@ import type { ImportxModuleInfo, ImportxOptions } from '../types'
 
 export async function loader(info: ImportxModuleInfo, options: ImportxOptions): Promise<any> {
   const jiti = createJiti(info.parentPath, {
-    interopDefault: true,
     ...(info.cache === false
       ? {
           cache: false,

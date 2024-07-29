@@ -14,7 +14,7 @@ const runtimes = ['node', 'tsx', 'deno', 'bun']
 const runtimesMap = {
   node: 'node',
   tsx: 'npx tsx',
-  deno: 'deno run --allow-read --allow-env --allow-write --allow-run',
+  deno: 'deno run --allow-read --allow-env --allow-write --allow-run --allow-sys',
   bun: 'bun',
 }
 
