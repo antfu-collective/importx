@@ -81,7 +81,7 @@ export async function isNativeTsImportSupported(): Promise<boolean> {
   if (_isNativeTsImportSupported === undefined) {
     try {
       const modName = 'dummy.mts'
-      const mod = await import(`../${modName}`)
+      const mod = await import(`../runtime-fixtures/${modName}`)
       _isNativeTsImportSupported = mod.default === 'dummy'
     }
     catch {
