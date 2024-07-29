@@ -132,14 +132,14 @@ Import ESM Dep:   ❌
 runtime: deno
 loader:  jiti
 -----------
-Import:           ✅
-Cache:            ✅
-No cache:         ✅
-Deps:             ✅
-CTS:              ✅
-CJS & ESM Mixed:  ✅
-Const enum:       ✅
-Import ESM Dep:   ✅
+Import:           ❌
+Cache:            ❌
+No cache:         ❌
+Deps:             ❌
+CTS:              ❌
+CJS & ESM Mixed:  ❌
+Const enum:       ❌
+Import ESM Dep:   ❌
 
 ===========
 runtime: deno
