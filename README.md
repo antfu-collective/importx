@@ -215,13 +215,35 @@ const mod = await import('importx')
   }))
 ```
 
+## Fallback Loaders
+
+Since v0.4, importx supports fallback loaders when previous loaders fail to load the module. By default `['jiti']` will be used as it's the most compatible loader. You can customize the fallback loaders by setting the `fallbackLoaders` option:
+
+```ts
+const mod = await import('importx')
+  .then(x => x.import('./path/to/module.ts', {
+    fallbackLoaders: ['jiti', 'tsx'],
+    parentURL: import.meta.url,
+  }))
+```
+
+You can also disable fallback loaders by setting it to `false`:
+
+```ts
+const mod = await import('importx')
+  .then(x => x.import('./path/to/module.ts', {
+    fallbackLoaders: false,
+    parentURL: import.meta.url,
+  }))
+```
+
 ## Runtime-Loader Compatibility Table
 
 Importing a TypeScript module with `importx`:
 
 <!-- TABLE_START -->
 
-> Generated with version `v0.3.7` at 2024-07-29T13:36:51.319Z
+> Generated with version `v0.3.11` at 2024-07-29T13:55:23.094Z
 
 |  | native | tsx | jiti | bundle-require |
 | ------- | --- | --- | --- | --- |

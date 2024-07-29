@@ -6,6 +6,8 @@ const LOADER = process.env.IMPORTX_LOADER || 'auto'
 const barPath = new URL('./basic/bar.mts', import.meta.url)
 const barContent = await fs.readFile(barPath, 'utf8')
 
+const fallbackLoaders = false
+
 const output = {
   loader: LOADER,
 }
@@ -37,6 +39,7 @@ it('main', async () => {
   try {
     const run1noCache = await importx.import('./basic/foo.mts', {
       loader: LOADER,
+      fallbackLoaders,
       cache: false,
       parentURL: import.meta.url,
       ignoreImportxWarning: true,
@@ -44,6 +47,7 @@ it('main', async () => {
 
     const run1cache = await importx.import('./basic/foo.mts', {
       loader: LOADER,
+      fallbackLoaders,
       cache: true,
       parentURL: import.meta.url,
       ignoreImportxWarning: true,
@@ -63,6 +67,7 @@ it('main', async () => {
 
     const run2noCache = await importx.import('./basic/foo.mts', {
       loader: LOADER,
+      fallbackLoaders,
       cache: false,
       parentURL: import.meta.url,
       ignoreImportxWarning: true,
@@ -70,6 +75,7 @@ it('main', async () => {
 
     const run2cache = await importx.import('./basic/foo.mts', {
       loader: LOADER,
+      fallbackLoaders,
       cache: true,
       parentURL: import.meta.url,
       ignoreImportxWarning: true,
@@ -87,6 +93,7 @@ it('mixed', async () => {
   const importx = await import('../../dist/index.mjs')
   const mod = await importx.import('./mixed/index.ts', {
     loader: LOADER,
+    fallbackLoaders,
     parentURL: import.meta.url,
     ignoreImportxWarning: true,
   })
@@ -103,6 +110,7 @@ it('cts', async () => {
   const importx = await import('../../dist/index.mjs')
   const mod = await importx.import('./cts/index.cts', {
     loader: LOADER,
+    fallbackLoaders,
     parentURL: import.meta.url,
     ignoreImportxWarning: true,
   })
@@ -119,6 +127,7 @@ it('constEnum', async () => {
   const importx = await import('../../dist/index.mjs')
   const mod = await importx.import('./ts-const-enum/index.ts', {
     loader: LOADER,
+    fallbackLoaders,
     parentURL: import.meta.url,
     ignoreImportxWarning: true,
   })
@@ -135,6 +144,7 @@ it('importEsmDep', async () => {
   const importx = await import('../../dist/index.mjs')
   const mod = await importx.import('./import-esm-dep/index.ts', {
     loader: LOADER,
+    fallbackLoaders,
     parentURL: import.meta.url,
     ignoreImportxWarning: true,
     cache: false,
