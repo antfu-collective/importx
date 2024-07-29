@@ -66,7 +66,7 @@ export async function getLoaderMatrix(): Promise<LoaderMatrix[]> {
 
   _loaderMatrix = await _createLoaderMatrix({
     isNativeTsImportSupported: await isNativeTsImportSupported(),
-    isRuntimeSupportsTsx: isRuntimeSupportsTsx(),
+    isRuntimeSupportsTsx: await isRuntimeSupportsTsx(),
   })
 
   return _loaderMatrix
@@ -81,7 +81,7 @@ export async function isNativeTsImportSupported(): Promise<boolean> {
   if (_isNativeTsImportSupported === undefined) {
     try {
       const modName = 'dummy.mts'
-      const mod = await import(`../${modName}`)
+      const mod = await import(`../runtime-fixtures/${modName}`)
       _isNativeTsImportSupported = mod.default === 'dummy'
     }
     catch {
@@ -126,13 +126,18 @@ export async function detectLoader(
  *
  * @see https://nodejs.org/api/module.html#moduleregisterspecifier-parenturl-options
  */
-function isRuntimeSupportsTsx() {
+async function isRuntimeSupportsTsx() {
   if (
     !nodeVersionNumbers
     || nodeVersionNumbers[0] < 18
     || (nodeVersionNumbers[0] === 18 && nodeVersionNumbers[1] < 19)
     || (nodeVersionNumbers[0] === 20 && nodeVersionNumbers[1] < 8)
   ) {
+    return false
+  }
+  // Disable in Electron
+  // eslint-disable-next-line node/prefer-global/process
+  if (typeof process !== 'undefined' && typeof process.versions.electron === 'string') {
     return false
   }
   return true

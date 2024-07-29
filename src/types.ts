@@ -62,6 +62,12 @@ export interface ImportxOptions extends FeaturesOptions {
    */
   loader?: SupportedLoader | 'auto'
   /**
+   * Fallback loaders used to import the module.
+   *
+   * @default ['jiti']
+   */
+  fallbackLoaders?: SupportedLoader[] | false
+  /**
    * Options for each loader
    * Only the loader that is used will be applied.
    */
@@ -78,7 +84,7 @@ export interface ImportxOptions extends FeaturesOptions {
      * @default { esmResolve: true }
      * @see https://github.com/unjs/jiti#options
      */
-    jiti?: import('jiti').JITIOptions
+    jiti?: import('jiti').JitiOptions
     /**
      * Options for `bundle-require` loader.
      *

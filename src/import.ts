@@ -43,6 +43,7 @@ export async function importx<T = any>(_specifier: string | URL, _options: strin
     excludeLoaders = [],
     listDependencies = null,
     ignoreImportxWarning = false,
+    fallbackLoaders = ['jiti'],
     ...otherOptions
   } = options
 
@@ -89,9 +90,10 @@ export async function importx<T = any>(_specifier: string | URL, _options: strin
     timestampLoad: -1,
   }
 
-  debug(`[${loader}]`, 'Importing', fullPath, 'from', parentPath)
+  async function run(loader: SupportedLoader) {
+    info.loader = loader
+    debug(`[${loader}]`, 'Importing', fullPath, 'from', parentPath)
 
-  async function run() {
     switch (loader) {
       case 'native': {
         if (cache === false && !ignoreImportxWarning)
@@ -134,13 +136,30 @@ export async function importx<T = any>(_specifier: string | URL, _options: strin
     }
   }
 
-  const mod = await run()
-  info.timestampLoad = Date.now()
-  const previous = _moduleInfoMap.get(mod)
-  if (previous)
-    info.previousImportInfo = previous
-  _moduleInfoMap.set(mod, info)
-  return mod
+  const loaders = new Set([
+    loader,
+    ...fallbackLoaders || [],
+  ])
+
+  let error: unknown | undefined
+
+  for (const loader of loaders) {
+    try {
+      const mod = await run(loader)
+      info.timestampLoad = Date.now()
+      const previous = _moduleInfoMap.get(mod)
+      if (previous)
+        info.previousImportInfo = previous
+      _moduleInfoMap.set(mod, info)
+      return mod
+    }
+    catch (err) {
+      error = err
+      debug(`[${loader}]`, err)
+    }
+  }
+
+  throw error
 }
 
 function getLoaderFromEnv(): SupportedLoader | undefined {
