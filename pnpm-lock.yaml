@@ -23,6 +23,9 @@ importers:
       jiti:
         specifier: 2.0.0-beta.2
         version: 2.0.0-beta.2
+      jiti-v1:
+        specifier: npm:jiti@^1
+        version: jiti@1.21.6
       pathe:
         specifier: ^1.1.2
         version: 1.1.2
@@ -1951,6 +1954,10 @@ packages:
 
   isexe@2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
+
+  jiti@1.21.6:
+    resolution: {integrity: sha512-2yTgeWTWzMWkHu6Jp9NKgePDaYHbntiwvYuuJLbbN9vl7DC9DvXKOB2BC3ZZ92D3cvV/aflH0osDfwpHepQ53w==}
+    hasBin: true
 
   jiti@2.0.0-beta.2:
     resolution: {integrity: sha512-c+PHQZakiQuMKbnhvrjZUvrK6E/AfmTOf4P+E3Y4FNVHcNMX9e/XrnbEvO+m4wS6ZjsvhHh/POQTlfy8uXFc0A==}
@@ -4729,6 +4736,8 @@ snapshots:
   is-unicode-supported@2.0.0: {}
 
   isexe@2.0.0: {}
+
+  jiti@1.21.6: {}
 
   jiti@2.0.0-beta.2: {}
 

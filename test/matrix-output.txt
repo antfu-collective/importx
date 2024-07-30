@@ -39,6 +39,19 @@ Import ESM Dep:   ✅
 
 ===========
 runtime: node
+loader:  jiti-v1
+-----------
+Import:           ❌
+Cache:            ❌
+No cache:         ❌
+Deps:             ❌
+CTS:              ✅
+CJS & ESM Mixed:  ❌
+Const enum:       ❌
+Import ESM Dep:   ❌
+
+===========
+runtime: node
 loader:  bundle-require
 -----------
 Import:           ✅
@@ -88,6 +101,19 @@ CTS:              ✅
 CJS & ESM Mixed:  ✅
 Const enum:       ✅
 Import ESM Dep:   ✅
+
+===========
+runtime: tsx
+loader:  jiti-v1
+-----------
+Import:           ❌
+Cache:            ❌
+No cache:         ❌
+Deps:             ❌
+CTS:              ✅
+CJS & ESM Mixed:  ❌
+Const enum:       ❌
+Import ESM Dep:   ❌
 
 ===========
 runtime: tsx
@@ -137,6 +163,19 @@ Cache:            ❌
 No cache:         ❌
 Deps:             ❌
 CTS:              ❌
+CJS & ESM Mixed:  ❌
+Const enum:       ❌
+Import ESM Dep:   ❌
+
+===========
+runtime: deno
+loader:  jiti-v1
+-----------
+Import:           ❌
+Cache:            ❌
+No cache:         ❌
+Deps:             ❌
+CTS:              ✅
 CJS & ESM Mixed:  ❌
 Const enum:       ❌
 Import ESM Dep:   ❌
@@ -192,6 +231,19 @@ CTS:              ✅
 CJS & ESM Mixed:  ✅
 Const enum:       ✅
 Import ESM Dep:   ✅
+
+===========
+runtime: bun
+loader:  jiti-v1
+-----------
+Import:           ✅
+Cache:            ✅
+No cache:         ❌
+Deps:             ✅
+CTS:              ✅
+CJS & ESM Mixed:  ✅
+Const enum:       ✅
+Import ESM Dep:   ❌
 
 ===========
 runtime: bun

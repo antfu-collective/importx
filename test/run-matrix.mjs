@@ -8,7 +8,7 @@ import strip from 'strip-ansi'
 
 const pkg = JSON.parse(await fs.readFile(new URL('../package.json', import.meta.url), 'utf8'))
 
-const loaders = ['native', 'tsx', 'jiti', 'bundle-require']
+const loaders = ['native', 'tsx', 'jiti', 'jiti-v1', 'bundle-require']
 const runtimes = ['node', 'tsx', 'deno', 'bun']
 
 const runtimesMap = {

@@ -112,6 +112,11 @@ export async function importx<T = any>(_specifier: string | URL, _options: strin
           .then(r => r.loader(info, options))
       }
 
+      case 'jiti-v1': {
+        return import('./loaders/jiti-v1')
+          .then(r => r.loader(info, options))
+      }
+
       case 'bundle-require': {
         if (cache === true && !ignoreImportxWarning)
           throw new Error('`cache: true` is not compatible with `native` loader')
