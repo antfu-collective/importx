@@ -1,7 +1,7 @@
 {
   "name": "importx",
   "type": "module",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "packageManager": "pnpm@9.6.0",
   "description": "Unified tool for importing TypeScript modules at runtime",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
