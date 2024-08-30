@@ -56,7 +56,6 @@
     "jiti": "2.0.0-beta.2",
     "jiti-v1": "npm:jiti@^1",
     "pathe": "^1.1.2",
-    "pkg-types": "^1.1.3",
     "tsx": "^4.16.2"
   },
   "devDependencies": {
