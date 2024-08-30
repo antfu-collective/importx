@@ -100,20 +100,20 @@ else {
 |  | ${loaders.join(' | ')} |
 | ------- | ${loaders.map(() => '---').join(' | ')} |
 ${runtimes.map(runtime => `| ${runtime} | ${loaders.map((loader) => {
-  const record = records.find(x => x.loader === loader && x.runtime === runtime)
-  if (!record)
-    return 'N/A'
-  return [
-    `Import: ${record.import ? '✅' : '❌'}`,
-    `Cache: ${record.importCache ? '✅' : '❌'}`,
-    `No cache: ${record.importNoCache ? '✅' : '❌'}`,
-    `Deps: ${record.dependencies ? '✅' : '❌'}`,
-    `CTS Import: ${record.cts ? '✅' : '❌'}`,
-    `ESM/CJS Mixed: ${record.mixed ? '✅' : '❌'}`,
-    `Const Enum: ${record.constEnum ? '✅' : '❌'}`,
-    `Import ESM Dep: ${record.importEsmDep ? '✅' : '❌'}`,
-  ].join('<br>')
-}).join(' | ')} |`).join('\n')}
+    const record = records.find(x => x.loader === loader && x.runtime === runtime)
+    if (!record)
+      return 'N/A'
+    return [
+      `Import: ${record.import ? '✅' : '❌'}`,
+      `Cache: ${record.importCache ? '✅' : '❌'}`,
+      `No cache: ${record.importNoCache ? '✅' : '❌'}`,
+      `Deps: ${record.dependencies ? '✅' : '❌'}`,
+      `CTS Import: ${record.cts ? '✅' : '❌'}`,
+      `ESM/CJS Mixed: ${record.mixed ? '✅' : '❌'}`,
+      `Const Enum: ${record.constEnum ? '✅' : '❌'}`,
+      `Import ESM Dep: ${record.importEsmDep ? '✅' : '❌'}`,
+    ].join('<br>')
+  }).join(' | ')} |`).join('\n')}
 `.trim()
 
   let readme = await fs.readFile('README.md', 'utf8')
