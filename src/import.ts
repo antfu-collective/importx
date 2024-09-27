@@ -1,8 +1,8 @@
-import { fileURLToPath, pathToFileURL } from 'node:url'
-import { dirname, join } from 'pathe'
-import Debug from 'debug'
-import type { ImportxModuleInfo, ImportxOptions, SupportedLoader } from './types'
 import type { LoaderDetectionContext } from './detect'
+import type { ImportxModuleInfo, ImportxOptions, SupportedLoader } from './types'
+import { fileURLToPath, pathToFileURL } from 'node:url'
+import Debug from 'debug'
+import { dirname, join } from 'pathe'
 import { detectLoader, isTypeScriptFile } from './detect'
 
 const debug = Debug('importx')
@@ -109,11 +109,6 @@ export async function importx<T = any>(_specifier: string | URL, _options: strin
 
       case 'jiti': {
         return import('./loaders/jiti')
-          .then(r => r.loader(info, options))
-      }
-
-      case 'jiti-v1': {
-        return import('./loaders/jiti-v1')
           .then(r => r.loader(info, options))
       }
 

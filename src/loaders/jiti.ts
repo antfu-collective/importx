@@ -1,5 +1,5 @@
-import { createJiti } from 'jiti'
 import type { ImportxModuleInfo, ImportxOptions } from '../types'
+import { createJiti } from 'jiti'
 
 export async function loader(info: ImportxModuleInfo, options: ImportxOptions): Promise<any> {
   const jiti = createJiti(info.parentPath, {

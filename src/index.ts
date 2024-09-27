@@ -4,9 +4,9 @@ export {
 } from './detect'
 
 export {
-  importx,
-  import,
   getModuleInfo,
+  import,
+  importx,
 } from './import'
 
 export * from './types'

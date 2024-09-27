@@ -243,11 +243,14 @@ Importing a TypeScript module with `importx`:
 
 <!-- TABLE_START -->
 
-> Generated with version `v0.4.2` at 2024-07-30T10:38:06.719Z
+> Generated with version `v0.4.4` at 2024-09-27T00:27:46.691Z
 
-|  | jiti-v1 |
-| ------- | --- |
-| node | Import: ❌<br>Cache: ❌<br>No cache: ❌<br>Deps: ❌<br>CTS Import: ✅<br>ESM/CJS Mixed: ❌<br>Const Enum: ❌<br>Import ESM Dep: ❌ |
+|  | native | tsx | jiti | bundle-require |
+| ------- | --- | --- | --- | --- |
+| node | Import: ❌<br>Cache: ❌<br>No cache: ❌<br>Deps: ❌<br>CTS Import: ❌<br>ESM/CJS Mixed: ❌<br>Const Enum: ❌<br>Import ESM Dep: ❌ | Import: ✅<br>Cache: ✅<br>No cache: ✅<br>Deps: ✅<br>CTS Import: ✅<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅<br>Import ESM Dep: ✅ | Import: ✅<br>Cache: ✅<br>No cache: ✅<br>Deps: ✅<br>CTS Import: ✅<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅<br>Import ESM Dep: ✅ | Import: ✅<br>Cache: ❌<br>No cache: ✅<br>Deps: ✅<br>CTS Import: ❌<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅<br>Import ESM Dep: ✅ |
+| tsx | Import: ✅<br>Cache: ✅<br>No cache: ❌<br>Deps: ❌<br>CTS Import: ✅<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅<br>Import ESM Dep: ✅ | Import: ✅<br>Cache: ✅<br>No cache: ✅<br>Deps: ✅<br>CTS Import: ✅<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅<br>Import ESM Dep: ✅ | Import: ✅<br>Cache: ✅<br>No cache: ✅<br>Deps: ✅<br>CTS Import: ✅<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅<br>Import ESM Dep: ✅ | Import: ✅<br>Cache: ❌<br>No cache: ✅<br>Deps: ✅<br>CTS Import: ❌<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅<br>Import ESM Dep: ✅ |
+| deno | Import: ✅<br>Cache: ✅<br>No cache: ❌<br>Deps: ❌<br>CTS Import: ❌<br>ESM/CJS Mixed: ❌<br>Const Enum: ❌<br>Import ESM Dep: ✅ | Import: ❌<br>Cache: ❌<br>No cache: ❌<br>Deps: ❌<br>CTS Import: ❌<br>ESM/CJS Mixed: ❌<br>Const Enum: ❌<br>Import ESM Dep: ❌ | Import: ❌<br>Cache: ❌<br>No cache: ❌<br>Deps: ❌<br>CTS Import: ❌<br>ESM/CJS Mixed: ❌<br>Const Enum: ❌<br>Import ESM Dep: ❌ | Import: ✅<br>Cache: ❌<br>No cache: ✅<br>Deps: ✅<br>CTS Import: ❌<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅<br>Import ESM Dep: ✅ |
+| bun | Import: ✅<br>Cache: ✅<br>No cache: ❌<br>Deps: ❌<br>CTS Import: ✅<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅<br>Import ESM Dep: ✅ | Import: ❌<br>Cache: ❌<br>No cache: ❌<br>Deps: ❌<br>CTS Import: ❌<br>ESM/CJS Mixed: ❌<br>Const Enum: ❌<br>Import ESM Dep: ❌ | Import: ✅<br>Cache: ❌<br>No cache: ❌<br>Deps: ✅<br>CTS Import: ✅<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅<br>Import ESM Dep: ✅ | Import: ✅<br>Cache: ❌<br>No cache: ✅<br>Deps: ✅<br>CTS Import: ❌<br>ESM/CJS Mixed: ✅<br>Const Enum: ✅<br>Import ESM Dep: ✅ |
 
 <!-- TABLE_END -->
 

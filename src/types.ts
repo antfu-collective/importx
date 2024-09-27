@@ -1,6 +1,6 @@
 type ArgumentTypes<T> = T extends (...args: infer U) => any ? U : never
 
-export type SupportedLoader = 'tsx' | 'jiti' | 'bundle-require' | 'native' | 'jiti-v1'
+export type SupportedLoader = 'tsx' | 'jiti' | 'bundle-require' | 'native'
 
 export interface FeaturesOptions {
   /**
@@ -84,12 +84,6 @@ export interface ImportxOptions extends FeaturesOptions {
      * @see https://github.com/unjs/jiti#options
      */
     jiti?: import('jiti').JitiOptions
-    /**
-     * Options for `jiti-v1` loader.
-     *
-     * @default { esmResolve: true }
-     */
-    jitiV1?: import('jiti-v1').JITIOptions
     /**
      * Options for `bundle-require` loader.
      *

@@ -1,14 +1,14 @@
-/* eslint-disable no-console */
-import { fileURLToPath } from 'node:url'
 import fs from 'node:fs/promises'
 import process from 'node:process'
+/* eslint-disable no-console */
+import { fileURLToPath } from 'node:url'
 import { execaCommand } from 'execa'
 import c from 'picocolors'
 import strip from 'strip-ansi'
 
 const pkg = JSON.parse(await fs.readFile(new URL('../package.json', import.meta.url), 'utf8'))
 
-const loaders = ['native', 'tsx', 'jiti', 'jiti-v1', 'bundle-require']
+const loaders = ['native', 'tsx', 'jiti', 'bundle-require']
 const runtimes = ['node', 'tsx', 'deno', 'bun']
 
 const runtimesMap = {

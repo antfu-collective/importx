@@ -1,6 +1,6 @@
 import type { register as registerESM } from 'tsx/esm/api'
-import { register, tsImport } from 'tsx/esm/api'
 import type { ImportxModuleInfo, ImportxOptions } from '../types'
+import { register, tsImport } from 'tsx/esm/api'
 
 const apiESM = new Map<string, ReturnType<typeof registerESM>>()
 

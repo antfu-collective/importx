@@ -1,6 +1,6 @@
+import fs from 'node:fs/promises'
 /* eslint-disable no-console */
 import process from 'node:process'
-import fs from 'node:fs/promises'
 
 const LOADER = process.env.IMPORTX_LOADER || 'auto'
 const barPath = new URL('./basic/bar.mts', import.meta.url)
