@@ -79,6 +79,11 @@ let _isNativeTsImportSupported: boolean | undefined
 
 export async function isNativeTsImportSupported(): Promise<boolean> {
   if (_isNativeTsImportSupported === undefined) {
+    // @ts-expect-error missing `typescript` property
+    // eslint-disable-next-line node/prefer-global/process
+    if (typeof process !== 'undefined' && process.features?.typescript) {
+      return _isNativeTsImportSupported = true
+    }
     try {
       const modName = 'dummy.mts'
       const mod = await import(`../runtime-fixtures/${modName}`)
