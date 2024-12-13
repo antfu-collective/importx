@@ -135,9 +135,14 @@ async function isRuntimeSupportsTsx() {
   ) {
     return false
   }
-  // Disable in Electron
+
+  // not supported in vscode < 1.96: https://github.com/microsoft/vscode/issues/224426
+  // magic number 10629634 is from
+  // https://github.com/microsoft/vscode/blob/bee3e32d012157a94cbc431080b743775fe713c5/.npmrc
+
   // eslint-disable-next-line node/prefer-global/process
-  if (typeof process !== 'undefined' && typeof process.versions.electron === 'string') {
+  const msBuildVersion = typeof process !== 'undefined' && process.versions['microsoft-build']
+  if (msBuildVersion && Number(msBuildVersion) < 10629634) {
     return false
   }
   return true
