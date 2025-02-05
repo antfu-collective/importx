@@ -2,7 +2,7 @@
   "name": "importx",
   "type": "module",
   "version": "0.5.1",
-  "packageManager": "pnpm@9.15.0",
+  "packageManager": "pnpm@10.2.0",
   "description": "Unified tool for importing TypeScript modules at runtime",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -50,37 +50,36 @@
     "prepare": "simple-git-hooks"
   },
   "dependencies": {
-    "bundle-require": "^5.0.0",
+    "bundle-require": "^5.1.0",
     "debug": "^4.4.0",
     "esbuild": "^0.20.2 || ^0.21.0 || ^0.22.0 || ^0.23.0 || ^0.24.0",
-    "jiti": "^2.4.1",
-    "pathe": "^1.1.2",
+    "jiti": "^2.4.2",
+    "pathe": "^2.0.2",
     "tsx": "^4.19.2"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^3.11.2",
-    "@antfu/ni": "^0.23.1",
-    "@antfu/utils": "^0.7.10",
+    "@antfu/eslint-config": "^4.1.1",
+    "@antfu/ni": "^23.3.1",
+    "@antfu/utils": "^8.1.0",
     "@types/debug": "^4.1.12",
-    "@types/node": "^22.10.2",
-    "bumpp": "^9.9.1",
-    "eslint": "^9.16.0",
+    "@types/node": "^22.13.1",
+    "bumpp": "^10.0.2",
+    "eslint": "^9.19.0",
     "esno": "^4.8.0",
     "execa": "^9.5.2",
     "find-up": "^7.0.0",
-    "lint-staged": "^15.2.11",
+    "lint-staged": "^15.4.3",
     "picocolors": "^1.1.1",
-    "pnpm": "^9.15.0",
     "simple-git-hooks": "^2.11.1",
     "strip-ansi": "^7.1.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.7.2",
-    "unbuild": "^2.0.0",
-    "vite": "^6.0.3",
-    "vitest": "^2.1.8"
+    "typescript": "^5.7.3",
+    "unbuild": "^3.3.1",
+    "vite": "^6.1.0",
+    "vitest": "^3.0.5"
   },
   "resolutions": {
-    "jiti": "2.0.0-beta.3"
+    "jiti": "^2.4.2"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"
