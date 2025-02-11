@@ -45,6 +45,9 @@ importers:
       '@types/node':
         specifier: ^22.13.1
         version: 22.13.1
+      ansis:
+        specifier: ^3.12.0
+        version: 3.12.0
       bumpp:
         specifier: ^10.0.2
         version: 10.0.2
@@ -63,15 +66,9 @@ importers:
       lint-staged:
         specifier: ^15.4.3
         version: 15.4.3
-      picocolors:
-        specifier: ^1.1.1
-        version: 1.1.1
       simple-git-hooks:
         specifier: ^2.11.1
         version: 2.11.1
-      strip-ansi:
-        specifier: ^7.1.0
-        version: 7.1.0
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@22.13.1)(typescript@5.7.3)
@@ -993,6 +990,10 @@ packages:
   ansi-styles@6.2.1:
     resolution: {integrity: sha512-bN798gFfQX+viw3R7yrGWRqnrN2oRkEkUjjl4JNn4E8GxxbjtG3FbrEIIY3l8/hrwUwIeCZvi4QuOTP4MErVug==}
     engines: {node: '>=12'}
+
+  ansis@3.12.0:
+    resolution: {integrity: sha512-SxhlInpMkv9QCyI2yHyrhVrTF8dH93M/S86DT5f9brFgr92uJLOCg0RNmtx3YKWKcRmNAaU+gyUfHMdUiqxvFw==}
+    engines: {node: '>=14'}
 
   are-docs-informative@0.0.2:
     resolution: {integrity: sha512-ixiS0nLNNG5jNQzgZJNoUpBKdo9yTYZMGJ+QgT2jmjR7G7+QHRCc4v6LQ3NgE7EBJq+o0ams3waJwkrlBom8Ig==}
@@ -3796,6 +3797,8 @@ snapshots:
       color-convert: 2.0.1
 
   ansi-styles@6.2.1: {}
+
+  ansis@3.12.0: {}
 
   are-docs-informative@0.0.2: {}
 

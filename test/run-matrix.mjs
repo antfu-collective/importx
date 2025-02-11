@@ -2,9 +2,8 @@ import fs from 'node:fs/promises'
 import process from 'node:process'
 /* eslint-disable no-console */
 import { fileURLToPath } from 'node:url'
+import c from 'ansis'
 import { execaCommand } from 'execa'
-import c from 'picocolors'
-import strip from 'strip-ansi'
 
 const pkg = JSON.parse(await fs.readFile(new URL('../package.json', import.meta.url), 'utf8'))
 
@@ -120,5 +119,5 @@ ${runtimes.map(runtime => `| ${runtime} | ${loaders.map((loader) => {
   readme = readme.replace(/(<!-- TABLE_START -->)[\s\S]*(<!-- TABLE_END -->)/, `$1\n\n${table}\n\n$2`)
   await fs.writeFile('README.md', readme, 'utf8')
 
-  await fs.writeFile('test/matrix-output.txt', strip(list.join('\n')), 'utf-8')
+  await fs.writeFile('test/matrix-output.txt', c.strip(list.join('\n')), 'utf-8')
 }
