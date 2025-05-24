@@ -81,7 +81,7 @@ graph TD
   Cache[["Cache enabled?"]]
   Native1(["native import()"])
   Native2(["native import()"])
-  RuntimeTsx{{"Is current runtime supports tsx?"}}
+  RuntimeTsx{{"Does current runtime support tsx?"}}
   ListDeps[["Need to list dependencies?"]]
   Tsx([tsx loader])
   Jiti([jiti loader])
@@ -112,7 +112,7 @@ Use the native `import()` to import the module. According to the ESM spec, impor
 
 ### `tsx`
 
-Use [`tsx`](https://github.com/privatenumber/tsx)'s [`tsImport` API](https://tsx.is/node/ts-import) to import the module. Under the hood, it registers [Node.js loader API](https://nodejs.org/api/module.html#moduleregisterspecifier-parenturl-options) and uses [esbuild](https://esbuild.github.io/) to transpile TypeScript to JavaScript.
+Use [`tsx`](https://github.com/privatenumber/tsx)'s [`tsImport` API](https://tsx.is/dev-api/ts-import) to import the module. Under the hood, it registers [Node.js loader API](https://nodejs.org/api/module.html#moduleregisterspecifier-parenturl-options) and uses [esbuild](https://esbuild.github.io/) to transpile TypeScript to JavaScript.
 
 #### Pros
 
