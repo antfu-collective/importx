@@ -1,11 +1,11 @@
 import type { LoaderDetectionContext } from './detect'
 import type { ImportxModuleInfo, ImportxOptions, SupportedLoader } from './types'
 import { fileURLToPath, pathToFileURL } from 'node:url'
-import Debug from 'debug'
+import { createDebug } from 'obug'
 import { dirname, join } from 'pathe'
 import { detectLoader, isTypeScriptFile } from './detect'
 
-const debug = Debug('importx')
+const debug = createDebug('importx')
 const _moduleInfoMap = new WeakMap<any, ImportxModuleInfo>()
 
 /**
